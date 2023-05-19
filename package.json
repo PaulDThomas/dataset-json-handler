@@ -25,6 +25,7 @@
     "dist"
   ],
   "scripts": {
+    "prepare": "husky install",
     "build": "parcel build src/main.ts",
     "start": "parcel demo/index.html --dist-dir demo/dist",
     "test": "jest --watch",
@@ -49,6 +50,7 @@
     ]
   },
   "dependencies": {
+    "@asup/context-menu": "^1.0.5",
     "@asup/simple-table": "^1.2.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"

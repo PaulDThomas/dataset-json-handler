@@ -7,6 +7,7 @@ import {
 import { useCallback, useEffect, useState } from 'react';
 import { DatasetJson } from '../../src/classes/DatasetJsonClass';
 import { getDataFromUrl } from './functions/getDataFromUrl';
+import { SummaryTableGenerator } from '../../src/components/SummaryTable';
 
 export const simpleTableSortFn = (
   a: iSimpleTableRow,
@@ -62,7 +63,7 @@ const App = (): JSX.Element => {
     !loaded && !loading && !error && getData();
   }, [error, getData, loaded, loading]);
 
-  const [showThing, setShowThing] = useState<'items' | 'data' | 'summary'>('items');
+  const [showThing, setShowThing] = useState<'items' | 'data' | 'summary'>('summary');
 
   return (
     <div className='app-holder'>
@@ -71,7 +72,7 @@ const App = (): JSX.Element => {
           <div style={{ height: '140px' }}>
             <table
               id='header-table'
-              style={{ borderCollapse: 'collapse', border: '1px dotted black' }}
+              style={{ borderCollapse: 'collapse', border: '1px dotted black', width: '100%' }}
             >
               <tbody>
                 <tr>
@@ -79,7 +80,7 @@ const App = (): JSX.Element => {
                   <td colSpan={3}>
                     <input
                       type='text'
-                      style={{ width: '800px' }}
+                      style={{ width: 'calc(100% - 0.5rem)' }}
                       value={rawUrl}
                       onChange={(e) => setRawUrl(e.currentTarget.value)}
                     />
@@ -135,7 +136,7 @@ const App = (): JSX.Element => {
               className='tab-holder'
               style={{
                 background: 'white',
-                height: 'calc(95vh - 140px - 0.5rem - 4px)',
+                height: 'calc(95vh - 140px - 1rem)',
               }}
             >
               <div
@@ -173,6 +174,15 @@ const App = (): JSX.Element => {
                     headerLabel='Data'
                   />
                 </div>
+              </div>
+              <div
+                className='tab fader'
+                style={{
+                  opacity: showThing === 'summary' ? 1 : 0,
+                  zIndex: showThing === 'summary' ? 1 : 0,
+                }}
+              >
+                <SummaryTableGenerator dataset={datasetJson} />
               </div>
             </div>
           )}

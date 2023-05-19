@@ -1,0 +1,11 @@
+.variable-list {
+  border-radius: 12px;
+  padding: 0 0.5rem 0.5rem 0;
+  width: calc(150px + 1.5rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: calc(100% - 2.5rem);
+  overflow-y: auto;
+}

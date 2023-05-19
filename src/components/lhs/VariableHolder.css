@@ -1,0 +1,17 @@
+.variable-holder {
+  margin-top: 1px;
+  margin-bottom: 1px;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  padding: 0.25rem;
+  width: 150px;
+  background-color: white;
+  text-align: center;
+  border-radius: 8px;
+  border: 1px black solid;
+  font-size: small;
+}
+
+.variable-holder.being-dragged {
+  opacity: 0.5;
+}

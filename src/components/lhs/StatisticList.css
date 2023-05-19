@@ -1,0 +1,10 @@
+.statistic-list-holder {
+  background-color: lightseagreen;
+  border-radius: 12px;
+  padding: 0.5rem;
+  width: calc(100px + 2rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

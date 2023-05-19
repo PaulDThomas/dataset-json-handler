@@ -9,10 +9,6 @@ body {
   justify-content: center;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
-}
-
 .app-holder {
   background-color: white;
   border-radius: 0.5rem;
@@ -32,7 +28,7 @@ code {
   position: relative;
   height: 95vh;
   opacity: 1;
-  overflow: auto;
+  overflow: none;
 }
 
 #header-table td {
