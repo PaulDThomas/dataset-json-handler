@@ -1,4 +1,4 @@
-import { iSimpleTableRow } from '@asup/simple-table';
+import { iSimpleTableField, iSimpleTableRow, simpleTableSortFn } from '@asup/simple-table';
 import { DatasetJsonItem } from '../interfaces/DatasetJsonItem';
 import { itemDataRow } from '../interfaces/itemDataRow';
 import { cdiscDatasetJson } from '../interfaces/cdiscDatasetJson';
@@ -88,6 +88,20 @@ export class DatasetJson {
     if (newItems.length > 0) {
       this._items = newItems;
     }
+  }
+  get simpleTableFields() {
+    return this._items.map(
+      (item) =>
+        ({
+          ...item,
+          sortFn: simpleTableSortFn,
+          searchFn:
+            item.type === 'string'
+              ? (row, text) =>
+                  (row[item.name] as string).toLocaleLowerCase().includes(text.toLocaleLowerCase())
+              : undefined,
+        } as iSimpleTableField),
+    );
   }
   /**
    * Add new item (variable) to the data set

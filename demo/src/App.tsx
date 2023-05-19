@@ -62,7 +62,7 @@ const App = (): JSX.Element => {
     !loaded && !loading && !error && getData();
   }, [error, getData, loaded, loading]);
 
-  const [showItems, setShowItems] = useState<boolean>(false);
+  const [showThing, setShowThing] = useState<'items' | 'data' | 'summary'>('items');
 
   return (
     <div className='app-holder'>
@@ -101,13 +101,29 @@ const App = (): JSX.Element => {
                   <td>label</td>
                   <td>{datasetJson?.label}</td>
                   <td>
+                    Show
                     <input
-                      type='checkbox'
-                      role='checkbox'
-                      checked={showItems}
-                      onClick={() => setShowItems(!showItems)}
+                      type='radio'
+                      role='radio'
+                      checked={showThing === 'items'}
+                      onClick={() => setShowThing('items')}
+                      id='show-items-radio'
                     />
-                    Show items
+                    <label htmlFor='show-items-radio'>Items</label>
+                    <input
+                      type='radio'
+                      role='radio'
+                      checked={showThing === 'data'}
+                      onClick={() => setShowThing('data')}
+                    />
+                    <label htmlFor='show-data-radio'>Data</label>
+                    <input
+                      type='radio'
+                      role='radio'
+                      checked={showThing === 'summary'}
+                      onClick={() => setShowThing('summary')}
+                    />
+                    <label htmlFor='show-summary-radio'>Table</label>
                   </td>
                 </tr>
               </tbody>
@@ -116,44 +132,48 @@ const App = (): JSX.Element => {
 
           {datasetJson && (
             <div
+              className='tab-holder'
               style={{
                 background: 'white',
                 height: 'calc(95vh - 140px - 0.5rem - 4px)',
               }}
             >
-              {showItems && (
-                <SimpleTable
-                  id='items-table'
-                  fields={fieldsForItems}
-                  keyField={'OID'}
-                  data={datasetJson ? datasetJson.items : []}
-                  headerLabel='Items'
-                  showSearch={true}
-                  showFilter
-                />
-              )}
-              {!showItems && (
-                <SimpleTable
-                  id='data-table'
-                  fields={datasetJson.items.map(
-                    (item) =>
-                      ({
-                        ...item,
-                        sortFn: simpleTableSortFn,
-                        searchFn:
-                          item.type === 'string'
-                            ? (row, text) =>
-                                (row[item.name] as string)
-                                  .toLocaleLowerCase()
-                                  .includes(text.toLocaleLowerCase())
-                            : undefined,
-                      } as iSimpleTableField),
-                  )}
-                  keyField={'__rowNumber'}
-                  data={datasetJson ? datasetJson.itemData : []}
-                  headerLabel='Data'
-                />
-              )}
+              <div
+                className='tab fader'
+                style={{
+                  opacity: showThing === 'items' ? 1 : 0,
+                  zIndex: showThing === 'items' ? 1 : 0,
+                }}
+              >
+                <div>
+                  <SimpleTable
+                    id='items-table'
+                    fields={fieldsForItems}
+                    keyField={'OID'}
+                    data={datasetJson ? datasetJson.items : []}
+                    headerLabel='Items'
+                    showSearch={true}
+                    showFilter
+                  />
+                </div>
+              </div>
+              <div
+                className='tab fader'
+                style={{
+                  opacity: showThing === 'data' ? 1 : 0,
+                  zIndex: showThing === 'data' ? 1 : 0,
+                }}
+              >
+                <div>
+                  <SimpleTable
+                    id='data-table'
+                    fields={datasetJson.simpleTableFields}
+                    keyField={'__rowNumber'}
+                    data={datasetJson ? datasetJson.itemData : []}
+                    headerLabel='Data'
+                  />
+                </div>
+              </div>
             </div>
           )}
         </div>
