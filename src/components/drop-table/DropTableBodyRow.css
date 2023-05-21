@@ -1,0 +1,7 @@
+.drop-table-holder td div.data-cell {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: yellowgreen;
+}

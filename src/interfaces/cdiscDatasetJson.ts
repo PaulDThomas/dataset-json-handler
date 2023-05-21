@@ -1,4 +1,4 @@
-export interface cdiscDatasetJson {
+export interface CdiscDatasetJson {
   clinicalData: {
     studyOID: string;
     metaDataVersionOID: string;

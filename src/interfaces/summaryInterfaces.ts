@@ -12,20 +12,12 @@ export enum eStatistic {
   p100 = 'Max',
 }
 
-export interface SummaryTableSchema {
-  columns: SummaryVariable[];
-  rows: SummaryVariable[];
-  target?: SummaryVariable;
-  statistics: eStatistic[];
-  statisticPosition: 'row' | 'column';
-}
-
-export interface position {
+export interface Position {
   location: 'row' | 'column';
   index: number[];
 }
 
-export interface dndData {
+export interface DndData {
   type: 'variable' | 'statistic';
   data: SummaryVariable | eStatistic;
 }

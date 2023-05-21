@@ -1,5 +1,6 @@
 import { DatasetJson } from '../classes/DatasetJsonClass';
 import { SummaryTableContextProvider } from '../context/SummaryTableContext';
+import { DropTable } from './drop-table/DropTable';
 import { VariableList } from './lhs/VariableList';
 
 interface SummaryTableGeneratorProps {
@@ -9,22 +10,25 @@ interface SummaryTableGeneratorProps {
 export const SummaryTableGenerator = ({ dataset }: SummaryTableGeneratorProps): JSX.Element => {
   return (
     <SummaryTableContextProvider dataset={dataset}>
-      <div>
+      <div className='summarytablegenerator'>
         <div className='simpletable-title-holder'>
           <h5 className='simpletable-title'>Summary table for: {dataset.name}</h5>
         </div>
-        <div style={{ display: 'flex', flexDirection: 'row', height: 'calc(100% - 26px)' }}>
+        <div
+          className='summarytable-main-holder'
+          style={{ display: 'flex', flexDirection: 'row', height: 'calc(100% - 46px)' }}
+        >
           <div
             className='summarytable-lhs'
-            style={{ width: '200px' }}
+            style={{ width: '190px', height: '100%' }}
           >
             <VariableList id={'summarytable-variables'} />
           </div>
           <div
             className='summarytable-rhs'
-            style={{ width: 'calc(100% - 200px)' }}
+            style={{ width: 'calc(100% - 190px)', height: '100%' }}
           >
-            <div>RHS</div>
+            <DropTable id={'summarytable'} />
           </div>
         </div>
       </div>

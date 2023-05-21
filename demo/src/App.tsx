@@ -7,7 +7,7 @@ import {
 import { useCallback, useEffect, useState } from 'react';
 import { DatasetJson } from '../../src/classes/DatasetJsonClass';
 import { getDataFromUrl } from './functions/getDataFromUrl';
-import { SummaryTableGenerator } from '../../src/components/SummaryTable';
+import { SummaryTableGenerator } from '../../src/components/SummaryTableGenerator';
 
 export const simpleTableSortFn = (
   a: iSimpleTableRow,
@@ -77,10 +77,10 @@ const App = (): JSX.Element => {
               <tbody>
                 <tr>
                   <td>Data url</td>
-                  <td colSpan={3}>
+                  <td colSpan={4}>
                     <input
                       type='text'
-                      style={{ width: 'calc(100% - 0.5rem)' }}
+                      style={{ width: 'calc(100% - 0.5rem)', border: '1px solid black' }}
                       value={rawUrl}
                       onChange={(e) => setRawUrl(e.currentTarget.value)}
                     />
@@ -89,6 +89,32 @@ const App = (): JSX.Element => {
                 <tr>
                   <td width={'200px'}>studyOID</td>
                   <td width={'250px'}>{datasetJson?.studyOID}</td>
+                  <td rowSpan={4}></td>
+                  <td rowSpan={4}>
+                    Show
+                    <input
+                      type='radio'
+                      role='radio'
+                      checked={showThing === 'items'}
+                      onChange={() => setShowThing('items')}
+                      id='show-items-radio'
+                    />
+                    <label htmlFor='show-items-radio'>Items</label>
+                    <input
+                      type='radio'
+                      role='radio'
+                      checked={showThing === 'data'}
+                      onChange={() => setShowThing('data')}
+                    />
+                    <label htmlFor='show-data-radio'>Data</label>
+                    <input
+                      type='radio'
+                      role='radio'
+                      checked={showThing === 'summary'}
+                      onChange={() => setShowThing('summary')}
+                    />
+                    <label htmlFor='show-summary-radio'>Table</label>
+                  </td>
                 </tr>
                 <tr>
                   <td>metaDataVersionOID</td>
@@ -101,31 +127,6 @@ const App = (): JSX.Element => {
                 <tr>
                   <td>label</td>
                   <td>{datasetJson?.label}</td>
-                  <td>
-                    Show
-                    <input
-                      type='radio'
-                      role='radio'
-                      checked={showThing === 'items'}
-                      onClick={() => setShowThing('items')}
-                      id='show-items-radio'
-                    />
-                    <label htmlFor='show-items-radio'>Items</label>
-                    <input
-                      type='radio'
-                      role='radio'
-                      checked={showThing === 'data'}
-                      onClick={() => setShowThing('data')}
-                    />
-                    <label htmlFor='show-data-radio'>Data</label>
-                    <input
-                      type='radio'
-                      role='radio'
-                      checked={showThing === 'summary'}
-                      onClick={() => setShowThing('summary')}
-                    />
-                    <label htmlFor='show-summary-radio'>Table</label>
-                  </td>
                 </tr>
               </tbody>
             </table>

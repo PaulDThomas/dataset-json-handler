@@ -1,7 +1,7 @@
 import { iSimpleTableField, iSimpleTableRow, simpleTableSortFn } from '@asup/simple-table';
 import { DatasetJsonItem } from '../interfaces/DatasetJsonItem';
-import { itemDataRow } from '../interfaces/itemDataRow';
-import { cdiscDatasetJson } from '../interfaces/cdiscDatasetJson';
+import { ItemDataRow } from '../interfaces/itemDataRow';
+import { CdiscDatasetJson } from '../interfaces/cdiscDatasetJson';
 
 /**
  * Typescript class for a CDISC data set JSON object
@@ -135,7 +135,7 @@ export class DatasetJson {
     }
   }
 
-  public _itemData: itemDataRow[] = [];
+  public _itemData: ItemDataRow[] = [];
   /**
    * Data stored in the data set
    */
@@ -182,7 +182,7 @@ export class DatasetJson {
     }
   }
 
-  public constructor(newJson: cdiscDatasetJson) {
+  public constructor(newJson: CdiscDatasetJson) {
     this._studyOID = newJson.clinicalData.studyOID;
     this._metaDataVersionOID = newJson.clinicalData.metaDataVersionOID;
     const ds = Object.values(newJson.clinicalData.itemGroupData)[0];

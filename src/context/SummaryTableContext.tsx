@@ -1,22 +1,33 @@
-import { createContext } from 'react';
-import { SummaryTableSchema } from '../interfaces/summaryInterfaces';
+import { createContext, useState } from 'react';
+import { eStatistic } from '../interfaces/summaryInterfaces';
 import { DatasetJson } from '../classes/DatasetJsonClass';
 import { SummaryVariable } from '../interfaces/DatasetJsonItem';
 
+export interface SummaryTableSchema {
+  columns: SummaryVariable[];
+  rows: SummaryVariable[];
+  target?: SummaryVariable;
+  statistics: eStatistic[];
+  statisticPosition: 'row' | 'column';
+}
+
 export interface SummaryTableContextProps extends SummaryTableSchema {
   variableList: SummaryVariable[];
-  setDndTableSchema?: (ret: SummaryTableSchema) => void;
+  setRows: (ret: SummaryVariable[]) => void;
+  setColumns: (ret: SummaryVariable[]) => void;
 }
 
 export const SummaryTableContext = createContext<SummaryTableContextProps>({
   variableList: [],
   rows: [],
+  setRows: (ret) => console.log(ret.length),
   columns: [],
-  statisticPosition: 'row',
+  setColumns: (ret) => console.log(ret.length),
   statistics: [],
+  statisticPosition: 'row',
 });
 
-interface SummaryTableContextProvideProps {
+interface SummaryTableContextProviderProps {
   children: string | JSX.Element | JSX.Element[];
   dataset: DatasetJson;
 }
@@ -24,13 +35,18 @@ interface SummaryTableContextProvideProps {
 export const SummaryTableContextProvider = ({
   dataset,
   children,
-}: SummaryTableContextProvideProps): JSX.Element => {
+}: SummaryTableContextProviderProps): JSX.Element => {
+  const [rows, setRows] = useState<SummaryVariable[]>([]);
+  const [columns, setColumns] = useState<SummaryVariable[]>([]);
+
   return (
     <SummaryTableContext.Provider
       value={{
         variableList: dataset.items,
-        rows: [],
-        columns: [],
+        rows,
+        columns,
+        setRows,
+        setColumns,
         statistics: [],
         statisticPosition: 'row',
       }}

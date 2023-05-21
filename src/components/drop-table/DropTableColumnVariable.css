@@ -1,0 +1,13 @@
+.drop-table-holder th div.cell-holder {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: yellow;
+}
+
+.drop-table-holder .context-menu-handler {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

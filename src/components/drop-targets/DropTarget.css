@@ -1,0 +1,17 @@
+.drop-target {
+  margin: 4px;
+  background-color: red;
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem;
+  padding: 0;
+  z-index: 10;
+}
+
+.drop-target.can-drop {
+  margin: 3px;
+  border: 1px dashed black;
+}

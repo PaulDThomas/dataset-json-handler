@@ -4,7 +4,7 @@ import { iSimpleTableRow } from '@asup/simple-table';
  * Interface for data set row
  */
 
-export interface itemDataRow extends iSimpleTableRow {
+export interface ItemDataRow extends iSimpleTableRow {
   /**
    * Number of the row in the data set
    */
