@@ -14,7 +14,7 @@ export const VariableHolder = ({ id, variable }: VariableHolderProps): JSX.Eleme
     console.log('Drag start for ' + variable.name);
     setIsBeingDragged(true);
     e.dataTransfer.setData(
-      'application/json',
+      'application/datasetjsonitem',
       JSON.stringify({ type: 'variable', data: variable.data }),
     );
   };

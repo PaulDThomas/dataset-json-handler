@@ -1,6 +1,8 @@
-import { DragEvent, useState } from 'react';
+import { DragEvent, useContext, useState } from 'react';
 import { DndData } from '../../interfaces/summaryInterfaces';
 import './DropTarget.css';
+import { SummaryTableContext } from '../../context/SummaryTableContext';
+import { iDatasetJsonItem } from '../../classes/DatasetJsonItemClass';
 
 interface DropTargetProps {
   id: string;
@@ -18,18 +20,25 @@ export const DropTarget = ({
   type,
 }: DropTargetProps): JSX.Element => {
   const [isOver, setIsOver] = useState<boolean>(false);
+  const summaryTableContext = useContext(SummaryTableContext);
 
   const handleDrop = (e: DragEvent) => {
     console.log('Dropped: ' + e.dataTransfer);
     setIsOver(false);
     e.stopPropagation();
     e.preventDefault();
-    if (e.dataTransfer.types[0] === 'application/json') {
+    if (e.dataTransfer.types[0] === 'application/datasetjsonitem') {
       try {
-        const data = JSON.parse(e.dataTransfer.getData('application/json'));
+        const data: iDatasetJsonItem = JSON.parse(
+          e.dataTransfer.getData('application/datasetjsonitem'),
+        ).data;
         console.log('Data dropped');
         console.log(data);
-        dropAction && dropAction(data);
+        const ix = summaryTableContext.variableList.findIndex((v) => v.OID === data.OID);
+        if (ix > -1) {
+          const variable = summaryTableContext.variableList[ix];
+          dropAction && dropAction({ type: 'variable', data: variable });
+        }
       } catch (error) {
         console.warn(`Something has gone wrong :( dropping on ${id}`);
         console.warn(error);
@@ -42,7 +51,7 @@ export const DropTarget = ({
       id={id}
       className={`drop-target ${isOver ? 'can-drop' : ''} ${type}`}
       onDragOver={(e) => {
-        if (e.dataTransfer.types[0] === 'application/json') {
+        if (e.dataTransfer.types[0] === 'application/datasetjsonitem') {
           setIsOver(true);
           e.preventDefault();
           e.stopPropagation();
