@@ -84,6 +84,10 @@ export class DataSetJsonItemClass {
     };
   }
 
+  get toString() {
+    return JSON.stringify(this.data);
+  }
+
   public constructor(newItem: iDatasetJsonItem) {
     this._OID = newItem.OID;
     this._name = newItem.name;

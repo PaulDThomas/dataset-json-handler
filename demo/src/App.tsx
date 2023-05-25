@@ -151,7 +151,7 @@ const App = (): JSX.Element => {
                     id='items-table'
                     fields={fieldsForItems}
                     keyField={'OID'}
-                    data={datasetJson ? datasetJson.items.map((item) => ({ name: item.name })) : []}
+                    data={datasetJson ? datasetJson.items.map((item) => item.data) : []}
                     headerLabel='Items'
                     showSearch={true}
                     showFilter

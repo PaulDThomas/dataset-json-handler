@@ -13,10 +13,7 @@ export const VariableHolder = ({ id, variable }: VariableHolderProps): JSX.Eleme
   const handleDragStart = (e: React.DragEvent) => {
     console.log('Drag start for ' + variable.name);
     setIsBeingDragged(true);
-    e.dataTransfer.setData(
-      'application/datasetjsonitem',
-      JSON.stringify({ type: 'variable', data: variable.data }),
-    );
+    e.dataTransfer.setData('application/datasetjsonitem', variable.toString);
   };
 
   const handleDragEnd = (e: React.DragEvent) => {

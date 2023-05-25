@@ -86,11 +86,8 @@ export class DatasetJson {
    */
   set items(newItems: (iDatasetJsonItem | DataSetJsonItemClass)[]) {
     if (newItems.length > 0) {
-      this._items = newItems.map(
-        (i) =>
-          (i instanceof DataSetJsonItemClass
-            ? i
-            : new DataSetJsonItemClass(i)) as DataSetJsonItemClass,
+      this._items = newItems.map((i) =>
+        i instanceof DataSetJsonItemClass ? i : new DataSetJsonItemClass(i),
       );
     }
   }
@@ -98,7 +95,7 @@ export class DatasetJson {
     return this._items.map(
       (item) =>
         ({
-          ...item,
+          ...item.data,
           sortFn: simpleTableSortFn,
           searchFn:
             item.type === 'string'

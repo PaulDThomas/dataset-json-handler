@@ -31,7 +31,7 @@ export const DropTarget = ({
       try {
         const data: iDatasetJsonItem = JSON.parse(
           e.dataTransfer.getData('application/datasetjsonitem'),
-        ).data;
+        );
         console.log('Data dropped');
         console.log(data);
         const ix = summaryTableContext.variableList.findIndex((v) => v.OID === data.OID);
