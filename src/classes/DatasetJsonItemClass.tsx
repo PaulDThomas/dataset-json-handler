@@ -63,7 +63,7 @@ export class DataSetJsonItemClass {
   /**
    * Item type
    */
-  get type() {
+  get type(): eVariableType {
     return this._type;
   }
   private _length: number | undefined = 8;
@@ -72,6 +72,16 @@ export class DataSetJsonItemClass {
    */
   get length() {
     return this._length;
+  }
+
+  get data(): iDatasetJsonItem {
+    return {
+      OID: this._OID,
+      name: this._name,
+      label: this._label,
+      type: this._type,
+      length: this._length,
+    };
   }
 
   public constructor(newItem: iDatasetJsonItem) {

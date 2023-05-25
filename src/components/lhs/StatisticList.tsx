@@ -1,4 +1,4 @@
-import { eStatistic } from '../../interfaces/summaryInterfaces';
+import { eStatistic } from 'enums/eStatistic';
 import './StatisticList.css';
 import { StatisticHolder } from './StatisticHolder';
 

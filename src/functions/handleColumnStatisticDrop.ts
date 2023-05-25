@@ -1,5 +1,6 @@
 import { SummaryTableContextProps } from '../context/SummaryTableContext';
-import { DndData, Position, eStatistic } from '../interfaces/summaryInterfaces';
+import { DndData, Position } from '../interfaces/summaryInterfaces';
+import { eStatistic } from 'enums/eStatistic';
 import { moveStatistic } from './moveStatistic';
 
 export const handleStatisticDrop = (
@@ -15,13 +16,13 @@ export const handleStatisticDrop = (
       (data as DndData).data as eStatistic,
       position.index[0],
     );
-    dnd.setDndTableSchema &&
-      dnd.setDndTableSchema({
-        columns: dnd.columns,
-        rows: dnd.rows,
-        target: dnd.target,
-        statisticPosition: position.location,
-        statistics: newStatistics,
-      });
+    //   dnd.setDndTableSchema &&
+    //     dnd.setDndTableSchema({
+    //       columns: dnd.columns,
+    //       rows: dnd.rows,
+    //       target: dnd.target,
+    //       statisticPosition: position.location,
+    //       statistics: newStatistics,
+    //     });
   }
 };

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './StatisticHolder.css';
-import { eStatistic } from '../../interfaces/summaryInterfaces';
+import { eStatistic } from 'enums/eStatistic';
 
 interface StatisticHolderProps {
   id: string;

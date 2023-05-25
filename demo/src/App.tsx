@@ -5,9 +5,8 @@ import {
   iSimpleTableSort,
 } from '@asup/simple-table';
 import { useCallback, useEffect, useState } from 'react';
-import { DatasetJson } from '../../src/classes/DatasetJsonClass';
 import { getDataFromUrl } from './functions/getDataFromUrl';
-import { SummaryTableGenerator } from '../../src/components/SummaryTableGenerator';
+import { SummaryTableGenerator, DatasetJson } from '../../src/main';
 
 export const simpleTableSortFn = (
   a: iSimpleTableRow,
@@ -152,7 +151,7 @@ const App = (): JSX.Element => {
                     id='items-table'
                     fields={fieldsForItems}
                     keyField={'OID'}
-                    data={datasetJson ? datasetJson.items : []}
+                    data={datasetJson ? datasetJson.items.map((item) => ({ name: item.name })) : []}
                     headerLabel='Items'
                     showSearch={true}
                     showFilter

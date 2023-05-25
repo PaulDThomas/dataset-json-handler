@@ -54,7 +54,7 @@ export const DropTarget = ({
         ...style,
       }}
     >
-      {!children ? <>&#8203;</> : children}
+      {children ?? <>&#8203;</>}
     </div>
   );
 };

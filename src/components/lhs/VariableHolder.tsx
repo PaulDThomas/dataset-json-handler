@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import './VariableHolder.css';
-import { SummaryVariable } from '../../interfaces/DatasetJsonItem';
+import { DataSetJsonItemClass } from '../../classes/DatasetJsonItemClass';
 
 interface VariableHolderProps {
   id: string;
-  variable: SummaryVariable;
+  variable: DataSetJsonItemClass;
 }
 
 export const VariableHolder = ({ id, variable }: VariableHolderProps): JSX.Element => {
@@ -15,7 +15,7 @@ export const VariableHolder = ({ id, variable }: VariableHolderProps): JSX.Eleme
     setIsBeingDragged(true);
     e.dataTransfer.setData(
       'application/json',
-      JSON.stringify({ type: 'variable', data: variable }),
+      JSON.stringify({ type: 'variable', data: variable.data }),
     );
   };
 

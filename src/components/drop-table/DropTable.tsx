@@ -1,10 +1,9 @@
 import { useContext } from 'react';
 import { SummaryTableContext } from '../../context/SummaryTableContext';
+import './DropTable.css';
 import { DropTableColumnVariable } from './DropTableColumnVariable';
 import { DropTableRowVariable } from './DropTableRowVariable';
 import { DropTableTopLeftCell } from './DropTableTopLeftCell';
-import './DropTable.css';
-import { ContextMenuHandler } from '@asup/context-menu';
 
 interface DropTableProps {
   id: string;

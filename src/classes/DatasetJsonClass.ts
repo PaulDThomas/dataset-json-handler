@@ -78,7 +78,7 @@ export class DatasetJson {
   /**
    * Items (variables) in the data set
    */
-  get items() {
+  get items(): DataSetJsonItemClass[] {
     return this._items;
   }
   /**
@@ -86,8 +86,11 @@ export class DatasetJson {
    */
   set items(newItems: (iDatasetJsonItem | DataSetJsonItemClass)[]) {
     if (newItems.length > 0) {
-      this._items = newItems.map((i) =>
-        i instanceof DataSetJsonItemClass ? i : new DataSetJsonItemClass(i),
+      this._items = newItems.map(
+        (i) =>
+          (i instanceof DataSetJsonItemClass
+            ? i
+            : new DataSetJsonItemClass(i)) as DataSetJsonItemClass,
       );
     }
   }

@@ -2,11 +2,11 @@ import { useContext } from 'react';
 import './DropTableBodyRow.css';
 import { SummaryTableContext } from '../../context/SummaryTableContext';
 
-interface DropTableBodyRow {
+interface DropTableBodyRowProps {
   rowIndex: number;
 }
 
-export const DropTableBodyRow = ({ rowIndex: index }: DropTableBodyRow): JSX.Element => {
+export const DropTableBodyRow = ({ rowIndex: index }: DropTableBodyRowProps): JSX.Element => {
   const summaryTableContext = useContext(SummaryTableContext);
 
   return (

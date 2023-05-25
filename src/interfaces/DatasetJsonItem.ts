@@ -1,5 +1,3 @@
-import { iSimpleTableRow } from '@asup/simple-table';
-
 /**
  * Skeleton values
  */
@@ -17,17 +15,17 @@ export interface SkeletonValueProps {
 /**
  * DatasetJsonItem extended for summary table
  */
-export interface SummaryVariable extends DatasetJsonItem {
-  /**
-   * Dummy data values
-   */
-  skeletonValues?: SkeletonValueProps[];
-  /**
-   * Decimal places in the table
-   */
-  decimalPlaces?: number;
-  /**
-   * Format for date times
-   */
-  dateFormat?: 'date' | 'time' | 'datetime';
-}
+// export interface SummaryVariable extends DatasetJsonItem {
+//   /**
+//    * Dummy data values
+//    */
+//   skeletonValues?: SkeletonValueProps[];
+//   /**
+//    * Decimal places in the table
+//    */
+//   decimalPlaces?: number;
+//   /**
+//    * Format for date times
+//    */
+//   dateFormat?: 'date' | 'time' | 'datetime';
+// }

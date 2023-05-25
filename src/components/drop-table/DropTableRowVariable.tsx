@@ -1,13 +1,13 @@
+import { ContextMenuHandler } from '@asup/context-menu';
 import { useContext, useMemo } from 'react';
+import { DataSetJsonItemClass } from '../../classes/DatasetJsonItemClass';
 import { SummaryTableContext } from '../../context/SummaryTableContext';
+import { deleteRowVariable } from '../../functions/deleteRowVariable';
 import { handleRowVariableDrop } from '../../functions/handleRowVariableDrop';
-import { SummaryVariable } from '../../interfaces/DatasetJsonItem';
 import { DropEdges } from '../drop-targets/DropEdges';
 import { VariableHolder } from '../lhs/VariableHolder';
 import { DropTableBodyRow } from './DropTableBodyRow';
 import './DropTableRowVariable.css';
-import { ContextMenuHandler } from '@asup/context-menu';
-import { deleteRowVariable } from '../../functions/deleteRowVariable';
 
 interface DropTableHeaderVariableProps {
   id: string;
@@ -16,7 +16,7 @@ interface DropTableHeaderVariableProps {
 
 export const DropTableRowVariable = ({ id, index }: DropTableHeaderVariableProps): JSX.Element => {
   const summaryTableContext = useContext(SummaryTableContext);
-  const variable = useMemo<SummaryVariable>(
+  const variable = useMemo<DataSetJsonItemClass>(
     () => summaryTableContext.rows[index],
     [index, summaryTableContext.rows],
   );
