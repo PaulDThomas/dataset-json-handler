@@ -1,4 +1,4 @@
-import { eStatistic } from '../interfaces/summaryInterfaces';
+import { eStatistic } from 'enums/eStatistic';
 
 export const moveStatistic = (
   originalArray: eStatistic[],

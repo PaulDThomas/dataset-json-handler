@@ -1,7 +1,7 @@
 import { iSimpleTableField, iSimpleTableRow, simpleTableSortFn } from '@asup/simple-table';
-import { DatasetJsonItem } from '../interfaces/DatasetJsonItem';
-import { ItemDataRow } from '../interfaces/itemDataRow';
-import { CdiscDatasetJson } from '../interfaces/cdiscDatasetJson';
+import { ItemDataRow } from '../interfaces/ItemDataRow';
+import { CdiscDatasetJson } from '../interfaces/CdiscDatasetJson';
+import { DataSetJsonItemClass, iDatasetJsonItem } from './DatasetJsonItemClass';
 
 /**
  * Typescript class for a CDISC data set JSON object
@@ -74,7 +74,7 @@ export class DatasetJson {
     return this.itemData.length;
   }
 
-  private _items: DatasetJsonItem[] = [];
+  private _items: DataSetJsonItemClass[] = [];
   /**
    * Items (variables) in the data set
    */
@@ -84,9 +84,11 @@ export class DatasetJson {
   /**
    * Items (variables) in the data set
    */
-  set items(newItems: DatasetJsonItem[]) {
+  set items(newItems: (iDatasetJsonItem | DataSetJsonItemClass)[]) {
     if (newItems.length > 0) {
-      this._items = newItems;
+      this._items = newItems.map((i) =>
+        i instanceof DataSetJsonItemClass ? i : new DataSetJsonItemClass(i),
+      );
     }
   }
   get simpleTableFields() {
@@ -108,12 +110,14 @@ export class DatasetJson {
    * @param newItem Add data set item definition to the data set
    * @returns true is successful, false (& sets errorText) is there is an error
    */
-  public addItem(newItem: DatasetJsonItem): boolean {
+  public addItem(newItem: DataSetJsonItemClass | iDatasetJsonItem): boolean {
     if (this.items.map((i) => i.name).includes(newItem.name)) {
       this._errorText = 'Item name already exists';
       return false;
     }
-    this._items.push(newItem);
+    this._items.push(
+      newItem instanceof DataSetJsonItemClass ? newItem : new DataSetJsonItemClass(newItem),
+    );
     this._itemData.forEach((row) => {
       row[newItem.name] = undefined;
     });
@@ -188,7 +192,7 @@ export class DatasetJson {
     const ds = Object.values(newJson.clinicalData.itemGroupData)[0];
     this._name = ds.name;
     this._label = ds.label;
-    this._items = ds.items;
+    this.items = ds.items;
     this._itemData = ds.itemData.map((arrayRow, ai) => {
       const newItem = Object.fromEntries(
         new Map(ds.items.map((item, i) => [item.name, arrayRow[i]])),
