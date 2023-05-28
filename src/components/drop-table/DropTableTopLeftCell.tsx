@@ -1,26 +1,29 @@
 import { useContext } from 'react';
-import { handleColumnVariableDrop } from '../../functions/handleColumnVariableDrop';
-import { handleRowVariableDrop } from '../../functions/handleRowVariableDrop';
+import { DataSetJsonItemClass } from '../../classes/DatasetJsonItemClass';
+import { SummaryTableContext } from '../../context/SummaryTableContext';
+import { MOVE_COLUMN_VARIABLE, MOVE_ROW_VARIABLE } from '../../functions/reducer';
 import { DropEdges } from '../drop-targets/DropEdges';
 import './DropTableTopLeftCell.css';
-import { SummaryTableContext } from '../../context/SummaryTableContext';
 
 interface DropTableTopLeftCellProps {
   id: string;
 }
 
 export const DropTableTopLeftCell = ({ id }: DropTableTopLeftCellProps): JSX.Element => {
-  const summaryTableContext = useContext(SummaryTableContext);
+  const { dispatch } = useContext(SummaryTableContext);
   return (
     <th style={{ position: 'relative' }}>
       <DropEdges
         id={`${id}-drop-edges`}
-        onDropBottom={(ret) =>
-          handleRowVariableDrop({ location: 'row', index: [0] }, ret, summaryTableContext)
-        }
-        onDropRight={(ret) =>
-          handleColumnVariableDrop({ location: 'column', index: [0] }, ret, summaryTableContext)
-        }
+        onDropBottom={(ret) => {
+          if (ret.data instanceof DataSetJsonItemClass) {
+            dispatch({ type: MOVE_ROW_VARIABLE, position: 0, item: ret.data });
+          }
+        }}
+        onDropRight={(ret) => {
+          if (ret.data instanceof DataSetJsonItemClass)
+            dispatch({ type: MOVE_COLUMN_VARIABLE, position: 0, item: ret.data });
+        }}
       >
         <div className='tl-cell-holder' />
       </DropEdges>

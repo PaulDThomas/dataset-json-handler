@@ -1,35 +1,37 @@
-import { createContext, useState } from 'react';
 import { eStatistic } from 'enums/eStatistic';
+import { createContext, useReducer } from 'react';
 import { DatasetJson } from '../classes/DatasetJsonClass';
-import { WhereClauseClass } from '../classes/WhereClauseClass';
 import { DataSetJsonItemClass } from '../classes/DatasetJsonItemClass';
+import { WhereClauseClass } from '../classes/WhereClauseClass';
+import { ActionProps, reducer } from '../functions/reducer';
 
 export interface SummaryTableSchema {
-  columns: DataSetJsonItemClass[];
   rows: DataSetJsonItemClass[];
+  columns: DataSetJsonItemClass[];
   target?: DataSetJsonItemClass;
   statistics: eStatistic[];
   statisticPosition: 'row' | 'column';
   whereClauses: WhereClauseClass[];
 }
 
-export interface SummaryTableContextProps extends SummaryTableSchema {
+const initialState: SummaryTableSchema = {
+  rows: [],
+  columns: [],
+  statistics: [],
+  statisticPosition: 'column',
+  whereClauses: [],
+};
+
+export interface SummaryTableContextProps {
+  state: SummaryTableSchema;
+  dispatch: React.Dispatch<ActionProps>;
   variableList: DataSetJsonItemClass[];
-  setRows: (ret: DataSetJsonItemClass[]) => void;
-  setColumns: (ret: DataSetJsonItemClass[]) => void;
-  setWhereClauses: (ret: WhereClauseClass[]) => void;
 }
 
 export const SummaryTableContext = createContext<SummaryTableContextProps>({
+  state: initialState,
+  dispatch: () => ({}),
   variableList: [],
-  rows: [],
-  setRows: (ret) => console.log(ret.length),
-  columns: [],
-  setColumns: (ret) => console.log(ret.length),
-  statistics: [],
-  statisticPosition: 'row',
-  whereClauses: [],
-  setWhereClauses: (ret) => console.log(ret.length),
 });
 
 interface SummaryTableContextProviderProps {
@@ -41,22 +43,14 @@ export const SummaryTableContextProvider = ({
   dataset,
   children,
 }: SummaryTableContextProviderProps): JSX.Element => {
-  const [rows, setRows] = useState<DataSetJsonItemClass[]>([]);
-  const [columns, setColumns] = useState<DataSetJsonItemClass[]>([]);
-  const [whereClauses, setWhereClauses] = useState<WhereClauseClass[]>([]);
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   return (
     <SummaryTableContext.Provider
       value={{
+        state,
+        dispatch,
         variableList: dataset.items,
-        rows,
-        columns,
-        setRows,
-        setColumns,
-        statistics: [],
-        statisticPosition: 'row',
-        whereClauses,
-        setWhereClauses,
       }}
     >
       {children}

@@ -8,7 +8,7 @@ interface VariableListProps {
 }
 
 export const VariableList = ({ id }: VariableListProps) => {
-  const summaryTableContext = useContext(SummaryTableContext);
+  const { state, variableList } = useContext(SummaryTableContext);
 
   return (
     <div
@@ -16,12 +16,12 @@ export const VariableList = ({ id }: VariableListProps) => {
       id={id}
     >
       <div className='simpletable-holder'>
-        {summaryTableContext.variableList
+        {variableList
           .filter(
             (v) =>
-              !summaryTableContext.columns.map((c) => c.name).includes(v.name) &&
-              !summaryTableContext.rows.map((r) => r.name).includes(v.name) &&
-              summaryTableContext.target?.name !== v.name,
+              !state.columns.map((c) => c.name).includes(v.name) &&
+              !state.rows.map((r) => r.name).includes(v.name) &&
+              state.target?.name !== v.name,
           )
           .map((variable, index) => (
             <DraggableVariable

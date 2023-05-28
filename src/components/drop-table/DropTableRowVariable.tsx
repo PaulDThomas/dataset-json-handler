@@ -2,8 +2,7 @@ import { ContextMenuHandler } from '@asup/context-menu';
 import { useContext, useMemo } from 'react';
 import { DataSetJsonItemClass } from '../../classes/DatasetJsonItemClass';
 import { SummaryTableContext } from '../../context/SummaryTableContext';
-import { deleteRowVariable } from '../../functions/deleteRowVariable';
-import { handleRowVariableDrop } from '../../functions/handleRowVariableDrop';
+import { MOVE_ROW_VARIABLE, REMOVE_ROW_VARIABLE } from '../../functions/reducer';
 import { DropEdges } from '../drop-targets/DropEdges';
 import { DraggableVariable } from '../lhs/DraggableVariable';
 import { DropTableBodyRow } from './DropTableBodyRow';
@@ -15,36 +14,31 @@ interface DropTableHeaderVariableProps {
 }
 
 export const DropTableRowVariable = ({ id, index }: DropTableHeaderVariableProps): JSX.Element => {
-  const summaryTableContext = useContext(SummaryTableContext);
-  const variable = useMemo<DataSetJsonItemClass>(
-    () => summaryTableContext.rows[index],
-    [index, summaryTableContext.rows],
-  );
+  const { state, dispatch } = useContext(SummaryTableContext);
+  const item = useMemo<DataSetJsonItemClass>(() => state.rows[index], [state.rows, index]);
 
   return (
-    <tr key={variable.name}>
+    <tr key={item.name}>
       <td style={{ position: 'relative' }}>
         <ContextMenuHandler
           menuItems={[
             {
               label: 'Remove',
-              action: () => deleteRowVariable(index, summaryTableContext),
+              action: () => dispatch({ type: REMOVE_ROW_VARIABLE, item }),
             },
           ]}
         >
           <DropEdges
             id={`${id}`}
-            onDropBottom={(ret) =>
-              handleRowVariableDrop(
-                { location: 'row', index: [index + 1] },
-                ret,
-                summaryTableContext,
-              )
-            }
+            onDropBottom={(ret) => {
+              if (ret.data instanceof DataSetJsonItemClass) {
+                dispatch({ type: MOVE_ROW_VARIABLE, position: index + 1, item: ret.data });
+              }
+            }}
           >
             <DraggableVariable
               id={`${id}-column-header-${index}`}
-              variable={variable}
+              variable={item}
             />
           </DropEdges>
         </ContextMenuHandler>

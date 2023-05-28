@@ -7,17 +7,17 @@ interface DropTableBodyRowProps {
 }
 
 export const DropTableBodyRow = ({ rowIndex: index }: DropTableBodyRowProps): JSX.Element => {
-  const summaryTableContext = useContext(SummaryTableContext);
+  const { state } = useContext(SummaryTableContext);
 
   return (
     <>
-      {summaryTableContext.columns.map((variable, ci) => (
+      {state.columns.map((variable, ci) => (
         <td key={variable.OID ?? ci}>
           <div
             className='data-cell'
             style={{ textAlign: 'center' }}
           >
-            {summaryTableContext.rows[index].label}
+            {state.rows[index].label}
             <br />
             x
             <br />

@@ -10,7 +10,7 @@ interface DropTableProps {
 }
 
 export const DropTable = ({ id }: DropTableProps): JSX.Element => {
-  const summaryTableContext = useContext(SummaryTableContext);
+  const { state } = useContext(SummaryTableContext);
 
   return (
     <div className='drop-table-holder'>
@@ -21,9 +21,9 @@ export const DropTable = ({ id }: DropTableProps): JSX.Element => {
         <thead>
           <tr>
             <DropTableTopLeftCell id={`${id}-tl-cell`} />
-            {summaryTableContext.columns.map((v, i) => (
+            {state.columns.map((v, i) => (
               <DropTableColumnVariable
-                key={v.OID ?? i}
+                key={`${i}:${v.OID}`}
                 id={`${id}-header-variable-${i}`}
                 index={i}
               />
@@ -31,9 +31,9 @@ export const DropTable = ({ id }: DropTableProps): JSX.Element => {
           </tr>
         </thead>
         <tbody>
-          {summaryTableContext.rows.map((v, i) => (
+          {state.rows.map((v, i) => (
             <DropTableRowVariable
-              key={v.OID ?? i}
+              key={`${i}:${v.OID}`}
               id={`${id}-row-variable-${i}`}
               index={i}
             />

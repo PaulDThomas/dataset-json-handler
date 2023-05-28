@@ -1,14 +1,16 @@
 import { useContext, useState } from 'react';
 import { SummaryTableContext } from '../../context/SummaryTableContext';
+import { UPDATE_WHERE_CLAUSE } from '../../functions/reducer';
 import { ContextWindow } from '@asup/context-menu';
 import { WhereClauseRow } from './WhereClauseRow';
+import { WhereClauseClass } from '../../classes/WhereClauseClass';
 
 interface SummaryTableWhereProps {
   editable?: boolean;
 }
 
 export const SummaryTableWhere = ({ editable = true }: SummaryTableWhereProps) => {
-  const summaryTableContext = useContext(SummaryTableContext);
+  const { state, dispatch } = useContext(SummaryTableContext);
 
   const [showWindow, setShowWindow] = useState<boolean>(false);
 
@@ -20,8 +22,8 @@ export const SummaryTableWhere = ({ editable = true }: SummaryTableWhereProps) =
       }}
     >
       <div className=''>
-        {summaryTableContext.whereClauses.length} filter
-        {summaryTableContext.whereClauses.length === 1 ? '' : 's'} applied
+        {state.whereClauses.length} filter
+        {state.whereClauses.length === 1 ? '' : 's'} applied
         <span
           className='stwhere-edit-button'
           title='Edit filters'
@@ -39,15 +41,22 @@ export const SummaryTableWhere = ({ editable = true }: SummaryTableWhereProps) =
           onClose={() => setShowWindow(false)}
         >
           <div className='stwhere-main'>
-            {summaryTableContext.whereClauses.map((w, i) => (
+            {state.whereClauses.map((w, i) => (
               <WhereClauseRow
                 key={i}
-                whereClause={w}
+                WID={w.WID}
                 canEdit={true}
               />
             ))}
             {editable && (
-              <div className='stwhere-add-where-clause'>
+              <div
+                className='stwhere-add-where-clause'
+                onClick={() => {
+                  if (!state.whereClauses.some((w) => !w.isValid)) {
+                    dispatch({ type: UPDATE_WHERE_CLAUSE, whereClause: new WhereClauseClass() });
+                  }
+                }}
+              >
                 <svg
                   xmlns='http://www.w3.org/2000/svg'
                   width='16'
