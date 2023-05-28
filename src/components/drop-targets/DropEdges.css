@@ -1,3 +1,8 @@
+:root {
+  --drop-edge-width: 8px;
+  --drop-edge-offset: 4px;
+}
+
 .drop-edges {
   width: 100%;
   height: 100%;
@@ -6,37 +11,29 @@
 }
 
 .drop-target.top {
-  top: -1rem;
-  left: -0.25rem;
-  width: calc(100% - 0.5rem);
-  height: 1rem;
-  position: absolute;
-  background-color: rgba(0, 0, 0, 0.25);
+  top: calc(-1 * var(--drop-edge-width));
+  left: calc(-1 * var(--drop-edge-offset));
+  width: 100%;
+  height: var(--drop-edge-width);
 }
 
 .drop-target.bottom {
-  bottom: -6px;
-  left: -0.25rem;
+  bottom: calc(-1 * var(--drop-edge-width));
+  left: calc(-1 * var(--drop-edge-offset));
   width: 100%;
-  height: 4px;
-  position: absolute;
-  background-color: rgba(0, 0, 0, 0.25);
+  height: var(--drop-edge-width);
 }
 
 .drop-target.left {
-  left: -1rem;
-  top: -0.25rem;
-  width: calc(100% - 0.5rem);
-  height: 1rem;
-  position: absolute;
-  background-color: rgba(0, 0, 0, 0.25);
+  left: calc(-1 * var(--drop-edge-width));
+  top: calc(-1 * var(--drop-edge-offset));
+  width: var(--drop-edge-width);
+  height: 100%;
 }
 
 .drop-target.right {
-  right: -6px;
-  top: -2px;
-  width: 4px;
+  right: calc(-1 * var(--drop-edge-width));
+  top: calc(-1 * var(--drop-edge-offset));
+  width: calc(1 * var(--drop-edge-width));
   height: 100%;
-  position: absolute;
-  background-color: rgba(0, 0, 0, 0.25);
 }
