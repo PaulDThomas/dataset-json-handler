@@ -1,6 +1,5 @@
 import { eOperation } from '../enums/eOperation';
 import { DataSetJsonItemClass, eVariableType } from './DatasetJsonItemClass';
-import { randomUUID } from 'crypto';
 
 /**
  * Where clause definition
@@ -9,7 +8,7 @@ export interface iWhereClause {
   /** Unique identifier */
   WID?: string;
   /** Variable being checked */
-  variable: DataSetJsonItemClass;
+  variable: DataSetJsonItemClass | null;
   /** Operation to apply */
   whereOperation: eOperation | null;
   /** Value(s) in the where clause */
@@ -131,11 +130,11 @@ export class WhereClauseClass {
    *  @filteredVariableValues Values
    * }
    */
-  public constructor(newWhereClause: iWhereClause) {
-    this._WID = newWhereClause.WID ?? randomUUID();
-    this._variable = newWhereClause.variable;
-    this._whereOperation = newWhereClause.whereOperation;
-    this._filteredVariableValues = newWhereClause.filteredVariableValues;
+  public constructor(newWhereClause?: iWhereClause) {
+    this._WID = newWhereClause?.WID ?? crypto.randomUUID();
+    this._variable = newWhereClause?.variable ?? null;
+    this._whereOperation = newWhereClause?.whereOperation ?? null;
+    this._filteredVariableValues = newWhereClause?.filteredVariableValues ?? [];
   }
 
   /**
