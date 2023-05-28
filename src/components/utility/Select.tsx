@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 interface EnumSelectorProps {
-  values: string[];
+  values: { value: string; label: string }[];
   selected: string;
   setSelected?: (ret: string) => void;
   style?: React.CSSProperties;
@@ -19,8 +19,9 @@ export const Select = ({
   useEffect(() => setCurrentValue(selected), [selected]);
 
   return (
-    <div className={`enumselector-main ${className}`}>
+    <div className={`selector-main ${className}`}>
       <select
+        className='selector-select'
         style={style}
         value={currentValue}
         onChange={(e) => setCurrentValue(e.currentTarget.value)}
@@ -28,10 +29,10 @@ export const Select = ({
       >
         {values.map((k, i) => (
           <option
-            key={`${i}${k}`}
-            value={k}
+            key={`${i}-${k.value}`}
+            value={k.value}
           >
-            {k}
+            {k.label}
           </option>
         ))}
       </select>
