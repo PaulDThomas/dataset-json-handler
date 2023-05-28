@@ -4,7 +4,7 @@ import { handleStatisticDrop } from '../../functions/handleColumnStatisticDrop';
 import { handleColumnVariableDrop } from '../../functions/handleColumnVariableDrop';
 import { DropEdges } from '../drop-targets/DropEdges';
 import { StatisticHolder } from '../lhs/StatisticHolder';
-import { VariableHolder } from '../lhs/VariableHolder';
+import { DraggableVariable } from '../lhs/DraggableVariable';
 import './DropTableColumnVariable.css';
 import { ContextMenuHandler } from '@asup/context-menu';
 import { deleteColumnVariable } from '../../functions/deleteColumnVariable';
@@ -57,7 +57,7 @@ export const DropTableColumnVariable = ({
           }
         >
           <>
-            <VariableHolder
+            <DraggableVariable
               id={`${id}-column-header-${index}`}
               variable={variable}
             />

@@ -5,7 +5,7 @@ import { SummaryTableContext } from '../../context/SummaryTableContext';
 import { deleteRowVariable } from '../../functions/deleteRowVariable';
 import { handleRowVariableDrop } from '../../functions/handleRowVariableDrop';
 import { DropEdges } from '../drop-targets/DropEdges';
-import { VariableHolder } from '../lhs/VariableHolder';
+import { DraggableVariable } from '../lhs/DraggableVariable';
 import { DropTableBodyRow } from './DropTableBodyRow';
 import './DropTableRowVariable.css';
 
@@ -42,7 +42,7 @@ export const DropTableRowVariable = ({ id, index }: DropTableHeaderVariableProps
               )
             }
           >
-            <VariableHolder
+            <DraggableVariable
               id={`${id}-column-header-${index}`}
               variable={variable}
             />

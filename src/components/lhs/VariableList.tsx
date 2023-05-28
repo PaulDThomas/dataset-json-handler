@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { VariableHolder } from './VariableHolder';
+import { DraggableVariable } from './DraggableVariable';
 import './VariableList.css';
 import { SummaryTableContext } from '../../context/SummaryTableContext';
 
@@ -24,7 +24,7 @@ export const VariableList = ({ id }: VariableListProps) => {
               summaryTableContext.target?.name !== v.name,
           )
           .map((variable, index) => (
-            <VariableHolder
+            <DraggableVariable
               key={variable.OID ?? index}
               id={`${id}-${variable.name}`}
               variable={variable}

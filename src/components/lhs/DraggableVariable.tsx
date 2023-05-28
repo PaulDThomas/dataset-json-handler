@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import './VariableHolder.css';
+import './DraggableVariable.css';
 import { DataSetJsonItemClass } from '../../classes/DatasetJsonItemClass';
 
-interface VariableHolderProps {
+interface DraggableVariableProps {
   id: string;
   variable: DataSetJsonItemClass;
 }
 
-export const VariableHolder = ({ id, variable }: VariableHolderProps): JSX.Element => {
+export const DraggableVariable = ({ id, variable }: DraggableVariableProps): JSX.Element => {
   const [isBeingDragged, setIsBeingDragged] = useState<boolean>(false);
 
   const handleDragStart = (e: React.DragEvent) => {
