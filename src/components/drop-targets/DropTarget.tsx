@@ -34,10 +34,10 @@ export const DropTarget = ({
         );
         console.log('Data dropped');
         console.log(data);
-        const ix = summaryTableContext.variableList.findIndex((v) => v.OID === data.OID);
+        const ix = summaryTableContext.itemList.findIndex((v) => v.OID === data.OID);
         if (ix > -1) {
-          const variable = summaryTableContext.variableList[ix];
-          dropAction && dropAction({ type: 'variable', data: variable });
+          const item = summaryTableContext.itemList[ix];
+          dropAction && dropAction({ type: 'variable', data: item });
         }
       } catch (error) {
         console.warn(`Something has gone wrong :( dropping on ${id}`);

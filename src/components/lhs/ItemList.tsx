@@ -1,22 +1,22 @@
 import { useContext } from 'react';
-import { DraggableVariable } from './DraggableVariable';
-import './VariableList.css';
+import { DraggableItem } from './DraggableItem';
+import './ItemList.css';
 import { SummaryTableContext } from '../../context/SummaryTableContext';
 
-interface VariableListProps {
+interface ItemListProps {
   id: string;
 }
 
-export const VariableList = ({ id }: VariableListProps) => {
-  const { state, variableList } = useContext(SummaryTableContext);
+export const ItemList = ({ id }: ItemListProps) => {
+  const { state, itemList } = useContext(SummaryTableContext);
 
   return (
     <div
-      className='variable-list simpletable-main small-scrollbar'
+      className='item-list simpletable-main small-scrollbar'
       id={id}
     >
       <div className='simpletable-holder'>
-        {variableList
+        {itemList
           .filter(
             (v) =>
               !state.columns.map((c) => c.name).includes(v.name) &&
@@ -24,7 +24,7 @@ export const VariableList = ({ id }: VariableListProps) => {
               state.target?.name !== v.name,
           )
           .map((variable, index) => (
-            <DraggableVariable
+            <DraggableItem
               key={variable.OID ?? index}
               id={`${id}-${variable.name}`}
               item={variable}

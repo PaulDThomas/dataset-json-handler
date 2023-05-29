@@ -1,4 +1,4 @@
-.variable-holder {
+.item-holder {
   margin-top: 1px;
   margin-bottom: 1px;
   margin-left: 0.5rem;
@@ -12,6 +12,6 @@
   font-size: small;
 }
 
-.variable-holder.being-dragged {
+.item-holder.being-dragged {
   opacity: 0.5;
 }

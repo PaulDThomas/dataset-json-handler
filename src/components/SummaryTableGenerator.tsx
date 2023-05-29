@@ -3,7 +3,7 @@ import { DatasetJson } from '../classes/DatasetJsonClass';
 import { SummaryTableContextProvider } from '../context/SummaryTableContext';
 import { SummaryTableWhere } from './where/SummaryTableWhere';
 import { DropTable } from './drop-table/DropTable';
-import { VariableList } from './lhs/VariableList';
+import { ItemList } from './lhs/ItemList';
 
 interface SummaryTableGeneratorProps {
   dataset: DatasetJson;
@@ -25,7 +25,7 @@ export const SummaryTableGenerator = ({ dataset }: SummaryTableGeneratorProps): 
               className='summarytable-lhs'
               style={{ width: '190px', height: '100%' }}
             >
-              <VariableList id={'summarytable-items'} />
+              <ItemList id={'summarytable-items'} />
             </div>
             <div
               className='summarytable-rhs'

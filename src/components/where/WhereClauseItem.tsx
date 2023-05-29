@@ -4,7 +4,7 @@ import { WhereClauseClass } from '../../classes/WhereClauseClass';
 import { SummaryTableContext } from '../../context/SummaryTableContext';
 import { UPDATE_WHERE_CLAUSE } from '../../functions/reducer';
 import { DropTarget } from '../drop-targets/DropTarget';
-import { DraggableVariable } from '../lhs/DraggableVariable';
+import { DraggableItem } from '../lhs/DraggableItem';
 
 interface WhereClauseItemProps {
   index: number;
@@ -15,7 +15,7 @@ export const WhereClauseItem = ({ index }: WhereClauseItemProps): JSX.Element =>
 
   return (
     <div
-      className='variableholder-main'
+      className='itemholder-main'
       style={{
         position: 'relative',
         width: '166px',
@@ -40,14 +40,14 @@ export const WhereClauseItem = ({ index }: WhereClauseItemProps): JSX.Element =>
         }}
       >
         {state.whereClauses[index] ? (
-          <DraggableVariable
+          <DraggableItem
             id={`whereclauseitem-${index}`}
             item={state.whereClauses[index].item}
           />
         ) : (
           <div
             id={`whereclauseitem-${index}`}
-            className='variable-holder'
+            className='item-holder'
           />
         )}
       </DropTarget>

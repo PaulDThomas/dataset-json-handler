@@ -4,7 +4,7 @@ import { DataSetJsonItemClass } from '../../classes/DatasetJsonItemClass';
 import { SummaryTableContext } from '../../context/SummaryTableContext';
 import { MOVE_COLUMN_VARIABLE, REMOVE_COLUMN_VARIABLE } from '../../functions/reducer';
 import { DropEdges } from '../drop-targets/DropEdges';
-import { DraggableVariable } from '../lhs/DraggableVariable';
+import { DraggableItem } from '../lhs/DraggableItem';
 import { StatisticHolder } from '../lhs/StatisticHolder';
 import './DropTableColumnVariable.css';
 
@@ -49,7 +49,7 @@ export const DropTableColumnVariable = ({
           // }
         >
           <>
-            <DraggableVariable
+            <DraggableItem
               id={`${id}-column-header-${index}`}
               item={item}
             />

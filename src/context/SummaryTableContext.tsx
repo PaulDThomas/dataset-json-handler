@@ -25,13 +25,13 @@ const initialState: SummaryTableSchema = {
 export interface SummaryTableContextProps {
   state: SummaryTableSchema;
   dispatch: React.Dispatch<ActionProps>;
-  variableList: DataSetJsonItemClass[];
+  itemList: DataSetJsonItemClass[];
 }
 
 export const SummaryTableContext = createContext<SummaryTableContextProps>({
   state: initialState,
   dispatch: () => ({}),
-  variableList: [],
+  itemList: [],
 });
 
 interface SummaryTableContextProviderProps {
@@ -50,7 +50,7 @@ export const SummaryTableContextProvider = ({
       value={{
         state,
         dispatch,
-        variableList: dataset.items,
+        itemList: dataset.items,
       }}
     >
       {children}

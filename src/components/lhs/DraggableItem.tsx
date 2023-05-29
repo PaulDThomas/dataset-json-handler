@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
-import './DraggableVariable.css';
+import './DraggableItem.css';
 import { DataSetJsonItemClass } from '../../classes/DatasetJsonItemClass';
 import { ContextMenuHandler, ContextWindow } from '@asup/context-menu';
 import { ItemProperties } from '../utility/ItemProperties';
 
-interface DraggableVariableProps {
+interface DraggableItemProps {
   id: string;
   item: DataSetJsonItemClass | null;
 }
 
-export const DraggableVariable = ({ id, item }: DraggableVariableProps): JSX.Element => {
+export const DraggableItem = ({ id, item }: DraggableItemProps): JSX.Element => {
   const [isBeingDragged, setIsBeingDragged] = useState<boolean>(false);
   const [showProperties, setShowProperties] = useState<boolean>(false);
 
@@ -36,7 +36,7 @@ export const DraggableVariable = ({ id, item }: DraggableVariableProps): JSX.Ele
       >
         <div
           id={id}
-          className={`variable-holder ${isBeingDragged ? 'being-dragged' : ''}`}
+          className={`item-holder ${isBeingDragged ? 'being-dragged' : ''}`}
           draggable
           onDragStart={handleDragStart}
           onDragEnd={handleDragEnd}
