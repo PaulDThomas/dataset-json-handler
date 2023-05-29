@@ -51,7 +51,7 @@ export const DropTableColumnVariable = ({
           <>
             <DraggableVariable
               id={`${id}-column-header-${index}`}
-              variable={item}
+              item={item}
             />
             {state.statisticPosition === 'column' && (
               <div

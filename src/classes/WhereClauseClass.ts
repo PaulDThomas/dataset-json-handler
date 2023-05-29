@@ -1,5 +1,5 @@
 import { eOperation } from '../enums/eOperation';
-import { DataSetJsonItemClass, eVariableType } from './DatasetJsonItemClass';
+import { DataSetJsonItemClass, eItemType } from './DatasetJsonItemClass';
 
 /**
  * Where clause definition
@@ -7,12 +7,12 @@ import { DataSetJsonItemClass, eVariableType } from './DatasetJsonItemClass';
 export interface iWhereClause {
   /** Unique identifier */
   WID?: string;
-  /** Variable being checked */
-  variable: DataSetJsonItemClass | null;
+  /** Item being checked */
+  item: DataSetJsonItemClass | null;
   /** Operation to apply */
   whereOperation: eOperation | null;
   /** Value(s) in the where clause */
-  filteredVariableValues?: (string | number | Date)[];
+  filteredItemValues?: (string | number | Date)[];
 }
 
 /**
@@ -29,26 +29,26 @@ export class WhereClauseClass {
 
   private _previousVersions: {
     timestamp: Date;
-    _variableName: DataSetJsonItemClass;
+    _itemName: DataSetJsonItemClass;
     _whereOperation: eOperation;
-    _filteredVariableValues: (string | number | Date)[] | undefined;
+    _filteredItemValues: (string | number | Date)[] | undefined;
   }[] = [];
   get previousVersions() {
     return this._previousVersions;
   }
 
-  private _variable: DataSetJsonItemClass | null = null;
+  private _item: DataSetJsonItemClass | null = null;
   /**
-   * Variable to check
+   * Item to check
    */
-  get variable() {
-    return this._variable;
+  get item() {
+    return this._item;
   }
   /**
-   * Variable to check
+   * Item to check
    */
-  set variable(newVariable: DataSetJsonItemClass | null) {
-    this._variable = newVariable;
+  set item(newItem: DataSetJsonItemClass | null) {
+    this._item = newItem;
   }
 
   private _whereOperation: eOperation | null = null;
@@ -65,40 +65,32 @@ export class WhereClauseClass {
     this._whereOperation = newOperation;
   }
 
-  private _filteredVariableValues: (string | number | Date)[] | undefined = [];
+  private _filteredItemValues: (string | number | Date)[] | undefined = [];
   /**
    * Values for condition
    */
-  get filteredVariableValues() {
-    return this._filteredVariableValues;
+  get filteredItemValues() {
+    return this._filteredItemValues;
   }
   /**
    * Values for condition
    */
-  set filteredVariableValues(newValues: (string | number | Date)[] | undefined) {
-    if (newValues === undefined) this._filteredVariableValues === newValues;
-    else if (!this._variable)
-      throw new Error('WhereClause: Can not set values where there is no variable');
+  set filteredItemValues(newValues: (string | number | Date)[] | undefined) {
+    if (newValues === undefined) this._filteredItemValues === newValues;
+    else if (!this._item) throw new Error('WhereClause: Can not set values where there is no item');
+    else if (this._item.type === eItemType.string && newValues.some((v) => typeof v !== 'string'))
+      throw new Error('WhereClause: Can only set string values for a string item');
     else if (
-      this._variable.type === eVariableType.string &&
-      newValues.some((v) => typeof v !== 'string')
-    )
-      throw new Error('WhereClause: Can only set string values for a string variable');
-    else if (
-      [eVariableType.integer, eVariableType.float].includes(this._variable.type) &&
+      [eItemType.integer, eItemType.float].includes(this._item.type) &&
       newValues.some((v) => typeof v !== 'number')
     )
-      throw new Error('WhereClause: Can only set number values for a integer or float variable');
+      throw new Error('WhereClause: Can only set number values for a integer or float items');
     else if (
-      [eVariableType.date, eVariableType.datetime, eVariableType.time].includes(
-        this._variable.type,
-      ) &&
+      [eItemType.date, eItemType.datetime, eItemType.time].includes(this._item.type) &&
       newValues.some((v) => !(v instanceof Date))
     )
-      throw new Error(
-        'WhereClause: Can only set date values for a date, datetime or time variable',
-      );
-    else this._filteredVariableValues = newValues;
+      throw new Error('WhereClause: Can only set date values for a date, datetime or time items');
+    else this._filteredItemValues = newValues;
   }
 
   /**
@@ -107,15 +99,15 @@ export class WhereClauseClass {
   get isValid() {
     return (
       this._WID &&
-      this._variable &&
+      this._item &&
       this._whereOperation &&
       (([eOperation.miss, eOperation.not_miss].includes(this._whereOperation) &&
-        this.filteredVariableValues?.length === 0) ||
+        this.filteredItemValues?.length === 0) ||
         ([eOperation.eq, eOperation.ge, eOperation.gt, eOperation.le, eOperation.lt].includes(
           this._whereOperation,
         ) &&
-          this._filteredVariableValues?.length === 1) ||
-        ([eOperation.in, eOperation.not_in] && (this._filteredVariableValues?.length ?? -1) > 0))
+          this._filteredItemValues?.length === 1) ||
+        ([eOperation.in, eOperation.not_in] && (this._filteredItemValues?.length ?? -1) > 0))
     );
   }
 
@@ -125,40 +117,40 @@ export class WhereClauseClass {
    * Parameters:
    * {
    *  @WID unique id
-   *  @variable DatasetJsonItem
+   *  @item DatasetJsonItem
    *  @whereOperation Operation
-   *  @filteredVariableValues Values
+   *  @filteredItemValues Values
    * }
    */
   public constructor(newWhereClause?: iWhereClause) {
     this._WID = newWhereClause?.WID ?? crypto.randomUUID();
-    this._variable = newWhereClause?.variable ?? null;
+    this._item = newWhereClause?.item ?? null;
     this._whereOperation = newWhereClause?.whereOperation ?? null;
-    this._filteredVariableValues = newWhereClause?.filteredVariableValues ?? [];
+    this._filteredItemValues = newWhereClause?.filteredItemValues ?? [];
   }
 
   /**
    * Update existing where clause, and save previous version if valid
-   * @param variableName U
-   * @param whereOperation
-   * @param filteredVariableValues
+   * @param itemName new name
+   * @param whereOperation: new operation
+   * @param filteredItemValues: new item values
    */
   public update(
-    variableName: DataSetJsonItemClass,
+    itemName: DataSetJsonItemClass,
     whereOperation: eOperation,
-    filteredVariableValues: (string | number | Date)[],
+    filteredItemValues: (string | number | Date)[],
   ) {
-    if (this._variable && this._whereOperation && this.isValid) {
+    if (this._item && this._whereOperation && this.isValid) {
       const currentVersion = {
         timestamp: new Date(),
-        _variableName: this._variable,
+        _itemName: this._item,
         _whereOperation: this._whereOperation,
-        _filteredVariableValues: this._filteredVariableValues,
+        _filteredItemValues: this._filteredItemValues,
       };
       this._previousVersions.push(currentVersion);
     }
-    this._variable = variableName;
+    this._item = itemName;
     this._whereOperation = whereOperation;
-    this._filteredVariableValues = filteredVariableValues;
+    this._filteredItemValues = filteredItemValues;
   }
 }

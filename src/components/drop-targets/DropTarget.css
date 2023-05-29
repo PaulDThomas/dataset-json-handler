@@ -16,3 +16,10 @@
   margin: 3px;
   border: 1px dashed black;
 }
+
+.drop-target.center {
+  margin: 3px;
+  width: calc(100% - 6px);
+  height: calc(100% - 6px);
+  background-color: rgba(0, 0, 0, 0.1);
+}

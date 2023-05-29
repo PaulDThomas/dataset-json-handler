@@ -27,7 +27,7 @@ export const VariableList = ({ id }: VariableListProps) => {
             <DraggableVariable
               key={variable.OID ?? index}
               id={`${id}-${variable.name}`}
-              variable={variable}
+              item={variable}
             />
           ))}
       </div>

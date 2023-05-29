@@ -1,54 +1,84 @@
-import { useContext, useMemo } from 'react';
+import { useContext } from 'react';
 import { WhereClauseClass } from '../../classes/WhereClauseClass';
 import { SummaryTableContext } from '../../context/SummaryTableContext';
 import { OperationSelector, eOperation } from '../../enums/eOperation';
-import { UPDATE_WHERE_CLAUSE } from '../../functions/reducer';
+import { REMOVE_WHERE_CLAUSE, UPDATE_WHERE_CLAUSE } from '../../functions/reducer';
+import { WhereClauseItem } from './WhereClauseItem';
 
 interface WhereClauseProps {
-  WID: string;
+  index: number;
   canEdit: boolean;
-  setWhereClause?: (ret: WhereClauseClass) => void;
-  previousVersions?: WhereClauseClass[];
 }
 
-export const WhereClauseRow = ({ WID, canEdit }: WhereClauseProps): JSX.Element => {
+export const WhereClauseRow = ({ index, canEdit }: WhereClauseProps): JSX.Element => {
   const { state, dispatch } = useContext(SummaryTableContext);
-  const whereClause = useMemo(
-    () => state.whereClauses.find((w) => w.WID === WID),
-    [state.whereClauses, WID],
-  );
 
-  if (!whereClause) return <></>;
+  if (!state.whereClauses[index]) return <></>;
   return (
     <div
       className='whereclause-main'
-      // onBlur={() => canEdit && setWhereClause && setWhereClause(currentValue)}
+      style={{
+        display: 'flex',
+        flexDirection: 'row',
+      }}
     >
-      <div>{whereClause.variable?.name ?? 'No variable chosen'}</div>
+      <div
+        className='whereclause-remove-holder'
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+        }}
+      >
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          width='16'
+          height='16'
+          fill='currentColor'
+          className='bi bi-dash-circle'
+          viewBox='0 0 16 16'
+          color='red'
+          onClick={
+            canEdit
+              ? () =>
+                  dispatch({ type: REMOVE_WHERE_CLAUSE, whereClause: state.whereClauses[index] })
+              : undefined
+          }
+        >
+          <path d='M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z' />
+          <path d='M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z' />
+        </svg>
+      </div>
+      <WhereClauseItem index={index} />
       <OperationSelector
-        selected={(whereClause?.whereOperation ?? '') as string}
+        selected={(state.whereClauses[index]?.whereOperation ?? '') as string}
         setSelected={
           canEdit
             ? (ret) => {
-                whereClause.whereOperation = ret as eOperation;
-                dispatch({ type: UPDATE_WHERE_CLAUSE, whereClause });
+                dispatch({
+                  type: UPDATE_WHERE_CLAUSE,
+                  whereClause: new WhereClauseClass({
+                    WID: state.whereClauses[index]?.WID,
+                    item: state.whereClauses[index]?.item,
+                    whereOperation: (ret as eOperation) ?? null,
+                    filteredItemValues: state.whereClauses[index]?.filteredItemValues,
+                  }),
+                });
               }
             : undefined
         }
       />
       <div className='whereclause-values'>
-        {(whereClause.filteredVariableValues &&
-          whereClause.filteredVariableValues.map((v, i) => (
-            <div key={i}>
-              {v instanceof Date
-                ? new Date(v.getTime() - v.getTimezoneOffset() * 60000)
-                    .toISOString()
-                    .replace(/T/, ' ')
-                    .slice(0, 16)
-                : v}
-            </div>
-          ))) ??
-          'No values set'}
+        {state.whereClauses[index]?.filteredItemValues?.map((v, i) => (
+          <div key={i}>
+            {v instanceof Date
+              ? new Date(v.getTime() - v.getTimezoneOffset() * 60000)
+                  .toISOString()
+                  .replace(/T/, ' ')
+                  .slice(0, 16)
+              : v}
+          </div>
+        )) ?? 'No values set'}
       </div>
     </div>
   );

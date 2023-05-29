@@ -1,36 +1,59 @@
 import React, { useState } from 'react';
 import './DraggableVariable.css';
 import { DataSetJsonItemClass } from '../../classes/DatasetJsonItemClass';
+import { ContextMenuHandler, ContextWindow } from '@asup/context-menu';
+import { ItemProperties } from '../utility/ItemProperties';
 
 interface DraggableVariableProps {
   id: string;
-  variable: DataSetJsonItemClass;
+  item: DataSetJsonItemClass | null;
 }
 
-export const DraggableVariable = ({ id, variable }: DraggableVariableProps): JSX.Element => {
+export const DraggableVariable = ({ id, item }: DraggableVariableProps): JSX.Element => {
   const [isBeingDragged, setIsBeingDragged] = useState<boolean>(false);
+  const [showProperties, setShowProperties] = useState<boolean>(false);
 
   const handleDragStart = (e: React.DragEvent) => {
-    console.log('Drag start for ' + variable.name);
-    setIsBeingDragged(true);
-    e.dataTransfer.setData('application/datasetjsonitem', variable.toString);
+    if (item) {
+      console.log('Drag start for ' + item.name);
+      setIsBeingDragged(true);
+      e.dataTransfer.setData('application/datasetjsonitem', item.toString);
+    }
   };
 
   const handleDragEnd = (e: React.DragEvent) => {
-    console.log(e);
-    console.log('Drag end for ' + variable.name);
-    setIsBeingDragged(false);
+    if (item) {
+      console.log(e);
+      console.log('Drag end for ' + item.name);
+      setIsBeingDragged(false);
+    }
   };
 
   return (
-    <div
-      id={id}
-      className={`variable-holder ${isBeingDragged ? 'being-dragged' : ''}`}
-      draggable
-      onDragStart={handleDragStart}
-      onDragEnd={handleDragEnd}
-    >
-      {variable.name}
-    </div>
+    <>
+      <ContextMenuHandler
+        menuItems={item ? [{ label: 'Properties', action: () => setShowProperties(true) }] : []}
+      >
+        <div
+          id={id}
+          className={`variable-holder ${isBeingDragged ? 'being-dragged' : ''}`}
+          draggable
+          onDragStart={handleDragStart}
+          onDragEnd={handleDragEnd}
+        >
+          {item?.name}
+        </div>
+      </ContextMenuHandler>
+      {item && (
+        <ContextWindow
+          id={'item-properties-window'}
+          visible={showProperties}
+          title={`${item?.label} properties`}
+          onClose={() => setShowProperties(false)}
+        >
+          <ItemProperties item={item} />
+        </ContextWindow>
+      )}
+    </>
   );
 };

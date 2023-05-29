@@ -1,7 +1,7 @@
 import { iSimpleTableRow } from '@asup/simple-table';
 import { JSX } from 'react';
 
-export enum eVariableType {
+export enum eItemType {
   string = 'string',
   integer = 'integer',
   float = 'float',
@@ -29,7 +29,7 @@ export interface iDatasetJsonItem extends iSimpleTableRow {
   /**
    * Item type
    */
-  type: eVariableType;
+  type: eItemType;
   /**
    * Item length (for strings)
    */
@@ -59,16 +59,16 @@ export class DataSetJsonItemClass {
   get label() {
     return this._label;
   }
-  private _type: eVariableType = eVariableType.string;
+  private _type: eItemType = eItemType.string;
   /**
    * Item type
    */
-  get type(): eVariableType {
+  get type(): eItemType {
     return this._type;
   }
   private _length: number | undefined = 8;
   /**
-   * Assigned variable length for strings
+   * Assigned item length for strings
    */
   get length() {
     return this._length;

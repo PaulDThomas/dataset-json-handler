@@ -1,4 +1,4 @@
-import { eVariableType } from '../classes/DatasetJsonItemClass';
+import { eItemType } from '../classes/DatasetJsonItemClass';
 
 export interface CdiscDatasetJson {
   clinicalData: {
@@ -13,7 +13,7 @@ export interface CdiscDatasetJson {
           OID: string;
           name: string;
           label: string;
-          type: eVariableType;
+          type: eItemType;
           length?: number;
         }[];
         itemData: (string | number | null)[][];

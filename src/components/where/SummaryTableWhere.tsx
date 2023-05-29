@@ -39,12 +39,13 @@ export const SummaryTableWhere = ({ editable = true }: SummaryTableWhereProps) =
           id={'stwhere-window'}
           title={'Where clauses'}
           onClose={() => setShowWindow(false)}
+          style={{ width: '500px' }}
         >
           <div className='stwhere-main'>
-            {state.whereClauses.map((w, i) => (
+            {state.whereClauses.map((_, i) => (
               <WhereClauseRow
                 key={i}
-                WID={w.WID}
+                index={i}
                 canEdit={true}
               />
             ))}

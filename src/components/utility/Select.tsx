@@ -19,10 +19,17 @@ export const Select = ({
   useEffect(() => setCurrentValue(selected), [selected]);
 
   return (
-    <div className={`selector-main ${className}`}>
+    <div
+      className={`selector-main ${className}`}
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+      }}
+    >
       <select
         className='selector-select'
-        style={style}
+        style={{ borderRadius: '4px', ...style }}
         value={currentValue}
         onChange={(e) => setCurrentValue(e.currentTarget.value)}
         onBlur={(e) => setSelected && setSelected(e.currentTarget.value)}

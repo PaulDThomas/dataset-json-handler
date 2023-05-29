@@ -9,7 +9,7 @@ interface DropTargetProps {
   dropAction?: (ret: DndData) => void;
   children?: null | string | JSX.Element | (string | JSX.Element)[];
   style?: React.CSSProperties;
-  type?: 'top' | 'left' | 'bottom' | 'right';
+  type?: 'top' | 'left' | 'bottom' | 'right' | 'center';
 }
 
 export const DropTarget = ({

@@ -25,7 +25,7 @@ export const SummaryTableGenerator = ({ dataset }: SummaryTableGeneratorProps): 
               className='summarytable-lhs'
               style={{ width: '190px', height: '100%' }}
             >
-              <VariableList id={'summarytable-variables'} />
+              <VariableList id={'summarytable-items'} />
             </div>
             <div
               className='summarytable-rhs'

@@ -1,7 +1,7 @@
 import { Select } from '../components/utility/Select';
 
 export enum eOperation {
-  eq = 'Equal',
+  eq = 'Equals',
   lt = 'Less than',
   le = 'Less than or equal to',
   gt = 'Greater than',
@@ -28,7 +28,7 @@ export const OperationSelector = ({
   return (
     <Select
       className={`eoperation-selector ${className}`}
-      style={style}
+      style={{ width: '170px', ...style }}
       values={Object.keys(eOperation).map((k, i) => ({
         value: k,
         label: Object.values(eOperation)[i],

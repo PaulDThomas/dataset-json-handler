@@ -11,8 +11,8 @@ export const DropTableBodyRow = ({ rowIndex: index }: DropTableBodyRowProps): JS
 
   return (
     <>
-      {state.columns.map((variable, ci) => (
-        <td key={variable.OID ?? ci}>
+      {state.columns.map((item, ci) => (
+        <td key={item.OID ?? ci}>
           <div
             className='data-cell'
             style={{ textAlign: 'center' }}
@@ -21,7 +21,7 @@ export const DropTableBodyRow = ({ rowIndex: index }: DropTableBodyRowProps): JS
             <br />
             x
             <br />
-            {variable.label}
+            {item.label}
           </div>
         </td>
       ))}
