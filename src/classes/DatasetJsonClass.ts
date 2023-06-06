@@ -1,12 +1,12 @@
 import { iSimpleTableField, iSimpleTableRow, simpleTableSortFn } from '@asup/simple-table';
 import { ItemDataRow } from '../interfaces/ItemDataRow';
 import { CdiscDatasetJson } from '../interfaces/CdiscDatasetJson';
-import { DataSetJsonItemClass, iDatasetJsonItem } from './DatasetJsonItemClass';
+import { DatasetJsonItemClass, iDatasetJsonItem } from './DatasetJsonItemClass';
 
 /**
  * Typescript class for a CDISC data set JSON object
  */
-export class DatasetJson {
+export class DatasetJsonClass {
   private _errorText = '';
   /**
    * Error text after internal error
@@ -74,20 +74,20 @@ export class DatasetJson {
     return this.itemData.length;
   }
 
-  private _items: DataSetJsonItemClass[] = [];
+  private _items: DatasetJsonItemClass[] = [];
   /**
    * Items (variables) in the data set
    */
-  get items(): DataSetJsonItemClass[] {
+  get items(): DatasetJsonItemClass[] {
     return this._items;
   }
   /**
    * Items (variables) in the data set
    */
-  set items(newItems: (iDatasetJsonItem | DataSetJsonItemClass)[]) {
+  set items(newItems: (iDatasetJsonItem | DatasetJsonItemClass)[]) {
     if (newItems.length > 0) {
       this._items = newItems.map((i) =>
-        i instanceof DataSetJsonItemClass ? i : new DataSetJsonItemClass(i),
+        i instanceof DatasetJsonItemClass ? i : new DatasetJsonItemClass(i),
       );
     }
   }
@@ -110,13 +110,13 @@ export class DatasetJson {
    * @param newItem Add data set item definition to the data set
    * @returns true is successful, false (& sets errorText) is there is an error
    */
-  public addItem(newItem: DataSetJsonItemClass | iDatasetJsonItem): boolean {
+  public addItem(newItem: DatasetJsonItemClass | iDatasetJsonItem): boolean {
     if (this.items.map((i) => i.name).includes(newItem.name)) {
       this._errorText = 'Item name already exists';
       return false;
     }
     this._items.push(
-      newItem instanceof DataSetJsonItemClass ? newItem : new DataSetJsonItemClass(newItem),
+      newItem instanceof DatasetJsonItemClass ? newItem : new DatasetJsonItemClass(newItem),
     );
     this._itemData.forEach((row) => {
       row[newItem.name] = undefined;
@@ -186,6 +186,10 @@ export class DatasetJson {
     }
   }
 
+  /**
+   * Create new DatasetJson class
+   * @param newJson Raw dataset JSON
+   */
   public constructor(newJson: CdiscDatasetJson) {
     this._studyOID = newJson.clinicalData.studyOID;
     this._metaDataVersionOID = newJson.clinicalData.metaDataVersionOID;

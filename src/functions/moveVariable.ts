@@ -1,20 +1,20 @@
-import { DataSetJsonItemClass } from '../classes/DatasetJsonItemClass';
+import { DatasetJsonItemClass } from '../classes/DatasetJsonItemClass';
 
 export const moveVariable = (
-  originalArray: DataSetJsonItemClass[],
-  variable: DataSetJsonItemClass,
+  originalArray: DatasetJsonItemClass[],
+  variable: DatasetJsonItemClass,
   newPosition: number,
-): DataSetJsonItemClass[] => {
+): DatasetJsonItemClass[] => {
   const ix = originalArray.findIndex((v) => v.OID === variable.OID ?? '');
   console.log(`Moving variable to ${newPosition} from ${ix}`);
-  const newArray: DataSetJsonItemClass[] = [...originalArray];
+  const newArray: DatasetJsonItemClass[] = [...originalArray];
   if (ix >= 0) {
     console.log('Moving');
     newArray.splice(ix, 1);
     newArray.splice(
       ix >= newPosition ? newPosition : newPosition - 1,
       0,
-      variable as DataSetJsonItemClass,
+      variable as DatasetJsonItemClass,
     );
   } else {
     console.log(`Adding ${variable.name}`);

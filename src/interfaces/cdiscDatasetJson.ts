@@ -1,5 +1,8 @@
 import { eItemType } from '../classes/DatasetJsonItemClass';
 
+/**
+ * CDISC implementation of Dataset JSON typescript interface
+ */
 export interface CdiscDatasetJson {
   clinicalData: {
     studyOID: string;

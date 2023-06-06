@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { DataSetJsonItemClass } from '../../classes/DatasetJsonItemClass';
+import { DatasetJsonItemClass } from '../../classes/DatasetJsonItemClass';
 import { SummaryTableContext } from '../../context/SummaryTableContext';
 import { MOVE_COLUMN_VARIABLE, MOVE_ROW_VARIABLE } from '../../functions/reducer';
 import { DropEdges } from '../drop-targets/DropEdges';
@@ -16,12 +16,12 @@ export const DropTableTopLeftCell = ({ id }: DropTableTopLeftCellProps): JSX.Ele
       <DropEdges
         id={`${id}-drop-edges`}
         onDropBottom={(ret) => {
-          if (ret.data instanceof DataSetJsonItemClass) {
+          if (ret.data instanceof DatasetJsonItemClass) {
             dispatch({ type: MOVE_ROW_VARIABLE, position: 0, item: ret.data });
           }
         }}
         onDropRight={(ret) => {
-          if (ret.data instanceof DataSetJsonItemClass)
+          if (ret.data instanceof DatasetJsonItemClass)
             dispatch({ type: MOVE_COLUMN_VARIABLE, position: 0, item: ret.data });
         }}
       >

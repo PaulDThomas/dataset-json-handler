@@ -1,6 +1,9 @@
 import { iSimpleTableRow } from '@asup/simple-table';
 import { JSX } from 'react';
 
+/**
+ * Item type
+ */
 export enum eItemType {
   string = 'string',
   integer = 'integer',
@@ -36,7 +39,7 @@ export interface iDatasetJsonItem extends iSimpleTableRow {
   length?: number;
 }
 
-export class DataSetJsonItemClass {
+export class DatasetJsonItemClass {
   private _OID = '';
 
   /**
@@ -74,6 +77,9 @@ export class DataSetJsonItemClass {
     return this._length;
   }
 
+  /**
+   * Data stored in the clas
+   */
   get data(): iDatasetJsonItem {
     return {
       OID: this._OID,
@@ -84,10 +90,17 @@ export class DataSetJsonItemClass {
     };
   }
 
+  /**
+   * Stringified version of the class
+   */
   get toString() {
     return JSON.stringify(this.data);
   }
 
+  /**
+   * Create new data item class
+   * @param newItem New data item information
+   */
   public constructor(newItem: iDatasetJsonItem) {
     this._OID = newItem.OID;
     this._name = newItem.name;
@@ -95,6 +108,9 @@ export class DataSetJsonItemClass {
     this._length = newItem.length;
   }
 
+  /**
+   * Return JSX span with the class name
+   */
   get component(): JSX.Element {
     return <span className='datasetjson-item'>{this._name}</span>;
   }

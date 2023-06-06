@@ -1,4 +1,4 @@
-import { DataSetJsonItemClass } from '../classes/DatasetJsonItemClass';
+import { DatasetJsonItemClass } from '../classes/DatasetJsonItemClass';
 import { WhereClauseClass } from '../classes/WhereClauseClass';
 import { SummaryTableSchema } from '../context/SummaryTableContext';
 import { updateWhereClause } from '../functions/updateWhereClause';
@@ -19,10 +19,10 @@ export const UPDATE_WHERE_CLAUSE = 'UPDATE_WHERE_CLAUSE';
 
 export interface ActionProps {
   type: string;
-  item?: DataSetJsonItemClass;
+  item?: DatasetJsonItemClass;
   position?: number;
-  rows?: DataSetJsonItemClass[];
-  columns?: DataSetJsonItemClass[];
+  rows?: DatasetJsonItemClass[];
+  columns?: DatasetJsonItemClass[];
   whereClause?: WhereClauseClass;
 }
 

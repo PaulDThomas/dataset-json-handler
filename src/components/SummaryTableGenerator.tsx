@@ -1,12 +1,12 @@
 import { ContextWindowStack } from '@asup/context-menu';
-import { DatasetJson } from '../classes/DatasetJsonClass';
+import { DatasetJsonClass } from '../classes/DatasetJsonClass';
 import { SummaryTableContextProvider } from '../context/SummaryTableContext';
 import { SummaryTableWhere } from './where/SummaryTableWhere';
 import { DropTable } from './drop-table/DropTable';
 import { ItemList } from './lhs/ItemList';
 
 interface SummaryTableGeneratorProps {
-  dataset: DatasetJson;
+  dataset: DatasetJsonClass;
 }
 
 export const SummaryTableGenerator = ({ dataset }: SummaryTableGeneratorProps): JSX.Element => {

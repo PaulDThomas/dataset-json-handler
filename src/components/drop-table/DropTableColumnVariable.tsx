@@ -1,6 +1,6 @@
 import { ContextMenuHandler } from '@asup/context-menu';
 import { useContext, useMemo } from 'react';
-import { DataSetJsonItemClass } from '../../classes/DatasetJsonItemClass';
+import { DatasetJsonItemClass } from '../../classes/DatasetJsonItemClass';
 import { SummaryTableContext } from '../../context/SummaryTableContext';
 import { MOVE_COLUMN_VARIABLE, REMOVE_COLUMN_VARIABLE } from '../../functions/reducer';
 import { DropEdges } from '../drop-targets/DropEdges';
@@ -18,7 +18,7 @@ export const DropTableColumnVariable = ({
   index,
 }: DropTableHeaderVariableProps): JSX.Element => {
   const { state, dispatch } = useContext(SummaryTableContext);
-  const item = useMemo<DataSetJsonItemClass>(() => state.columns[index], [index, state.columns]);
+  const item = useMemo<DatasetJsonItemClass>(() => state.columns[index], [index, state.columns]);
 
   return (
     <th
@@ -37,7 +37,7 @@ export const DropTableColumnVariable = ({
         <DropEdges
           id={id}
           onDropRight={(ret) => {
-            if (ret.data instanceof DataSetJsonItemClass)
+            if (ret.data instanceof DatasetJsonItemClass)
               dispatch({ type: MOVE_COLUMN_VARIABLE, position: index + 1, item: ret.data });
           }}
           // onDropBottom={(ret) =>

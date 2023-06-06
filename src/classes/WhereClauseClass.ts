@@ -1,5 +1,5 @@
 import { eOperation } from '../enums/eOperation';
-import { DataSetJsonItemClass, eItemType } from './DatasetJsonItemClass';
+import { DatasetJsonItemClass, eItemType } from './DatasetJsonItemClass';
 
 /**
  * Where clause definition
@@ -8,7 +8,7 @@ export interface iWhereClause {
   /** Unique identifier */
   WID?: string;
   /** Item being checked */
-  item: DataSetJsonItemClass | null;
+  item: DatasetJsonItemClass | null;
   /** Operation to apply */
   whereOperation: eOperation | null;
   /** Value(s) in the where clause */
@@ -29,7 +29,7 @@ export class WhereClauseClass {
 
   private _previousVersions: {
     timestamp: Date;
-    _itemName: DataSetJsonItemClass;
+    _itemName: DatasetJsonItemClass;
     _whereOperation: eOperation;
     _filteredItemValues: (string | number | Date)[] | undefined;
   }[] = [];
@@ -37,7 +37,7 @@ export class WhereClauseClass {
     return this._previousVersions;
   }
 
-  private _item: DataSetJsonItemClass | null = null;
+  private _item: DatasetJsonItemClass | null = null;
   /**
    * Item to check
    */
@@ -47,7 +47,7 @@ export class WhereClauseClass {
   /**
    * Item to check
    */
-  set item(newItem: DataSetJsonItemClass | null) {
+  set item(newItem: DatasetJsonItemClass | null) {
     this._item = newItem;
   }
 
@@ -136,7 +136,7 @@ export class WhereClauseClass {
    * @param filteredItemValues: new item values
    */
   public update(
-    itemName: DataSetJsonItemClass,
+    itemName: DatasetJsonItemClass,
     whereOperation: eOperation,
     filteredItemValues: (string | number | Date)[],
   ) {

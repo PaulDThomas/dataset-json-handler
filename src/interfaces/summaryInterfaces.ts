@@ -1,4 +1,4 @@
-import { DataSetJsonItemClass } from '../classes/DatasetJsonItemClass';
+import { DatasetJsonItemClass } from '../classes/DatasetJsonItemClass';
 import { eStatistic } from '../enums/eStatistic';
 
 /**
@@ -26,7 +26,7 @@ export interface DndData {
   /**
    * Dragged item definition
    */
-  data: DataSetJsonItemClass | eStatistic;
+  data: DatasetJsonItemClass | eStatistic;
 }
 
 /**
@@ -36,11 +36,11 @@ export interface SummaryGroup {
   /**
    * Variable will not be shown in report, used to order output if present
    */
-  groupVariable: DataSetJsonItemClass;
+  groupVariable: DatasetJsonItemClass;
   /**
    * Variable will be shown in report, and used for ordering if no order variable is present
    */
-  groupVariableLabel?: DataSetJsonItemClass;
+  groupVariableLabel?: DatasetJsonItemClass;
   /**
    * Groups defined by spanning more than one value, e.g. '1, 2, 3' or 'All'
    */

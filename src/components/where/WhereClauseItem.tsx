@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { DataSetJsonItemClass } from '../../classes/DatasetJsonItemClass';
+import { DatasetJsonItemClass } from '../../classes/DatasetJsonItemClass';
 import { WhereClauseClass } from '../../classes/WhereClauseClass';
 import { SummaryTableContext } from '../../context/SummaryTableContext';
 import { UPDATE_WHERE_CLAUSE } from '../../functions/reducer';
@@ -26,7 +26,7 @@ export const WhereClauseItem = ({ index }: WhereClauseItemProps): JSX.Element =>
         id={`whereclauseitem-${index}-droptarget`}
         type='center'
         dropAction={(ret) => {
-          if (ret.data instanceof DataSetJsonItemClass) {
+          if (ret.data instanceof DatasetJsonItemClass) {
             dispatch({
               type: UPDATE_WHERE_CLAUSE,
               whereClause: new WhereClauseClass({

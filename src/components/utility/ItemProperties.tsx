@@ -1,8 +1,8 @@
-import { DataSetJsonItemClass } from '../../classes/DatasetJsonItemClass';
+import { DatasetJsonItemClass } from '../../classes/DatasetJsonItemClass';
 
 interface ItemPropertiesProps {
-  item: DataSetJsonItemClass;
-  setItem?: (ret: DataSetJsonItemClass) => void;
+  item: DatasetJsonItemClass;
+  setItem?: (ret: DatasetJsonItemClass) => void;
 }
 
 export const ItemProperties = ({ item, setItem }: ItemPropertiesProps): JSX.Element => {

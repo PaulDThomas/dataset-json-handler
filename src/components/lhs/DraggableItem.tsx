@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import './DraggableItem.css';
-import { DataSetJsonItemClass } from '../../classes/DatasetJsonItemClass';
+import { DatasetJsonItemClass } from '../../classes/DatasetJsonItemClass';
 import { ContextMenuHandler, ContextWindow } from '@asup/context-menu';
 import { ItemProperties } from '../utility/ItemProperties';
 
 interface DraggableItemProps {
   id: string;
-  item: DataSetJsonItemClass | null;
+  item: DatasetJsonItemClass | null;
 }
 
 export const DraggableItem = ({ id, item }: DraggableItemProps): JSX.Element => {
@@ -41,7 +41,7 @@ export const DraggableItem = ({ id, item }: DraggableItemProps): JSX.Element => 
           onDragStart={handleDragStart}
           onDragEnd={handleDragEnd}
         >
-          {item?.name}
+          {item?.name ?? <em>Drop item here</em>}
         </div>
       </ContextMenuHandler>
       {item && (
