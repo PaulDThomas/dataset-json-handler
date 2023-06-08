@@ -1,18 +1,63 @@
-import { DatasetJsonItemClass } from '../../classes/DatasetJsonItemClass';
+import { useContext, useMemo } from 'react';
+import { SummaryTableContext } from '../../context/SummaryTableContext';
 
 interface ItemPropertiesProps {
-  item: DatasetJsonItemClass;
-  setItem?: (ret: DatasetJsonItemClass) => void;
+  oid: string;
 }
 
-export const ItemProperties = ({ item, setItem }: ItemPropertiesProps): JSX.Element => {
+export const ItemProperties = ({ oid }: ItemPropertiesProps): JSX.Element => {
+  const { state } = useContext(SummaryTableContext);
+  const item = useMemo(() => state.itemList.find((i) => i.OID === oid), [oid, state]);
+
+  if (!item) return <></>;
   return (
-    <div>
-      <div>{item.OID}</div>
-      <div>{item.name}</div>
-      <div>{item.label}</div>
-      <div>{item.type}</div>
-      <div>{item.length}</div>
-    </div>
+    <table>
+      <tbody>
+        <tr>
+          <td>OID</td>
+          <td>{oid}</td>
+        </tr>
+        <tr>
+          <td>Name</td>
+          <td>
+            <input
+              aria-label='Name'
+              value={item.name}
+              disabled
+            />
+          </td>
+        </tr>
+        <tr>
+          <td>Label</td>
+          <td>
+            <input
+              aria-label='Label'
+              value={item.label}
+              disabled
+            />
+          </td>
+        </tr>
+        <tr>
+          <td>Type</td>
+          <td>
+            <input
+              aria-label='Type'
+              value={item.type}
+              disabled
+            />
+          </td>
+        </tr>
+        <tr>
+          <td>Length</td>
+          <td>
+            <input
+              aria-label='Length'
+              value={item.length}
+              disabled
+            />
+          </td>
+        </tr>
+      </tbody>
+    </table>
   );
 };

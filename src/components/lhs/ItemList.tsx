@@ -8,7 +8,7 @@ interface ItemListProps {
 }
 
 export const ItemList = ({ id }: ItemListProps) => {
-  const { state, itemList } = useContext(SummaryTableContext);
+  const { state } = useContext(SummaryTableContext);
 
   return (
     <div
@@ -16,7 +16,7 @@ export const ItemList = ({ id }: ItemListProps) => {
       id={id}
     >
       <div className='simpletable-holder'>
-        {itemList
+        {state.itemList
           .filter(
             (v) =>
               !state.columns.map((c) => c.name).includes(v.name) &&
@@ -26,8 +26,8 @@ export const ItemList = ({ id }: ItemListProps) => {
           .map((variable, index) => (
             <DraggableItem
               key={variable.OID ?? index}
+              oid={variable.OID}
               id={`${id}-${variable.name}`}
-              item={variable}
             />
           ))}
       </div>

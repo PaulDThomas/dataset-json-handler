@@ -1,9 +1,9 @@
 import { eStatistic } from 'enums/eStatistic';
-import { createContext, useReducer } from 'react';
+import { createContext, useEffect, useReducer } from 'react';
 import { DatasetJsonClass } from '../classes/DatasetJsonClass';
 import { DatasetJsonItemClass } from '../classes/DatasetJsonItemClass';
 import { WhereClauseClass } from '../classes/WhereClauseClass';
-import { ActionProps, reducer } from '../functions/reducer';
+import { ActionProps, SET_ITEMS, reducer } from '../functions/reducer';
 
 export interface SummaryTableSchema {
   rows: DatasetJsonItemClass[];
@@ -12,6 +12,7 @@ export interface SummaryTableSchema {
   statistics: eStatistic[];
   statisticPosition: 'row' | 'column';
   whereClauses: WhereClauseClass[];
+  itemList: DatasetJsonItemClass[];
 }
 
 const initialState: SummaryTableSchema = {
@@ -20,18 +21,17 @@ const initialState: SummaryTableSchema = {
   statistics: [],
   statisticPosition: 'column',
   whereClauses: [],
+  itemList: [],
 };
 
 export interface SummaryTableContextProps {
   state: SummaryTableSchema;
   dispatch: React.Dispatch<ActionProps>;
-  itemList: DatasetJsonItemClass[];
 }
 
 export const SummaryTableContext = createContext<SummaryTableContextProps>({
   state: initialState,
   dispatch: () => ({}),
-  itemList: [],
 });
 
 interface SummaryTableContextProviderProps {
@@ -45,12 +45,15 @@ export const SummaryTableContextProvider = ({
 }: SummaryTableContextProviderProps): JSX.Element => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
+  useEffect(() => {
+    dispatch({ type: SET_ITEMS, items: dataset.items });
+  }, [dataset.items]);
+
   return (
     <SummaryTableContext.Provider
       value={{
         state,
         dispatch,
-        itemList: dataset.items,
       }}
     >
       {children}

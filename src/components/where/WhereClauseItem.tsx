@@ -39,10 +39,10 @@ export const WhereClauseItem = ({ index }: WhereClauseItemProps): JSX.Element =>
           }
         }}
       >
-        {state.whereClauses[index] ? (
+        {state.whereClauses[index].item ? (
           <DraggableItem
             id={`whereclauseitem-${index}`}
-            item={state.whereClauses[index].item}
+            oid={(state.whereClauses[index].item as DatasetJsonItemClass).OID}
           />
         ) : (
           <div

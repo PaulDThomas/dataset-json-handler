@@ -1,5 +1,4 @@
 import { iSimpleTableRow } from '@asup/simple-table';
-import { JSX } from 'react';
 
 /**
  * Item type
@@ -106,12 +105,5 @@ export class DatasetJsonItemClass {
     this._name = newItem.name;
     this._label = newItem.label;
     this._length = newItem.length;
-  }
-
-  /**
-   * Return JSX span with the class name
-   */
-  get component(): JSX.Element {
-    return <span className='datasetjson-item'>{this._name}</span>;
   }
 }

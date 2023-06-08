@@ -1,17 +1,20 @@
-import React, { useState } from 'react';
-import './DraggableItem.css';
-import { DatasetJsonItemClass } from '../../classes/DatasetJsonItemClass';
 import { ContextMenuHandler, ContextWindow } from '@asup/context-menu';
+import React, { useContext, useMemo, useState } from 'react';
+import { SummaryTableContext } from '../../context/SummaryTableContext';
+import './DraggableItem.css';
 import { ItemProperties } from '../utility/ItemProperties';
 
 interface DraggableItemProps {
   id: string;
-  item: DatasetJsonItemClass | null;
+  oid: string;
 }
 
-export const DraggableItem = ({ id, item }: DraggableItemProps): JSX.Element => {
+export const DraggableItem = ({ id, oid }: DraggableItemProps): JSX.Element => {
+  const { state } = useContext(SummaryTableContext);
   const [isBeingDragged, setIsBeingDragged] = useState<boolean>(false);
   const [showProperties, setShowProperties] = useState<boolean>(false);
+
+  const item = useMemo(() => state.itemList.find((i) => i.OID === oid), [oid, state]);
 
   const handleDragStart = (e: React.DragEvent) => {
     if (item) {
@@ -51,7 +54,7 @@ export const DraggableItem = ({ id, item }: DraggableItemProps): JSX.Element => 
           title={`${item?.label} properties`}
           onClose={() => setShowProperties(false)}
         >
-          <ItemProperties item={item} />
+          <ItemProperties oid={oid} />
         </ContextWindow>
       )}
     </>

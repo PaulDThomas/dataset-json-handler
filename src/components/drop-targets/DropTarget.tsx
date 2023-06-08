@@ -20,7 +20,7 @@ export const DropTarget = ({
   type,
 }: DropTargetProps): JSX.Element => {
   const [isOver, setIsOver] = useState<boolean>(false);
-  const summaryTableContext = useContext(SummaryTableContext);
+  const { state } = useContext(SummaryTableContext);
 
   const handleDrop = (e: DragEvent) => {
     console.log('Dropped: ' + e.dataTransfer);
@@ -34,9 +34,9 @@ export const DropTarget = ({
         );
         console.log('Data dropped');
         console.log(data);
-        const ix = summaryTableContext.itemList.findIndex((v) => v.OID === data.OID);
+        const ix = state.itemList.findIndex((v) => v.OID === data.OID);
         if (ix > -1) {
-          const item = summaryTableContext.itemList[ix];
+          const item = state.itemList[ix];
           dropAction && dropAction({ type: 'variable', data: item });
         }
       } catch (error) {

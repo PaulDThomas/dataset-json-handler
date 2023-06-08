@@ -38,7 +38,7 @@ export const DropTableRowVariable = ({ id, index }: DropTableHeaderVariableProps
           >
             <DraggableItem
               id={`${id}-column-header-${index}`}
-              item={item}
+              oid={item.OID}
             />
           </DropEdges>
         </ContextMenuHandler>

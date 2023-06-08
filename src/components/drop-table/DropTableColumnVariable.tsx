@@ -40,18 +40,11 @@ export const DropTableColumnVariable = ({
             if (ret.data instanceof DatasetJsonItemClass)
               dispatch({ type: MOVE_COLUMN_VARIABLE, position: index + 1, item: ret.data });
           }}
-          // onDropBottom={(ret) =>
-          //   handleStatisticDrop(
-          //     { location: 'column', index: [index + 1] },
-          //     ret,
-          //     summaryTableContext,
-          //   )
-          // }
         >
           <>
             <DraggableItem
               id={`${id}-column-header-${index}`}
-              item={item}
+              oid={item.OID}
             />
             {state.statisticPosition === 'column' && (
               <div
