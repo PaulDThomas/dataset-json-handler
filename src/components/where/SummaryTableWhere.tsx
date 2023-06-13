@@ -54,7 +54,10 @@ export const SummaryTableWhere = ({ editable = true }: SummaryTableWhereProps) =
                 className='stwhere-add-where-clause'
                 onClick={() => {
                   if (!state.whereClauses.some((w) => !w.isValid)) {
-                    dispatch({ type: UPDATE_WHERE_CLAUSE, whereClause: new WhereClauseClass() });
+                    dispatch({
+                      operation: UPDATE_WHERE_CLAUSE,
+                      whereClause: new WhereClauseClass(),
+                    });
                   }
                 }}
               >

@@ -46,7 +46,7 @@ export const SummaryTableContextProvider = ({
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
-    dispatch({ type: SET_ITEMS, items: dataset.items });
+    dispatch({ operation: SET_ITEMS, items: dataset.items });
   }, [dataset.items]);
 
   return (

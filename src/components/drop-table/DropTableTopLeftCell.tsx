@@ -17,12 +17,12 @@ export const DropTableTopLeftCell = ({ id }: DropTableTopLeftCellProps): JSX.Ele
         id={`${id}-drop-edges`}
         onDropBottom={(ret) => {
           if (ret.data instanceof DatasetJsonItemClass) {
-            dispatch({ type: MOVE_ROW_VARIABLE, position: 0, item: ret.data });
+            dispatch({ operation: MOVE_ROW_VARIABLE, position: 0, item: ret.data });
           }
         }}
         onDropRight={(ret) => {
           if (ret.data instanceof DatasetJsonItemClass)
-            dispatch({ type: MOVE_COLUMN_VARIABLE, position: 0, item: ret.data });
+            dispatch({ operation: MOVE_COLUMN_VARIABLE, position: 0, item: ret.data });
         }}
       >
         <div className='tl-cell-holder' />

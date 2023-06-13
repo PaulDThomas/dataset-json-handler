@@ -20,8 +20,20 @@ export const SET_ROWS = 'SET_ROWS';
 export const UPDATE_ITEM = 'UPDATE_ITEM';
 export const UPDATE_WHERE_CLAUSE = 'UPDATE_WHERE_CLAUSE';
 
+type Operation =
+  | 'MOVE_COLUMN_VARIABLE'
+  | 'MOVE_ROW_VARIABLE'
+  | 'REMOVE_COLUMN_VARIABLE'
+  | 'REMOVE_ROW_VARIABLE'
+  | 'REMOVE_WHERE_CLAUSE'
+  | 'SET_COLUMNS'
+  | 'SET_ITEMS'
+  | 'SET_ROWS'
+  | 'UPDATE_ITEM'
+  | 'UPDATE_WHERE_CLAUSE';
+
 export interface ActionProps {
-  type: string;
+  operation: Operation;
   items?: DatasetJsonItemClass[];
   item?: DatasetJsonItemClass;
   position?: number;
@@ -32,7 +44,7 @@ export interface ActionProps {
 
 export const reducer = (state: SummaryTableSchema, action: ActionProps): SummaryTableSchema => {
   let newState: SummaryTableSchema = { ...state };
-  switch (action.type) {
+  switch (action.operation) {
     case MOVE_COLUMN_VARIABLE:
       newState = moveColumnVariable(action, newState);
       break;

@@ -29,7 +29,7 @@ export const DropTableColumnVariable = ({
         menuItems={[
           {
             label: 'Remove',
-            action: () => dispatch({ type: REMOVE_COLUMN_VARIABLE, item }),
+            action: () => dispatch({ operation: REMOVE_COLUMN_VARIABLE, item }),
           },
         ]}
         style={{ width: '100%', height: '100%' }}
@@ -38,7 +38,7 @@ export const DropTableColumnVariable = ({
           id={id}
           onDropRight={(ret) => {
             if (ret.data instanceof DatasetJsonItemClass)
-              dispatch({ type: MOVE_COLUMN_VARIABLE, position: index + 1, item: ret.data });
+              dispatch({ operation: MOVE_COLUMN_VARIABLE, position: index + 1, item: ret.data });
           }}
         >
           <>

@@ -28,7 +28,7 @@ export const WhereClauseItem = ({ index }: WhereClauseItemProps): JSX.Element =>
         dropAction={(ret) => {
           if (ret.data instanceof DatasetJsonItemClass) {
             dispatch({
-              type: UPDATE_WHERE_CLAUSE,
+              operation: UPDATE_WHERE_CLAUSE,
               whereClause: new WhereClauseClass({
                 WID: state.whereClauses[index]?.WID,
                 item: ret.data,

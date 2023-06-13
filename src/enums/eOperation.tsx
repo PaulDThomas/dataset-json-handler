@@ -9,7 +9,7 @@ export enum eOperation {
   miss = 'Missing',
   not_miss = 'Not missing',
   in = 'In',
-  not_in = 'Not In',
+  not_in = 'Not in',
 }
 
 interface OperationSelectorProps {

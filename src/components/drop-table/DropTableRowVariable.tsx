@@ -24,7 +24,7 @@ export const DropTableRowVariable = ({ id, index }: DropTableHeaderVariableProps
           menuItems={[
             {
               label: 'Remove',
-              action: () => dispatch({ type: REMOVE_ROW_VARIABLE, item }),
+              action: () => dispatch({ operation: REMOVE_ROW_VARIABLE, item }),
             },
           ]}
         >
@@ -32,7 +32,7 @@ export const DropTableRowVariable = ({ id, index }: DropTableHeaderVariableProps
             id={`${id}`}
             onDropBottom={(ret) => {
               if (ret.data instanceof DatasetJsonItemClass) {
-                dispatch({ type: MOVE_ROW_VARIABLE, position: index + 1, item: ret.data });
+                dispatch({ operation: MOVE_ROW_VARIABLE, position: index + 1, item: ret.data });
               }
             }}
           >
