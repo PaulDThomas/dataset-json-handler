@@ -10,6 +10,7 @@
   border-radius: 8px;
   border: 1px black solid;
   font-size: small;
+  min-height: 1rem;
 }
 
 .item-holder.being-dragged {
