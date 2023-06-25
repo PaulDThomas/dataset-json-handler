@@ -1,6 +1,6 @@
 {
   "name": "@asup/dataset-json-handler",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Handler for Dataset-JSON",
   "author": "Paul Thomas <@PaulDThomas>",
   "private": false,
@@ -54,7 +54,8 @@
     "@asup/simple-table": "^1.2.2",
     "@swc/helpers": "^0.5.1",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-json-view": "^1.21.3"
   },
   "peer-dependencies": {
     "react": "^18.2.0",
