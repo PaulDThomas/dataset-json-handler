@@ -4,6 +4,7 @@ import { SummaryTableContextProvider } from '../context/SummaryTableContext';
 import { SummaryTableWhere } from './where/SummaryTableWhere';
 import { DropTable } from './drop-table/DropTable';
 import { ItemList } from './lhs/ItemList';
+import { ShowStateButton } from './ShowStateButton';
 
 interface SummaryTableGeneratorProps {
   dataset: DatasetJsonClass;
@@ -16,6 +17,7 @@ export const SummaryTableGenerator = ({ dataset }: SummaryTableGeneratorProps): 
         <div className='summarytablegenerator'>
           <div className='simpletable-title-holder'>
             <h5 className='simpletable-title'>Summary table for: {dataset.name}</h5>
+            <ShowStateButton />
           </div>
           <div
             className='summarytable-main-holder'
