@@ -34,3 +34,5 @@ export const ItemList = ({ id }: ItemListProps) => {
     </div>
   );
 };
+
+ItemList.displayName = 'ItemList';

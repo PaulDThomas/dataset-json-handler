@@ -60,3 +60,5 @@ export const DraggableItem = ({ id, oid }: DraggableItemProps): JSX.Element => {
     </>
   );
 };
+
+DraggableItem.displayName = 'DraggableItem';

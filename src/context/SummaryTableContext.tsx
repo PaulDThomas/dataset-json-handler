@@ -60,3 +60,5 @@ export const SummaryTableContextProvider = ({
     </SummaryTableContext.Provider>
   );
 };
+
+SummaryTableContextProvider.displayName = 'SummaryTableContextProvider';

@@ -1,16 +1,5 @@
+import { eOperation } from '../classes/WhereClauseClass';
 import { Select } from '../components/utility/Select';
-
-export enum eOperation {
-  eq = 'Equals',
-  lt = 'Less than',
-  le = 'Less than or equal to',
-  gt = 'Greater than',
-  ge = 'Greater than or equal to',
-  miss = 'Missing',
-  not_miss = 'Not missing',
-  in = 'In',
-  not_in = 'Not in',
-}
 
 interface OperationSelectorProps {
   selected: string;
@@ -38,3 +27,5 @@ export const OperationSelector = ({
     />
   );
 };
+
+OperationSelector.displayName = 'OperationSelector';
