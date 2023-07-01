@@ -31,8 +31,7 @@ export const Select = ({
         className='selector-select'
         style={{ borderRadius: '4px', ...style }}
         value={currentValue}
-        onChange={(e) => setCurrentValue(e.currentTarget.value)}
-        onBlur={(e) => setSelected && setSelected(e.currentTarget.value)}
+        onChange={(e) => setSelected && setSelected(e.currentTarget.value)}
       >
         {values.map((k, i) => (
           <option

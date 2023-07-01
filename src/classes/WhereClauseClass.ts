@@ -11,8 +11,8 @@ export enum eOperation {
   ge = 'Greater than or equal to',
   miss = 'Missing',
   not_miss = 'Not missing',
-  in = 'In',
-  not_in = 'Not in',
+  // in = 'In',
+  // not_in = 'Not in',
 }
 
 /**
@@ -92,6 +92,32 @@ export class WhereClauseClass {
   set filteredItemValues(newValues: (string | number | Date)[] | undefined) {
     if (newValues === undefined) this._filteredItemValues === newValues;
     else if (!this._item) throw new Error('WhereClause: Can not set values where there is no item');
+    // Change strings to correct type here
+    else if (
+      (this._item.type === eItemType.date ||
+        this._item.type === eItemType.datetime ||
+        this._item.type === eItemType.time) &&
+      newValues.every((v) => typeof v === 'string')
+    ) {
+      this._filteredItemValues = newValues
+        .map((v) => new Date(v as string))
+        .filter((v) => v !== undefined && !isNaN(v.getTime()));
+    } else if (
+      this._item.type === eItemType.float &&
+      newValues.every((v) => typeof v === 'string')
+    ) {
+      this._filteredItemValues = newValues
+        .map((v) => parseFloat(v as string))
+        .filter((v) => v !== undefined && !isNaN(v));
+    } else if (
+      this._item.type === eItemType.integer &&
+      newValues.every((v) => typeof v === 'string')
+    ) {
+      this._filteredItemValues = newValues
+        .map((v) => parseInt(v as string))
+        .filter((v) => v !== undefined && !isNaN(v));
+    }
+    // Standard set
     else if (this._item.type === eItemType.string && newValues.some((v) => typeof v !== 'string'))
       throw new Error('WhereClause: Can only set string values for a string item');
     else if (

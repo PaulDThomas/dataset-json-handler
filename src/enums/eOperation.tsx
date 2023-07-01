@@ -14,14 +14,20 @@ export const OperationSelector = ({
   style,
   className,
 }: OperationSelectorProps): JSX.Element => {
+  const vals = [
+    ...Object.keys(eOperation).map((k, i) => ({
+      value: k,
+      label: Object.values(eOperation)[i].toString(),
+    })),
+  ];
+  if (!vals.map((v) => v.value).includes(selected)) {
+    vals.splice(0, 0, { label: '-- Select --', value: '' });
+  }
   return (
     <Select
       className={`eoperation-selector ${className}`}
       style={{ width: '170px', ...style }}
-      values={Object.keys(eOperation).map((k, i) => ({
-        value: k,
-        label: Object.values(eOperation)[i],
-      }))}
+      values={vals}
       selected={selected}
       setSelected={setSelected ? (ret) => setSelected(ret) : undefined}
     />
