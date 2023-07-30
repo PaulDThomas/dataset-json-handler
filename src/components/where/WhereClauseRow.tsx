@@ -5,37 +5,12 @@ import { OperationSelector } from './OperationSelector';
 import { REMOVE_WHERE_CLAUSE, UPDATE_WHERE_CLAUSE } from '../../functions/reducer';
 import { WhereClauseItem } from './WhereClauseItem';
 import { WhereSingleValue } from './WhereSingleValue';
+import { WhereMultiValues } from './WhereMultiValues';
 
 export interface WhereClauseProps {
   index: number;
   canEdit: boolean;
 }
-
-// export const WhereMultiValues = ({ index, canEdit }: WhereClauseProps) => {
-//   const { state, dispatch } = useContext(SummaryTableContext);
-//   const whereClause = state.whereClauses.length > index ? state.whereClauses[index] : null;
-//   if (!whereClause || !whereClause.item) return <></>;
-//   return (
-//     <input
-//       value={
-//         whereClause.filteredItemValues && whereClause.filteredItemValues.length > 0
-//           ? whereClause.filteredItemValues[0].toString()
-//           : ''
-//       }
-//       onChange={
-//         canEdit
-//           ? (e) => {
-//               whereClause.filteredItemValues = [e.currentTarget.value];
-//               dispatch({
-//                 operation: UPDATE_WHERE_CLAUSE,
-//                 whereClause: whereClause,
-//               });
-//             }
-//           : undefined
-//       }
-//     />
-//   );
-// };
 
 export const WhereClauseRow = ({ index, canEdit }: WhereClauseProps): JSX.Element => {
   const { state, dispatch } = useContext(SummaryTableContext);
@@ -87,12 +62,6 @@ export const WhereClauseRow = ({ index, canEdit }: WhereClauseProps): JSX.Elemen
                 ? (ret) => {
                     const newWhere = new WhereClauseClass(state.whereClauses[index]);
                     newWhere.whereOperation = ret as Operation;
-                    // const newWhere = new WhereClauseClass({
-                    //   WID: state.whereClauses[index]?.WID,
-                    //   item: state.whereClauses[index]?.item,
-                    //   whereOperation: (ret as eOperation) ?? null,
-                    //   filteredItemValues: state.whereClauses[index].filteredItemValues,
-                    // });
                     dispatch({
                       operation: UPDATE_WHERE_CLAUSE,
                       whereClause: newWhere,
@@ -142,18 +111,18 @@ export const WhereClauseRow = ({ index, canEdit }: WhereClauseProps): JSX.Elemen
                     canEdit={canEdit}
                   />
                 ),
-                // in: (
-                //   <WhereMultiValues
-                //     index={index}
-                //     canEdit={canEdit}
-                //   />
-                // ),
-                // not_in: (
-                //   <WhereMultiValues
-                //     index={index}
-                //     canEdit={canEdit}
-                //   />
-                // ),
+                in: (
+                  <WhereMultiValues
+                    index={index}
+                    canEdit={canEdit}
+                  />
+                ),
+                not_in: (
+                  <WhereMultiValues
+                    index={index}
+                    canEdit={canEdit}
+                  />
+                ),
                 default: <></>,
               }[whereClause.whereOperation.valueOf()]
             ) : (
