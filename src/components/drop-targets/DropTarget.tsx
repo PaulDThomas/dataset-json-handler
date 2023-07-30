@@ -1,5 +1,5 @@
 import { DragEvent, useContext, useState } from 'react';
-import { DndData } from '../../interfaces/summaryInterfaces';
+import { DndData } from 'interfaces/DndData';
 import './DropTarget.css';
 import { SummaryTableContext } from '../../context/SummaryTableContext';
 import { iDatasetJsonItem } from '../../classes/DatasetJsonItemClass';

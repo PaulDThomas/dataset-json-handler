@@ -1,37 +1,9 @@
 import { DatasetJsonItemClass } from '../classes/DatasetJsonItemClass';
-import { eStatistic } from '../enums/eStatistic';
-
-/**
- * Table position
- */
-export interface Position {
-  /**
-   * Row or column
-   */
-  location: 'row' | 'column';
-  /**
-   * Zero based index for position
-   */
-  index: number[];
-}
-
-/**
- * Drag data contents
- */
-export interface DndData {
-  /**
-   * Variable or statistic
-   */
-  type: 'variable' | 'statistic';
-  /**
-   * Dragged item definition
-   */
-  data: DatasetJsonItemClass | eStatistic;
-}
 
 /**
  *  Summary group
  */
+
 export interface SummaryGroup {
   /**
    * Variable will not be shown in report, used to order output if present

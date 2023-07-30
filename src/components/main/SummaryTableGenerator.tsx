@@ -1,11 +1,11 @@
 import { ContextWindowStack } from '@asup/context-menu';
 import { useContext } from 'react';
-import { DSJContext } from '../context/DSJContextProvider';
-import { SummaryTableContextProvider } from '../context/SummaryTableContext';
+import { DSJContext } from '../../context/DSJContextProvider';
+import { SummaryTableContextProvider } from '../../context/SummaryTableContext';
+import { DropTable } from '../drop-table/DropTable';
+import { ItemList } from '../lhs/ItemList';
+import { SummaryTableWhere } from '../where/SummaryTableWhere';
 import { SummaryStateButton } from './SummaryStateButton';
-import { DropTable } from './drop-table/DropTable';
-import { ItemList } from './lhs/ItemList';
-import { SummaryTableWhere } from './where/SummaryTableWhere';
 
 export const SummaryTableGenerator = (): JSX.Element => {
   const { state } = useContext(DSJContext);
@@ -29,7 +29,7 @@ export const SummaryTableGenerator = (): JSX.Element => {
                   className='summarytable-lhs'
                   style={{ width: '190px', height: '100%' }}
                 >
-                  <ItemList id={'summarytable-items'} />
+                  <ItemList id={'summarytable-item-list'} />
                 </div>
                 <div
                   className='summarytable-rhs'

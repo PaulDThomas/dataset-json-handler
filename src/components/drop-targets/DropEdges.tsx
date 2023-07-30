@@ -1,4 +1,4 @@
-import { DndData } from '../../interfaces/summaryInterfaces';
+import { DndData } from 'interfaces/DndData';
 import './DropEdges.css';
 import { DropTarget } from './DropTarget';
 

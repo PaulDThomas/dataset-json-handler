@@ -1,28 +1,33 @@
 import { ContextWindow } from '@asup/context-menu';
-import { SummaryTableContext } from '../context/SummaryTableContext';
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import ReactJson from 'react-json-view';
-import './SummaryStateButton.css';
+import './JsonWindowButton.css';
 
-export const SummaryStateButton = () => {
-  const summaryTableContext = useContext(SummaryTableContext);
+interface JsonWindowButtonProps {
+  id: string;
+  title: string;
+  object: object;
+}
+
+export const JsonWindowButton = ({ id, title, object }: JsonWindowButtonProps) => {
   const [showWindow, setShowWindow] = useState<boolean>(false);
   return (
     <>
       <button
+        id={id}
         onClick={() => setShowWindow(!showWindow)}
-        className='summary-table-context-state-button'
+        className='json-window-button'
       >
         ⓘ
       </button>
       <ContextWindow
-        id={'summary-table-context-state-window'}
+        id={`${id}-window`}
         visible={showWindow}
-        title={'Summary table context state'}
+        title={title}
         onClose={() => setShowWindow(false)}
         style={{ maxHeight: '75vh', maxWidth: '50vw', width: '400px', height: '300px' }}
       >
-        <ReactJson src={summaryTableContext.state} />
+        <ReactJson src={object} />
       </ContextWindow>
     </>
   );
