@@ -4,7 +4,7 @@ import { useContext, useState } from 'react';
 import ReactJson from 'react-json-view';
 import './SummaryStateButton.css';
 
-export const ShowStateButton = () => {
+export const SummaryStateButton = () => {
   const summaryTableContext = useContext(SummaryTableContext);
   const [showWindow, setShowWindow] = useState<boolean>(false);
   return (

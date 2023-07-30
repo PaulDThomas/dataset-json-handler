@@ -2,7 +2,7 @@ import { ContextWindowStack } from '@asup/context-menu';
 import { useContext } from 'react';
 import { DSJContext } from '../../demo/src/context/DSJContextProvider';
 import { SummaryTableContextProvider } from '../context/SummaryTableContext';
-import { ShowStateButton } from './ShowStateButton';
+import { SummaryStateButton } from './SummaryStateButton';
 import { DropTable } from './drop-table/DropTable';
 import { ItemList } from './lhs/ItemList';
 import { SummaryTableWhere } from './where/SummaryTableWhere';
@@ -19,7 +19,7 @@ export const SummaryTableGenerator = (): JSX.Element => {
             <div className='summarytablegenerator'>
               <div className='simpletable-title-holder'>
                 <h5 className='simpletable-title'>Summary table for: {state.datasetJson.name}</h5>
-                <ShowStateButton />
+                <SummaryStateButton />
               </div>
               <div
                 className='summarytable-main-holder'
