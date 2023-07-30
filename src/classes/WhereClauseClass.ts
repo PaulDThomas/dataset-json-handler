@@ -3,17 +3,18 @@ import { DatasetJsonItemClass, eItemType } from './DatasetJsonItemClass';
 /**
  * Where operations
  */
-export enum eOperation {
-  eq = 'Equals',
-  lt = 'Less than',
-  le = 'Less than or equal to',
-  gt = 'Greater than',
-  ge = 'Greater than or equal to',
-  miss = 'Missing',
-  not_miss = 'Not missing',
-  // in = 'In',
-  // not_in = 'Not in',
-}
+export type Operation = 'eq' | 'lt' | 'le' | 'gt' | 'ge' | 'miss' | 'not_miss' | 'in' | 'not_in';
+export const Operations: { value: Operation; label: string }[] = [
+  { value: 'eq', label: 'Equals' },
+  { value: 'lt', label: 'Less than' },
+  { value: 'le', label: 'Less than or equal to' },
+  { value: 'gt', label: 'Greater than' },
+  { value: 'ge', label: 'Greater than or equal to' },
+  { value: 'miss', label: 'Missing' },
+  { value: 'not_miss', label: 'Not missing' },
+  { value: 'in', label: 'In' },
+  { value: 'not_in', label: 'Not in' },
+];
 
 /**
  * Where clause definition
@@ -24,9 +25,9 @@ export interface iWhereClause {
   /** Item being checked */
   item: DatasetJsonItemClass | null;
   /** Operation to apply */
-  whereOperation: eOperation | null;
+  whereOperation: Operation;
   /** Value(s) in the where clause */
-  filteredItemValues?: (string | number | Date)[];
+  filteredItemValues: (string | number | Date)[];
 }
 
 /**
@@ -44,7 +45,7 @@ export class WhereClauseClass {
   private _previousVersions: {
     timestamp: Date;
     _itemName: DatasetJsonItemClass;
-    _whereOperation: eOperation;
+    _whereOperation: Operation;
     _filteredItemValues: (string | number | Date)[] | undefined;
   }[] = [];
   get previousVersions() {
@@ -65,7 +66,7 @@ export class WhereClauseClass {
     this._item = newItem;
   }
 
-  private _whereOperation: eOperation | null = null;
+  private _whereOperation: Operation = 'eq';
   /**
    *  Operation
    */
@@ -75,11 +76,17 @@ export class WhereClauseClass {
   /**
    * Operation
    */
-  set whereOperation(newOperation: eOperation | null) {
+  set whereOperation(newOperation) {
+    if (['miss', 'not_miss'].includes(newOperation)) {
+      this._filteredItemValues = [];
+    } else if (['eq', 'lt', 'le', 'gt', 'ge'].includes(newOperation)) {
+      if (this._filteredItemValues.length > 1)
+        this._filteredItemValues = [this._filteredItemValues[0]];
+    }
     this._whereOperation = newOperation;
   }
 
-  private _filteredItemValues: (string | number | Date)[] | undefined = [];
+  private _filteredItemValues: (string | number | Date)[] = [];
   /**
    * Values for condition
    */
@@ -89,7 +96,7 @@ export class WhereClauseClass {
   /**
    * Values for condition
    */
-  set filteredItemValues(newValues: (string | number | Date)[] | undefined) {
+  set filteredItemValues(newValues: (string | number | Date)[]) {
     if (newValues === undefined) this._filteredItemValues === newValues;
     else if (!this._item) throw new Error('WhereClause: Can not set values where there is no item');
     // Change strings to correct type here
@@ -140,14 +147,11 @@ export class WhereClauseClass {
     return (
       this._WID &&
       this._item &&
-      this._whereOperation &&
-      (([eOperation.miss, eOperation.not_miss].includes(this._whereOperation) &&
-        this.filteredItemValues?.length === 0) ||
-        ([eOperation.eq, eOperation.ge, eOperation.gt, eOperation.le, eOperation.lt].includes(
-          this._whereOperation,
-        ) &&
-          this._filteredItemValues?.length === 1))
-      // || ([eOperation.in, eOperation.not_in] && (this._filteredItemValues?.length ?? -1) > 0)
+      ((['miss', 'not_miss'].includes(this._whereOperation) &&
+        this._filteredItemValues.length === 0) ||
+        (['eq', 'lt', 'le', 'gt', 'ge'].includes(this._whereOperation) &&
+          this._filteredItemValues.length === 1) ||
+        ['in', 'not_in'].includes(this._whereOperation))
     );
   }
 
@@ -165,7 +169,7 @@ export class WhereClauseClass {
   public constructor(newWhereClause?: iWhereClause) {
     this._WID = newWhereClause?.WID ?? crypto.randomUUID();
     this._item = newWhereClause?.item ?? null;
-    this._whereOperation = newWhereClause?.whereOperation ?? null;
+    this._whereOperation = newWhereClause?.whereOperation ?? 'eq';
     this._filteredItemValues = newWhereClause?.filteredItemValues ?? [];
   }
 
@@ -177,7 +181,7 @@ export class WhereClauseClass {
    */
   public update(
     itemName: DatasetJsonItemClass,
-    whereOperation: eOperation,
+    whereOperation: Operation,
     filteredItemValues: (string | number | Date)[],
   ) {
     if (this._item && this._whereOperation && this.isValid) {

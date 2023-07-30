@@ -1,4 +1,4 @@
-import { CdiscDatasetJson, DatasetJson } from '../../../src/main';
+import { CdiscDatasetJson, DatasetJsonClass } from '../../../src/main';
 import { Pane } from '../consts/panes';
 
 export const LOAD_DSJ = 'LOAD_DSJ';
@@ -15,7 +15,7 @@ export interface DsjActionProps {
 export interface dsjState {
   rawUrl: string;
   pane: Pane;
-  datasetJson: DatasetJson | null;
+  datasetJson: DatasetJsonClass | null;
 }
 
 export const dsjReducer = (state: dsjState, action: DsjActionProps): dsjState => {
@@ -24,7 +24,7 @@ export const dsjReducer = (state: dsjState, action: DsjActionProps): dsjState =>
   };
   switch (action.operation) {
     case 'LOAD_DSJ':
-      if (action.datasetJson) newState.datasetJson = new DatasetJson(action.datasetJson);
+      if (action.datasetJson) newState.datasetJson = new DatasetJsonClass(action.datasetJson);
       break;
     case 'SET_PANE':
       if (action.pane) newState.pane = action.pane;

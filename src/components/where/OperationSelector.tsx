@@ -1,9 +1,9 @@
-import { eOperation } from '../classes/WhereClauseClass';
-import { Select } from '../components/utility/Select';
+import { Operation, Operations } from '../../classes/WhereClauseClass';
+import { Select } from '../utility/Select';
 
 interface OperationSelectorProps {
-  selected: string;
-  setSelected?: (ret: string) => void;
+  selected: Operation;
+  setSelected?: (ret: Operation) => void;
   style?: React.CSSProperties;
   className?: string;
 }
@@ -14,12 +14,7 @@ export const OperationSelector = ({
   style,
   className,
 }: OperationSelectorProps): JSX.Element => {
-  const vals = [
-    ...Object.keys(eOperation).map((k, i) => ({
-      value: k,
-      label: Object.values(eOperation)[i].toString(),
-    })),
-  ];
+  const vals: { value: string; label: string }[] = [...Operations];
   if (!vals.map((v) => v.value).includes(selected)) {
     vals.splice(0, 0, { label: '-- Select --', value: '' });
   }
@@ -29,7 +24,7 @@ export const OperationSelector = ({
       style={{ width: '170px', ...style }}
       values={vals}
       selected={selected}
-      setSelected={setSelected ? (ret) => setSelected(ret) : undefined}
+      setSelected={setSelected ? (ret) => setSelected(ret as Operation) : undefined}
     />
   );
 };

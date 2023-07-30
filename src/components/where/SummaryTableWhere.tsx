@@ -39,7 +39,7 @@ export const SummaryTableWhere = ({ editable = true }: SummaryTableWhereProps) =
           id={'stwhere-window'}
           title={'Where clauses'}
           onClose={() => setShowWindow(false)}
-          style={{ width: '500px' }}
+          style={{ width: '600px' }}
         >
           <div className='stwhere-main'>
             {state.whereClauses.map((_, i) => (
@@ -49,17 +49,15 @@ export const SummaryTableWhere = ({ editable = true }: SummaryTableWhereProps) =
                 canEdit={true}
               />
             ))}
-            {editable && (
+            {editable && !state.whereClauses.some((w) => !w.isValid) && (
               <div
                 className='stwhere-add-where-clause'
-                onClick={() => {
-                  if (!state.whereClauses.some((w) => !w.isValid)) {
-                    dispatch({
-                      operation: UPDATE_WHERE_CLAUSE,
-                      whereClause: new WhereClauseClass(),
-                    });
-                  }
-                }}
+                onClick={() =>
+                  dispatch({
+                    operation: UPDATE_WHERE_CLAUSE,
+                    whereClause: new WhereClauseClass(),
+                  })
+                }
               >
                 <svg
                   xmlns='http://www.w3.org/2000/svg'

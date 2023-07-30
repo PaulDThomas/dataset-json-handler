@@ -1,47 +1,15 @@
 import { useContext } from 'react';
-import { WhereClauseClass, eOperation } from '../../classes/WhereClauseClass';
+import { WhereClauseClass, Operation } from '../../classes/WhereClauseClass';
 import { SummaryTableContext } from '../../context/SummaryTableContext';
-import { OperationSelector } from '../../enums/eOperation';
+import { OperationSelector } from './OperationSelector';
 import { REMOVE_WHERE_CLAUSE, UPDATE_WHERE_CLAUSE } from '../../functions/reducer';
 import { WhereClauseItem } from './WhereClauseItem';
-import { eItemType } from '../../classes/DatasetJsonItemClass';
+import { WhereSingleValue } from './WhereSingleValue';
 
-interface WhereClauseProps {
+export interface WhereClauseProps {
   index: number;
   canEdit: boolean;
 }
-
-export const WhereSingleValue = ({ index, canEdit }: WhereClauseProps) => {
-  const { state, dispatch } = useContext(SummaryTableContext);
-  const whereClause = state.whereClauses.length > index ? state.whereClauses[index] : null;
-  if (!whereClause || !whereClause.item) return <></>;
-  return (
-    <input
-      style={{ borderRadius: '4px', borderWidth: '1px' }}
-      value={
-        whereClause.filteredItemValues && whereClause.filteredItemValues.length > 0
-          ? whereClause.filteredItemValues[0].toString()
-          : ''
-      }
-      type={
-        [eItemType.date, eItemType.datetime, eItemType.time].includes(whereClause.item.type)
-          ? whereClause.item.type
-          : undefined
-      }
-      onChange={
-        canEdit
-          ? (e) => {
-              whereClause.filteredItemValues = [e.currentTarget.value];
-              dispatch({
-                operation: UPDATE_WHERE_CLAUSE,
-                whereClause: whereClause,
-              });
-            }
-          : undefined
-      }
-    />
-  );
-};
 
 // export const WhereMultiValues = ({ index, canEdit }: WhereClauseProps) => {
 //   const { state, dispatch } = useContext(SummaryTableContext);
@@ -113,18 +81,21 @@ export const WhereClauseRow = ({ index, canEdit }: WhereClauseProps): JSX.Elemen
       {whereClause.item && (
         <>
           <OperationSelector
-            selected={(whereClause.whereOperation ?? '') as string}
+            selected={whereClause.whereOperation}
             setSelected={
               canEdit
                 ? (ret) => {
+                    const newWhere = new WhereClauseClass(state.whereClauses[index]);
+                    newWhere.whereOperation = ret as Operation;
+                    // const newWhere = new WhereClauseClass({
+                    //   WID: state.whereClauses[index]?.WID,
+                    //   item: state.whereClauses[index]?.item,
+                    //   whereOperation: (ret as eOperation) ?? null,
+                    //   filteredItemValues: state.whereClauses[index].filteredItemValues,
+                    // });
                     dispatch({
                       operation: UPDATE_WHERE_CLAUSE,
-                      whereClause: new WhereClauseClass({
-                        WID: state.whereClauses[index]?.WID,
-                        item: state.whereClauses[index]?.item,
-                        whereOperation: (ret as eOperation) ?? null,
-                        filteredItemValues: state.whereClauses[index]?.filteredItemValues,
-                      }),
+                      whereClause: newWhere,
                     });
                   }
                 : undefined
@@ -199,6 +170,27 @@ export const WhereClauseRow = ({ index, canEdit }: WhereClauseProps): JSX.Elemen
               </div>
             )}
           </div>
+          {!whereClause.isValid && (
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                paddingLeft: '4px',
+              }}
+            >
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                width='16'
+                height='16'
+                fill='currentColor'
+                color='red'
+                viewBox='0 0 16 16'
+              >
+                <path d='M11.46.146A.5.5 0 0 0 11.107 0H4.893a.5.5 0 0 0-.353.146L.146 4.54A.5.5 0 0 0 0 4.893v6.214a.5.5 0 0 0 .146.353l4.394 4.394a.5.5 0 0 0 .353.146h6.214a.5.5 0 0 0 .353-.146l4.394-4.394a.5.5 0 0 0 .146-.353V4.893a.5.5 0 0 0-.146-.353L11.46.146zM8 4c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995A.905.905 0 0 1 8 4zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z' />
+              </svg>
+            </div>
+          )}
         </>
       )}
     </div>

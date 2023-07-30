@@ -4,5 +4,5 @@ import { SummaryTableGenerator } from './components/SummaryTableGenerator';
 import { CdiscDatasetJson } from './interfaces/CdiscDatasetJson';
 import { ItemDataRow } from './interfaces/ItemDataRow';
 
-export { SummaryTableGenerator, DatasetJsonClass as DatasetJson, DatasetJsonItemClass };
+export { SummaryTableGenerator, DatasetJsonClass, DatasetJsonItemClass };
 export type { CdiscDatasetJson, eItemType, ItemDataRow };
