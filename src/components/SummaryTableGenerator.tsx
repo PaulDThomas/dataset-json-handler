@@ -1,49 +1,53 @@
 import { ContextWindowStack } from '@asup/context-menu';
-import { DatasetJsonClass } from '../classes/DatasetJsonClass';
+import { useContext } from 'react';
+import { DSJContext } from '../../demo/src/context/DSJContextProvider';
 import { SummaryTableContextProvider } from '../context/SummaryTableContext';
-import { SummaryTableWhere } from './where/SummaryTableWhere';
+import { ShowStateButton } from './ShowStateButton';
 import { DropTable } from './drop-table/DropTable';
 import { ItemList } from './lhs/ItemList';
-import { ShowStateButton } from './ShowStateButton';
+import { SummaryTableWhere } from './where/SummaryTableWhere';
 
-interface SummaryTableGeneratorProps {
-  dataset: DatasetJsonClass;
-}
-
-export const SummaryTableGenerator = ({ dataset }: SummaryTableGeneratorProps): JSX.Element => {
+export const SummaryTableGenerator = (): JSX.Element => {
+  const { state } = useContext(DSJContext);
   return (
-    <ContextWindowStack>
-      <SummaryTableContextProvider dataset={dataset}>
-        <div className='summarytablegenerator'>
-          <div className='simpletable-title-holder'>
-            <h5 className='simpletable-title'>Summary table for: {dataset.name}</h5>
-            <ShowStateButton />
-          </div>
-          <div
-            className='summarytable-main-holder'
-            style={{ display: 'flex', flexDirection: 'row', height: 'calc(100% - 46px)' }}
-          >
-            <div
-              className='summarytable-lhs'
-              style={{ width: '190px', height: '100%' }}
-            >
-              <ItemList id={'summarytable-items'} />
+    <>
+      {!state.datasetJson ? (
+        <></>
+      ) : (
+        <ContextWindowStack>
+          <SummaryTableContextProvider dataset={state.datasetJson}>
+            <div className='summarytablegenerator'>
+              <div className='simpletable-title-holder'>
+                <h5 className='simpletable-title'>Summary table for: {state.datasetJson.name}</h5>
+                <ShowStateButton />
+              </div>
+              <div
+                className='summarytable-main-holder'
+                style={{ display: 'flex', flexDirection: 'row', height: 'calc(100% - 46px)' }}
+              >
+                <div
+                  className='summarytable-lhs'
+                  style={{ width: '190px', height: '100%' }}
+                >
+                  <ItemList id={'summarytable-items'} />
+                </div>
+                <div
+                  className='summarytable-rhs'
+                  style={{
+                    width: 'calc(100% - 190px)',
+                    height: '100%',
+                    display: 'flex',
+                    flexDirection: 'column',
+                  }}
+                >
+                  <SummaryTableWhere />
+                  <DropTable id={'summarytable'} />
+                </div>
+              </div>
             </div>
-            <div
-              className='summarytable-rhs'
-              style={{
-                width: 'calc(100% - 190px)',
-                height: '100%',
-                display: 'flex',
-                flexDirection: 'column',
-              }}
-            >
-              <SummaryTableWhere />
-              <DropTable id={'summarytable'} />
-            </div>
-          </div>
-        </div>
-      </SummaryTableContextProvider>
-    </ContextWindowStack>
+          </SummaryTableContextProvider>
+        </ContextWindowStack>
+      )}
+    </>
   );
 };

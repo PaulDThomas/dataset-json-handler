@@ -146,8 +146,8 @@ export class WhereClauseClass {
         ([eOperation.eq, eOperation.ge, eOperation.gt, eOperation.le, eOperation.lt].includes(
           this._whereOperation,
         ) &&
-          this._filteredItemValues?.length === 1) ||
-        ([eOperation.in, eOperation.not_in] && (this._filteredItemValues?.length ?? -1) > 0))
+          this._filteredItemValues?.length === 1))
+      // || ([eOperation.in, eOperation.not_in] && (this._filteredItemValues?.length ?? -1) > 0)
     );
   }
 

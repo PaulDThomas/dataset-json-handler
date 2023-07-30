@@ -36,6 +36,9 @@ body {
   padding: 2px;
 }
 
+#items-table,
+#items-table > tbody > tr > td,
+#items-table > thead > tr > th,
 #data-table > tbody > tr > td,
 #data-table > thead > tr > th {
   border: 1px solid black;
