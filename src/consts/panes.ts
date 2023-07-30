@@ -1,6 +1,6 @@
-import { SummaryTableGenerator } from '../../../src/main';
-import { PaneForData } from '../components/PaneForData';
-import { PaneForItems } from '../components/PaneForItems';
+import { SummaryTableGenerator } from '../main';
+import { PaneForData } from '../components/main/PaneForData';
+import { PaneForItems } from '../components/main/PaneForItems';
 
 export type Pane = 'items' | 'data' | 'summary';
 

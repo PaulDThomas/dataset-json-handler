@@ -1,7 +1,7 @@
-import { CdiscDatasetJson } from '../../../src/main';
-import { iFetchReturn } from '../interfaces/iFetchReturn';
+import { CdiscDatasetJson } from '../main';
+import { FetchReturn } from '../interfaces/FetchReturn';
 
-export interface datasetJsonReturn extends iFetchReturn {
+export interface datasetJsonReturn extends FetchReturn {
   datasetJson?: CdiscDatasetJson;
 }
 

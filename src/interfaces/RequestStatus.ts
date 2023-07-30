@@ -1,4 +1,4 @@
-export interface iRequestStatus<T> {
+export interface RequestStatus<T> {
   requesting: boolean;
   requestingId?: T;
   requestedId?: T;

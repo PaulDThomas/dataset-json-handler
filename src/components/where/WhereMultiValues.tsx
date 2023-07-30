@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { SummaryTableContext } from '../../context/SummaryTableContext';
-import { UPDATE_WHERE_CLAUSE } from '../../functions/reducer';
+import { UPDATE_WHERE_CLAUSE } from '../../context/stReducer';
 import { WhereClauseProps } from './WhereClauseRow';
 
 export const WhereMultiValues = ({ index, canEdit }: WhereClauseProps) => {

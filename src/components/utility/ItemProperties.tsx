@@ -17,46 +17,23 @@ export const ItemProperties = ({ oid }: ItemPropertiesProps): JSX.Element => {
           <td>OID</td>
           <td>{oid}</td>
         </tr>
-        <tr>
-          <td>Name</td>
-          <td>
-            <input
-              aria-label='Name'
-              value={item.name}
-              disabled
-            />
-          </td>
-        </tr>
-        <tr>
-          <td>Label</td>
-          <td>
-            <input
-              aria-label='Label'
-              value={item.label}
-              disabled
-            />
-          </td>
-        </tr>
-        <tr>
-          <td>Type</td>
-          <td>
-            <input
-              aria-label='Type'
-              value={item.type}
-              disabled
-            />
-          </td>
-        </tr>
-        <tr>
-          <td>Length</td>
-          <td>
-            <input
-              aria-label='Length'
-              value={item.length}
-              disabled
-            />
-          </td>
-        </tr>
+        {[
+          { name: 'name', label: 'Name' },
+          { name: 'label', label: 'Label' },
+          { name: 'type', label: 'Type' },
+          { name: 'length', label: 'Length' },
+        ].map((p, i) => (
+          <tr key={i}>
+            <td>{p.name}</td>
+            <td>
+              <input
+                aria-label={p.label}
+                value={item.data[p.name]?.toString() ?? ''}
+                disabled
+              />
+            </td>
+          </tr>
+        ))}
       </tbody>
     </table>
   );

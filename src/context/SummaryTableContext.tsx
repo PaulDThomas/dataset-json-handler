@@ -3,7 +3,7 @@ import { createContext, useEffect, useReducer } from 'react';
 import { DatasetJsonClass } from '../classes/DatasetJsonClass';
 import { DatasetJsonItemClass } from '../classes/DatasetJsonItemClass';
 import { WhereClauseClass } from '../classes/WhereClauseClass';
-import { ActionProps, SET_ITEMS, reducer } from '../functions/reducer';
+import { ActionProps, SET_ITEMS, stReducer } from './stReducer';
 
 export interface SummaryTableSchema {
   rows: DatasetJsonItemClass[];
@@ -43,7 +43,7 @@ export const SummaryTableContextProvider = ({
   dataset,
   children,
 }: SummaryTableContextProviderProps): JSX.Element => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [state, dispatch] = useReducer(stReducer, initialState);
 
   useEffect(() => {
     dispatch({ operation: SET_ITEMS, items: dataset.items });

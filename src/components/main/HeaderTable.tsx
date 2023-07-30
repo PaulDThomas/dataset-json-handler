@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { DSJContext, DSJContextProps } from '../context/DSJContextProvider';
+import { DSJContext, DSJContextProps } from '../../context/DSJContextProvider';
 import { HeaderTableUrl } from './HeaderTableUrl';
 import { PaneSwitch } from './PaneSwitch';
 

@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { DSJContext } from '../context/DSJContextProvider';
+import { DSJContext } from '../../context/DSJContextProvider';
 
 interface TabHolderProps {
   id?: string;

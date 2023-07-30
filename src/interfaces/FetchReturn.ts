@@ -1,4 +1,4 @@
-export interface iFetchReturn {
+export interface FetchReturn {
   success: boolean;
   ErrorText?: string;
 }

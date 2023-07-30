@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react';
 import { SummaryTableContext } from '../../context/SummaryTableContext';
-import { UPDATE_WHERE_CLAUSE } from '../../functions/reducer';
+import { UPDATE_WHERE_CLAUSE } from '../../context/stReducer';
 import { ContextWindow } from '@asup/context-menu';
 import { WhereClauseRow } from './WhereClauseRow';
 import { WhereClauseClass } from '../../classes/WhereClauseClass';

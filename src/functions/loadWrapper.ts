@@ -1,12 +1,12 @@
-import { iFetchReturn } from '../interfaces/iFetchReturn';
-import { iRequestStatus } from '../interfaces/iRequestStatus';
+import { FetchReturn } from '../interfaces/FetchReturn';
+import { RequestStatus } from '../interfaces/RequestStatus';
 import _ from 'lodash';
 
-export const loadWrapper = async <T1 extends iFetchReturn, T2>(
+export const loadWrapper = async <T1 extends FetchReturn, T2>(
   loadFunction: (target: T2, controller: AbortController) => Promise<T1>,
   target: T2,
-  status: iRequestStatus<T2>,
-  setStatus: (ret: iRequestStatus<T2>) => void,
+  status: RequestStatus<T2>,
+  setStatus: (ret: RequestStatus<T2>) => void,
 ): Promise<T1 | null> => {
   // Assume nothing is happening
   const doLoad =

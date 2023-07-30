@@ -1,16 +1,16 @@
 import { useCallback, useContext, useEffect, useState } from 'react';
-import { DSJContext, DSJContextProps } from '../context/DSJContextProvider';
-import { LOAD_DSJ } from '../context/dsjReducer';
-import { getDataFromUrl } from '../functions/getDataFromUrl';
-import { loadWrapper } from '../functions/loadWrapper';
-import { useDebounce } from '../hooks/useDebounce';
-import { iRequestStatus } from '../interfaces/iRequestStatus';
+import { DSJContext, DSJContextProps } from '../../context/DSJContextProvider';
+import { LOAD_DSJ } from '../../context/dsjReducer';
+import { getDataFromUrl } from '../../functions/getDataFromUrl';
+import { loadWrapper } from '../../functions/loadWrapper';
+import { useDebounce } from '../../hooks/useDebounce';
+import { RequestStatus } from '../../interfaces/RequestStatus';
 
 export const HeaderTableUrl = () => {
   const { state, dispatch } = useContext<DSJContextProps>(DSJContext);
   const [rawUrl, setRawUrl] = useState<string>(state.rawUrl);
   const debouncedUrl = useDebounce<string>(rawUrl);
-  const [loadStatus, setLoadStatus] = useState<iRequestStatus<string>>({
+  const [loadStatus, setLoadStatus] = useState<RequestStatus<string>>({
     requesting: false,
     error: false,
   });

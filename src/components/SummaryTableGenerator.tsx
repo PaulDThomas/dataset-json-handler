@@ -1,6 +1,6 @@
 import { ContextWindowStack } from '@asup/context-menu';
 import { useContext } from 'react';
-import { DSJContext } from '../../demo/src/context/DSJContextProvider';
+import { DSJContext } from '../context/DSJContextProvider';
 import { SummaryTableContextProvider } from '../context/SummaryTableContext';
 import { SummaryStateButton } from './SummaryStateButton';
 import { DropTable } from './drop-table/DropTable';

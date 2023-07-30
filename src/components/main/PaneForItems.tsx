@@ -1,7 +1,7 @@
 import { SimpleTable } from '@asup/simple-table';
-import { fieldsForItems } from '../consts/fieldsForItems';
+import { fieldsForItems } from '../../consts/fieldsForItems';
 import { useContext } from 'react';
-import { DSJContext } from '../context/DSJContextProvider';
+import { DSJContext } from '../../context/DSJContextProvider';
 
 export const PaneForItems = () => {
   const { state } = useContext(DSJContext);

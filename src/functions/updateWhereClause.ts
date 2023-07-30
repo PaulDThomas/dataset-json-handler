@@ -1,5 +1,5 @@
 import { SummaryTableSchema } from '../context/SummaryTableContext';
-import { ActionProps, UPDATE_WHERE_CLAUSE } from './reducer';
+import { ActionProps, UPDATE_WHERE_CLAUSE } from '../context/stReducer';
 
 export function updateWhereClause(action: ActionProps, state: SummaryTableSchema) {
   if (action.whereClause === undefined) throw `${UPDATE_WHERE_CLAUSE}: No where clause`;

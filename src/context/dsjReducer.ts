@@ -1,4 +1,4 @@
-import { CdiscDatasetJson, DatasetJsonClass } from '../../../src/main';
+import { CdiscDatasetJson, DatasetJsonClass } from '../main';
 import { Pane } from '../consts/panes';
 
 export const LOAD_DSJ = 'LOAD_DSJ';

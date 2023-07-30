@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { DatasetJsonItemClass } from '../../classes/DatasetJsonItemClass';
 import { WhereClauseClass } from '../../classes/WhereClauseClass';
 import { SummaryTableContext } from '../../context/SummaryTableContext';
-import { UPDATE_WHERE_CLAUSE } from '../../functions/reducer';
+import { UPDATE_WHERE_CLAUSE } from '../../context/stReducer';
 import { DropTarget } from '../drop-targets/DropTarget';
 import { DraggableItem } from '../lhs/DraggableItem';
 

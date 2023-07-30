@@ -2,7 +2,7 @@ import { ContextMenuHandler } from '@asup/context-menu';
 import { useContext, useMemo } from 'react';
 import { DatasetJsonItemClass } from '../../classes/DatasetJsonItemClass';
 import { SummaryTableContext } from '../../context/SummaryTableContext';
-import { MOVE_COLUMN_VARIABLE, REMOVE_COLUMN_VARIABLE } from '../../functions/reducer';
+import { MOVE_COLUMN_VARIABLE, REMOVE_COLUMN_VARIABLE } from '../../context/stReducer';
 import { DropEdges } from '../drop-targets/DropEdges';
 import { DraggableItem } from '../lhs/DraggableItem';
 import { StatisticHolder } from '../lhs/StatisticHolder';

@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { DatasetJsonItemClass } from '../../classes/DatasetJsonItemClass';
 import { SummaryTableContext } from '../../context/SummaryTableContext';
-import { MOVE_COLUMN_VARIABLE, MOVE_ROW_VARIABLE } from '../../functions/reducer';
+import { MOVE_COLUMN_VARIABLE, MOVE_ROW_VARIABLE } from '../../context/stReducer';
 import { DropEdges } from '../drop-targets/DropEdges';
 import './DropTableTopLeftCell.css';
 

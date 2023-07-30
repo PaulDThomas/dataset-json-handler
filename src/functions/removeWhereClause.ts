@@ -1,5 +1,5 @@
 import { SummaryTableSchema } from '../context/SummaryTableContext';
-import { ActionProps, REMOVE_WHERE_CLAUSE } from './reducer';
+import { ActionProps, REMOVE_WHERE_CLAUSE } from '../context/stReducer';
 
 export function removeWhereClause(action: ActionProps, state: SummaryTableSchema) {
   if (action.whereClause === undefined) throw `${REMOVE_WHERE_CLAUSE}: No where clause specified`;

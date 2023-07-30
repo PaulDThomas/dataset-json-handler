@@ -1,7 +1,7 @@
 import { Fragment, useContext } from 'react';
-import { DSJContextProps, DSJContext } from '../context/DSJContextProvider';
-import { SET_PANE } from '../context/dsjReducer';
-import { panes } from '../consts/panes';
+import { DSJContextProps, DSJContext } from '../../context/DSJContextProvider';
+import { SET_PANE } from '../../context/dsjReducer';
+import { panes } from '../../consts/panes';
 
 export const PaneSwitch = () => {
   const { state, dispatch } = useContext<DSJContextProps>(DSJContext);

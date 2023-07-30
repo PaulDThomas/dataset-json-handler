@@ -1,13 +1,13 @@
 import { DatasetJsonItemClass } from '../classes/DatasetJsonItemClass';
 import { WhereClauseClass } from '../classes/WhereClauseClass';
-import { SummaryTableSchema } from '../context/SummaryTableContext';
+import { SummaryTableSchema } from './SummaryTableContext';
 import { updateWhereClause } from '../functions/updateWhereClause';
-import { moveColumnVariable } from './moveColumnVariable';
-import { addRowVariable } from './moveRowVariable';
-import { removeColumnVariable } from './removeColumnVariable';
-import { removeRowVariable } from './removeRowVariable';
-import { removeWhereClause } from './removeWhereClause';
-import { updateItem } from './updateItem';
+import { moveColumnVariable } from '../functions/moveColumnVariable';
+import { addRowVariable } from '../functions/moveRowVariable';
+import { removeColumnVariable } from '../functions/removeColumnVariable';
+import { removeRowVariable } from '../functions/removeRowVariable';
+import { removeWhereClause } from '../functions/removeWhereClause';
+import { updateItem } from '../functions/updateItem';
 
 export const MOVE_COLUMN_VARIABLE = 'MOVE_COLUMN_VARIABLE';
 export const MOVE_ROW_VARIABLE = 'MOVE_ROW_VARIABLE';
@@ -42,7 +42,7 @@ export interface ActionProps {
   whereClause?: WhereClauseClass;
 }
 
-export const reducer = (state: SummaryTableSchema, action: ActionProps): SummaryTableSchema => {
+export const stReducer = (state: SummaryTableSchema, action: ActionProps): SummaryTableSchema => {
   let newState: SummaryTableSchema = { ...state };
   switch (action.operation) {
     case MOVE_COLUMN_VARIABLE:

@@ -1,7 +1,7 @@
-import { TabHolder } from './components/TabHolder';
-import { HeaderTable } from './components/HeaderTable';
-import DsjContextProvider from './context/DSJContextProvider';
-import { panes } from './consts/panes';
+import { TabHolder } from '../../src/components/utility/TabHolder';
+import { HeaderTable } from '../../src/components/main/HeaderTable';
+import DsjContextProvider from '../../src/context/DSJContextProvider';
+import { panes } from '../../src/consts/panes';
 
 // Main application
 const App = (): JSX.Element => {

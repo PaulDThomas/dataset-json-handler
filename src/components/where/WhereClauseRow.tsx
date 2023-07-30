@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { WhereClauseClass, Operation } from '../../classes/WhereClauseClass';
 import { SummaryTableContext } from '../../context/SummaryTableContext';
 import { OperationSelector } from './OperationSelector';
-import { REMOVE_WHERE_CLAUSE, UPDATE_WHERE_CLAUSE } from '../../functions/reducer';
+import { REMOVE_WHERE_CLAUSE, UPDATE_WHERE_CLAUSE } from '../../context/stReducer';
 import { WhereClauseItem } from './WhereClauseItem';
 import { WhereSingleValue } from './WhereSingleValue';
 import { WhereMultiValues } from './WhereMultiValues';
