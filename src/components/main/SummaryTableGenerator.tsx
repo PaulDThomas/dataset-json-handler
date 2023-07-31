@@ -26,10 +26,16 @@ export const SummaryTableGenerator = (): JSX.Element => {
                 style={{ display: 'flex', flexDirection: 'row', height: 'calc(100% - 46px)' }}
               >
                 <div
-                  className='summarytable-lhs'
-                  style={{ width: '190px', height: '100%' }}
+                  className='small-scrollbar-holder'
+                  style={{
+                    width: '182px',
+                    paddingRight: '4px',
+                    height: 'calc(100% - 8px)',
+                  }}
                 >
-                  <ItemList id={'summarytable-item-list'} />
+                  <div className='summarytable-lhs small-scrollbar'>
+                    <ItemList id={'summarytable-item-list'} />
+                  </div>
                 </div>
                 <div
                   className='summarytable-rhs'

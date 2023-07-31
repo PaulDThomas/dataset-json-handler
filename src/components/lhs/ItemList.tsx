@@ -1,7 +1,7 @@
-import { useContext } from 'react';
-import { DraggableItem } from './DraggableItem';
-import './ItemList.css';
+import { useContext, useState } from 'react';
 import { SummaryTableContext } from '../../context/SummaryTableContext';
+import './Accordion.css';
+import { DraggableItem } from './DraggableItem';
 
 interface ItemListProps {
   id: string;
@@ -9,13 +9,21 @@ interface ItemListProps {
 
 export const ItemList = ({ id }: ItemListProps) => {
   const { state } = useContext(SummaryTableContext);
+  const [expanded, setExpanded] = useState<boolean>(true);
 
   return (
     <div
-      className='item-list simpletable-main small-scrollbar'
+      className='item-list'
       id={id}
     >
-      <div className='simpletable-holder'>
+      <div
+        className='accordion-title'
+        onClick={() => setExpanded(!expanded)}
+      >
+        <div className={`accordion-pre ${expanded ? 'expanded' : 'closed'}`}>{'\u2BC5'}</div>
+        <span id={`accordion-title-${id}`}>Items</span>
+      </div>
+      <div className={`accordion-holder ${expanded ? 'expanded' : 'closed'}`}>
         {state.itemList
           .filter(
             (v) =>
