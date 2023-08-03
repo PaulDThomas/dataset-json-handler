@@ -4,6 +4,7 @@ import { DatasetJsonClass } from '../classes/DatasetJsonClass';
 import { DatasetJsonItemClass } from '../classes/DatasetJsonItemClass';
 import { WhereClauseConditionClass } from '../classes/WhereClauseConditionClass';
 import { ActionProps, SET_ITEMS, stReducer } from './stReducer';
+import { WhereClauseClass } from '../classes/WhereClauseClass';
 
 export interface SummaryTableSchema {
   rows: DatasetJsonItemClass[];
@@ -12,6 +13,7 @@ export interface SummaryTableSchema {
   statistics: eStatistic[];
   statisticPosition: 'row' | 'column';
   whereClauseConditions: WhereClauseConditionClass[];
+  groupList: WhereClauseClass[];
   itemList: DatasetJsonItemClass[];
 }
 
@@ -21,6 +23,7 @@ const initialState: SummaryTableSchema = {
   statistics: [],
   statisticPosition: 'column',
   whereClauseConditions: [],
+  groupList: [],
   itemList: [],
 };
 

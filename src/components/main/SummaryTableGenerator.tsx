@@ -4,8 +4,9 @@ import { DSJContext } from '../../context/DSJContextProvider';
 import { SummaryTableContextProvider } from '../../context/SummaryTableContext';
 import { DropTable } from '../drop-table/DropTable';
 import { ItemList } from '../lhs/ItemList';
-import { SummaryTableWhere } from '../where/SummaryTableWhere';
+import { SummaryTableWhere } from '../where-clause-condition/SummaryTableWhere';
 import { SummaryStateButton } from './SummaryStateButton';
+import { GroupList } from '../lhs/GroupList';
 
 export const SummaryTableGenerator = (): JSX.Element => {
   const { state } = useContext(DSJContext);
@@ -34,6 +35,7 @@ export const SummaryTableGenerator = (): JSX.Element => {
                   }}
                 >
                   <div className='summarytable-lhs small-scrollbar'>
+                    <GroupList id='summarytable-group-list' />
                     <ItemList id={'summarytable-item-list'} />
                   </div>
                 </div>
