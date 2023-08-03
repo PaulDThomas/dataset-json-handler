@@ -9,7 +9,7 @@ import { RequestStatus } from '../../interfaces/RequestStatus';
 export const HeaderTableUrl = () => {
   const { state, dispatch } = useContext<DSJContextProps>(DSJContext);
   const [rawUrl, setRawUrl] = useState<string>(state.rawUrl);
-  const debouncedUrl = useDebounce<string>(rawUrl);
+  const debouncedUrl = useDebounce<string>(rawUrl, 2000);
   const [loadStatus, setLoadStatus] = useState<RequestStatus<string>>({
     requesting: false,
     error: false,
@@ -17,7 +17,12 @@ export const HeaderTableUrl = () => {
 
   const getData = useCallback(
     async (urlString: string) => {
-      const response = await loadWrapper(getDataFromUrl, urlString, loadStatus, setLoadStatus);
+      const response = await loadWrapper(
+        getDataFromUrl,
+        urlString,
+        { ...loadStatus, error: false },
+        setLoadStatus,
+      );
       if (response && response.success && response?.datasetJson) {
         dispatch({ operation: LOAD_DSJ, datasetJson: response.datasetJson });
       }
