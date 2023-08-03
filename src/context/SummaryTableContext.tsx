@@ -2,7 +2,7 @@ import { eStatistic } from 'enums/eStatistic';
 import { createContext, useEffect, useReducer } from 'react';
 import { DatasetJsonClass } from '../classes/DatasetJsonClass';
 import { DatasetJsonItemClass } from '../classes/DatasetJsonItemClass';
-import { WhereClauseClass } from '../classes/WhereClauseClass';
+import { WhereClauseConditionClass } from '../classes/WhereClauseConditionClass';
 import { ActionProps, SET_ITEMS, stReducer } from './stReducer';
 
 export interface SummaryTableSchema {
@@ -11,7 +11,7 @@ export interface SummaryTableSchema {
   target?: DatasetJsonItemClass;
   statistics: eStatistic[];
   statisticPosition: 'row' | 'column';
-  whereClauses: WhereClauseClass[];
+  whereClauseConditions: WhereClauseConditionClass[];
   itemList: DatasetJsonItemClass[];
 }
 
@@ -20,7 +20,7 @@ const initialState: SummaryTableSchema = {
   columns: [],
   statistics: [],
   statisticPosition: 'column',
-  whereClauses: [],
+  whereClauseConditions: [],
   itemList: [],
 };
 

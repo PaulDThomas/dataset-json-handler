@@ -1,36 +1,36 @@
 import { DatasetJsonItemClass } from '../classes/DatasetJsonItemClass';
-import { WhereClauseClass } from '../classes/WhereClauseClass';
+import { WhereClauseConditionClass } from '../classes/WhereClauseConditionClass';
 import { SummaryTableSchema } from './SummaryTableContext';
-import { updateWhereClause } from '../functions/updateWhereClause';
+import { updateWhereClauseCondition } from '../functions/updateWhereClauseCondition';
 import { moveColumnVariable } from '../functions/moveColumnVariable';
 import { addRowVariable } from '../functions/moveRowVariable';
 import { removeColumnVariable } from '../functions/removeColumnVariable';
 import { removeRowVariable } from '../functions/removeRowVariable';
-import { removeWhereClause } from '../functions/removeWhereClause';
+import { removeWhereClauseCondition } from '../functions/removeWhereClauseCondition';
 import { updateItem } from '../functions/updateItem';
 
 export const MOVE_COLUMN_VARIABLE = 'MOVE_COLUMN_VARIABLE';
 export const MOVE_ROW_VARIABLE = 'MOVE_ROW_VARIABLE';
 export const REMOVE_COLUMN_VARIABLE = 'REMOVE_COLUMN_VARIABLE';
 export const REMOVE_ROW_VARIABLE = 'REMOVE_ROW_VARIABLE';
-export const REMOVE_WHERE_CLAUSE = 'REMOVE_WHERE_CLAUSE';
+export const REMOVE_WHERE_CLAUSE_CONDITION = 'REMOVE_WHERE_CLAUSE_CONDITION';
 export const SET_COLUMNS = 'SET_COLUMNS';
 export const SET_ITEMS = 'SET_ITEMS';
 export const SET_ROWS = 'SET_ROWS';
 export const UPDATE_ITEM = 'UPDATE_ITEM';
-export const UPDATE_WHERE_CLAUSE = 'UPDATE_WHERE_CLAUSE';
+export const UPDATE_WHERE_CLAUSE_CONDITION = 'UPDATE_WHERE_CLAUSE_CONDITION';
 
 type Operation =
   | 'MOVE_COLUMN_VARIABLE'
   | 'MOVE_ROW_VARIABLE'
   | 'REMOVE_COLUMN_VARIABLE'
   | 'REMOVE_ROW_VARIABLE'
-  | 'REMOVE_WHERE_CLAUSE'
+  | 'REMOVE_WHERE_CLAUSE_CONDITION'
   | 'SET_COLUMNS'
   | 'SET_ITEMS'
   | 'SET_ROWS'
   | 'UPDATE_ITEM'
-  | 'UPDATE_WHERE_CLAUSE';
+  | 'UPDATE_WHERE_CLAUSE_CONDITION';
 
 export interface ActionProps {
   operation: Operation;
@@ -39,7 +39,7 @@ export interface ActionProps {
   position?: number;
   rows?: DatasetJsonItemClass[];
   columns?: DatasetJsonItemClass[];
-  whereClause?: WhereClauseClass;
+  whereClauseCondition?: WhereClauseConditionClass;
 }
 
 export const stReducer = (state: SummaryTableSchema, action: ActionProps): SummaryTableSchema => {
@@ -57,8 +57,8 @@ export const stReducer = (state: SummaryTableSchema, action: ActionProps): Summa
     case REMOVE_ROW_VARIABLE:
       newState = removeRowVariable(action, newState);
       break;
-    case REMOVE_WHERE_CLAUSE:
-      newState = removeWhereClause(action, newState);
+    case REMOVE_WHERE_CLAUSE_CONDITION:
+      newState = removeWhereClauseCondition(action, newState);
       break;
     case SET_COLUMNS:
       if (!action.columns) throw `${SET_COLUMNS}: No columns`;
@@ -75,8 +75,8 @@ export const stReducer = (state: SummaryTableSchema, action: ActionProps): Summa
     case UPDATE_ITEM:
       newState = updateItem(action, newState);
       break;
-    case UPDATE_WHERE_CLAUSE:
-      newState = updateWhereClause(action, newState);
+    case UPDATE_WHERE_CLAUSE_CONDITION:
+      newState = updateWhereClauseCondition(action, newState);
       break;
   }
   console.dir(newState);

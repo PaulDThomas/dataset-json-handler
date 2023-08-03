@@ -1,4 +1,4 @@
-import { Operation, Operations } from '../../classes/WhereClauseClass';
+import { Operation, Operations } from '../../classes/WhereClauseConditionClass';
 import { Select } from '../utility/Select';
 
 interface OperationSelectorProps {

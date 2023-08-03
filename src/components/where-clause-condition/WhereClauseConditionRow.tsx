@@ -1,25 +1,32 @@
 import { useContext } from 'react';
-import { WhereClauseClass, Operation } from '../../classes/WhereClauseClass';
+import { WhereClauseConditionClass, Operation } from '../../classes/WhereClauseConditionClass';
 import { SummaryTableContext } from '../../context/SummaryTableContext';
 import { OperationSelector } from './OperationSelector';
-import { REMOVE_WHERE_CLAUSE, UPDATE_WHERE_CLAUSE } from '../../context/stReducer';
-import { WhereClauseItem } from './WhereClauseItem';
-import { WhereSingleValue } from './WhereSingleValue';
-import { WhereMultiValues } from './WhereMultiValues';
+import {
+  REMOVE_WHERE_CLAUSE_CONDITION,
+  UPDATE_WHERE_CLAUSE_CONDITION,
+} from '../../context/stReducer';
+import { WhereClauseConditionItem } from './WhereClauseConditionItem';
+import { WhereClauseConditionSingleValue } from './WhereClauseConditionSingleValue';
+import { WhereClauseConditionMultiValues } from './WhereClauseConditionMultiValues';
 
-export interface WhereClauseProps {
+export interface WhereClauseConditionProps {
   index: number;
   canEdit: boolean;
 }
 
-export const WhereClauseRow = ({ index, canEdit }: WhereClauseProps): JSX.Element => {
+export const WhereClauseConditionRow = ({
+  index,
+  canEdit,
+}: WhereClauseConditionProps): JSX.Element => {
   const { state, dispatch } = useContext(SummaryTableContext);
-  const whereClause = state.whereClauses.length > index ? state.whereClauses[index] : null;
+  const whereClauseCondition =
+    state.whereClauseConditions.length > index ? state.whereClauseConditions[index] : null;
 
-  if (!whereClause) return <></>;
+  if (!whereClauseCondition) return <></>;
   return (
     <div
-      className='whereclause-main'
+      className='whereclausecondition-main'
       style={{
         display: 'flex',
         flexDirection: 'row',
@@ -27,7 +34,7 @@ export const WhereClauseRow = ({ index, canEdit }: WhereClauseProps): JSX.Elemen
       }}
     >
       <div
-        className='whereclause-remove-holder'
+        className='whereclausecondition-remove-holder'
         style={{
           display: 'flex',
           flexDirection: 'column',
@@ -44,7 +51,11 @@ export const WhereClauseRow = ({ index, canEdit }: WhereClauseProps): JSX.Elemen
           color='red'
           onClick={
             canEdit
-              ? () => dispatch({ operation: REMOVE_WHERE_CLAUSE, whereClause: whereClause })
+              ? () =>
+                  dispatch({
+                    operation: REMOVE_WHERE_CLAUSE_CONDITION,
+                    whereClauseCondition: whereClauseCondition,
+                  })
               : undefined
           }
         >
@@ -52,26 +63,28 @@ export const WhereClauseRow = ({ index, canEdit }: WhereClauseProps): JSX.Elemen
           <path d='M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z' />
         </svg>
       </div>
-      <WhereClauseItem index={index} />
-      {whereClause.item && (
+      <WhereClauseConditionItem index={index} />
+      {whereClauseCondition.item && (
         <>
           <OperationSelector
-            selected={whereClause.whereOperation}
+            selected={whereClauseCondition.whereOperation}
             setSelected={
               canEdit
                 ? (ret) => {
-                    const newWhere = new WhereClauseClass(state.whereClauses[index]);
+                    const newWhere = new WhereClauseConditionClass(
+                      state.whereClauseConditions[index],
+                    );
                     newWhere.whereOperation = ret as Operation;
                     dispatch({
-                      operation: UPDATE_WHERE_CLAUSE,
-                      whereClause: newWhere,
+                      operation: UPDATE_WHERE_CLAUSE_CONDITION,
+                      whereClauseCondition: newWhere,
                     });
                   }
                 : undefined
             }
           />
           <div
-            className='whereclause-values'
+            className='whereclausecondition-values'
             style={{
               display: 'flex',
               flexDirection: 'column',
@@ -79,52 +92,52 @@ export const WhereClauseRow = ({ index, canEdit }: WhereClauseProps): JSX.Elemen
               marginLeft: '2px',
             }}
           >
-            {whereClause.whereOperation ? (
+            {whereClauseCondition.whereOperation ? (
               {
                 eq: (
-                  <WhereSingleValue
+                  <WhereClauseConditionSingleValue
                     index={index}
                     canEdit={canEdit}
                   />
                 ),
                 lt: (
-                  <WhereSingleValue
+                  <WhereClauseConditionSingleValue
                     index={index}
                     canEdit={canEdit}
                   />
                 ),
                 le: (
-                  <WhereSingleValue
+                  <WhereClauseConditionSingleValue
                     index={index}
                     canEdit={canEdit}
                   />
                 ),
                 gt: (
-                  <WhereSingleValue
+                  <WhereClauseConditionSingleValue
                     index={index}
                     canEdit={canEdit}
                   />
                 ),
                 ge: (
-                  <WhereSingleValue
+                  <WhereClauseConditionSingleValue
                     index={index}
                     canEdit={canEdit}
                   />
                 ),
                 in: (
-                  <WhereMultiValues
+                  <WhereClauseConditionMultiValues
                     index={index}
                     canEdit={canEdit}
                   />
                 ),
                 not_in: (
-                  <WhereMultiValues
+                  <WhereClauseConditionMultiValues
                     index={index}
                     canEdit={canEdit}
                   />
                 ),
                 default: <></>,
-              }[whereClause.whereOperation.valueOf()]
+              }[whereClauseCondition.whereOperation.valueOf()]
             ) : (
               <div
                 style={{
@@ -139,7 +152,7 @@ export const WhereClauseRow = ({ index, canEdit }: WhereClauseProps): JSX.Elemen
               </div>
             )}
           </div>
-          {!whereClause.isValid && (
+          {!whereClauseCondition.isValid && (
             <div
               style={{
                 display: 'flex',
@@ -165,4 +178,4 @@ export const WhereClauseRow = ({ index, canEdit }: WhereClauseProps): JSX.Elemen
     </div>
   );
 };
-WhereClauseRow.displayName = 'WhereClauseRow';
+WhereClauseConditionRow.displayName = 'WhereClauseRow';

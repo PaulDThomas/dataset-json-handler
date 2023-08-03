@@ -1,9 +1,9 @@
 import { useContext, useState } from 'react';
 import { SummaryTableContext } from '../../context/SummaryTableContext';
-import { UPDATE_WHERE_CLAUSE } from '../../context/stReducer';
+import { UPDATE_WHERE_CLAUSE_CONDITION } from '../../context/stReducer';
 import { ContextWindow } from '@asup/context-menu';
-import { WhereClauseRow } from './WhereClauseRow';
-import { WhereClauseClass } from '../../classes/WhereClauseClass';
+import { WhereClauseConditionRow } from './WhereClauseConditionRow';
+import { WhereClauseConditionClass } from '../../classes/WhereClauseConditionClass';
 
 interface SummaryTableWhereProps {
   editable?: boolean;
@@ -22,8 +22,8 @@ export const SummaryTableWhere = ({ editable = true }: SummaryTableWhereProps) =
       }}
     >
       <div className=''>
-        {state.whereClauses.length} filter
-        {state.whereClauses.length === 1 ? '' : 's'} applied
+        {state.whereClauseConditions.length} filter
+        {state.whereClauseConditions.length === 1 ? '' : 's'} applied
         <span
           className='stwhere-edit-button'
           title='Edit filters'
@@ -42,20 +42,20 @@ export const SummaryTableWhere = ({ editable = true }: SummaryTableWhereProps) =
           style={{ width: '600px' }}
         >
           <div className='stwhere-main'>
-            {state.whereClauses.map((_, i) => (
-              <WhereClauseRow
+            {state.whereClauseConditions.map((_, i) => (
+              <WhereClauseConditionRow
                 key={i}
                 index={i}
                 canEdit={true}
               />
             ))}
-            {editable && !state.whereClauses.some((w) => !w.isValid) && (
+            {editable && !state.whereClauseConditions.some((w) => !w.isValid) && (
               <div
                 className='stwhere-add-where-clause'
                 onClick={() =>
                   dispatch({
-                    operation: UPDATE_WHERE_CLAUSE,
-                    whereClause: new WhereClauseClass(),
+                    operation: UPDATE_WHERE_CLAUSE_CONDITION,
+                    whereClauseCondition: new WhereClauseConditionClass(),
                   })
                 }
               >
