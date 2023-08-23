@@ -14,7 +14,7 @@ export interface DsjActionProps {
 
 export interface dsjState {
   rawUrl: string;
-  pane: Pane;
+  pane?: Pane;
   datasetJson: DatasetJsonClass | null;
 }
 

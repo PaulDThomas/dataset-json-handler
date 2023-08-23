@@ -16,7 +16,7 @@ export const HeaderTable = () => {
           <HeaderTableUrl />
           <tr>
             <td width={'200px'}>studyOID</td>
-            <td width={'250px'}>{state.datasetJson?.studyOID}</td>
+            <td width={'350px'}>{state.datasetJson?.studyOID}</td>
             <td rowSpan={4}></td>
             <td rowSpan={4}>
               <PaneSwitch />

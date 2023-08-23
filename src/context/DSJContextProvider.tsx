@@ -8,9 +8,9 @@ export interface DSJContextProps {
 
 const defaultContext: dsjState = {
   rawUrl:
-    'https://raw.githubusercontent.com/cdisc-org/DataExchange-DatasetJson/master/examples/adam/adae.json',
+    'https://raw.githubusercontent.com/cdisc-org/DataExchange-DatasetJson/master/examples/adam/adsl.json',
   datasetJson: null,
-  pane: 'items',
+  pane: undefined,
 };
 
 export const DSJContext = createContext<DSJContextProps>({

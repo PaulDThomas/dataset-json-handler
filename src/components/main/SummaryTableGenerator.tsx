@@ -29,14 +29,27 @@ export const SummaryTableGenerator = (): JSX.Element => {
                 <div
                   className='small-scrollbar-holder'
                   style={{
-                    width: '182px',
-                    paddingRight: '4px',
+                    minWidth: '190px',
+                    width: '190px',
+                    paddingRight: '6px',
                     height: 'calc(100% - 8px)',
                   }}
                 >
                   <div className='summarytable-lhs small-scrollbar'>
-                    <GroupList id='summarytable-group-list' />
                     <ItemList id={'summarytable-item-list'} />
+                  </div>
+                </div>
+                <div
+                  className='small-scrollbar-holder'
+                  style={{
+                    minWidth: '260px',
+                    width: '260px',
+                    paddingRight: '4px',
+                    height: 'calc(100% - 8px)',
+                  }}
+                >
+                  <div className='summarytable-table-groups small-scrollbar'>
+                    <GroupList id='summarytable-group-list' />
                   </div>
                 </div>
                 <div

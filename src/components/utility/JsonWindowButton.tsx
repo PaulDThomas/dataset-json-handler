@@ -15,7 +15,11 @@ export const JsonWindowButton = ({ id, title, object }: JsonWindowButtonProps) =
     <>
       <button
         id={id}
-        onClick={() => setShowWindow(!showWindow)}
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          setShowWindow(!showWindow);
+        }}
         className='json-window-button'
       >
         ⓘ
