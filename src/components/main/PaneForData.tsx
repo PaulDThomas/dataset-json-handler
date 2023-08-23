@@ -14,7 +14,7 @@ export const PaneForData = () => {
             id='data-table'
             fields={state.datasetJson.simpleTableFields}
             keyField={'__rowNumber'}
-            data={state.datasetJson ? state.datasetJson.itemData : []}
+            data={state.datasetJson ? state.datasetJson.dataRows : []}
             headerLabel='Data'
           />
         </div>

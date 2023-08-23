@@ -37,7 +37,7 @@ export interface WhereClauseCondition {
  * Typescript class for a SummaryTable where clause
  */
 export class WhereClauseConditionClass {
-  private _id = '';
+  protected _id = '';
   /**
    * Unique Id attribute
    */
@@ -45,7 +45,7 @@ export class WhereClauseConditionClass {
     return this._id;
   }
 
-  private _item: DatasetJsonItemClass | null = null;
+  protected _item: DatasetJsonItemClass | null = null;
   /**
    * Item to check
    */
@@ -59,7 +59,7 @@ export class WhereClauseConditionClass {
     this._item = newItem;
   }
 
-  private _whereOperation: Operation = 'eq';
+  protected _whereOperation: Operation = 'eq';
   /**
    *  Operation
    */
@@ -79,7 +79,7 @@ export class WhereClauseConditionClass {
     this._whereOperation = newOperation;
   }
 
-  private _filteredItemValues: (string | number | Date)[] = [];
+  protected _filteredItemValues: (string | number | Date)[] = [];
   /**
    * Values for condition
    */

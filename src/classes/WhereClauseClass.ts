@@ -8,13 +8,13 @@ export interface WhereClause {
 }
 
 export class WhereClauseClass {
-  private _id = '';
+  protected _id = '';
   /** Unique identifier */
   get id() {
     return this._id;
   }
 
-  private _label = '0';
+  protected _label = '';
   /** A short informative description that may be used for display. */
   get label() {
     return this._label;
@@ -23,7 +23,7 @@ export class WhereClauseClass {
     this._label = newLabel;
   }
 
-  private _level = 0;
+  protected _level = 0;
   /** The level of the entry within a hierarchical structure. */
   get level() {
     return this._level;
@@ -32,7 +32,7 @@ export class WhereClauseClass {
     this._level = newLevel;
   }
 
-  private _order = 0;
+  protected _order = 0;
   /** The ordinal of the instance with respect to other instances. */
   get order() {
     return this._order;
@@ -41,7 +41,7 @@ export class WhereClauseClass {
     this._order = newOrder;
   }
 
-  private _condition: string | null = null;
+  protected _condition: string | null = null;
   /** Unique id for a connected where clause condition */
   get condition() {
     return this._condition;
@@ -50,7 +50,7 @@ export class WhereClauseClass {
     this._condition = newConditionId;
   }
 
-  private _compoundExpression: string | null = null;
+  protected _compoundExpression: string | null = null;
   /** Unique id for a connected where clause compound expression */
   get compoundExpression() {
     return this._compoundExpression;
@@ -61,6 +61,7 @@ export class WhereClauseClass {
 
   public constructor(newWhereClause?: WhereClause) {
     this._id = newWhereClause?.id ?? crypto.randomUUID();
+    this._label = newWhereClause?.label ?? 'New where clause';
     this._level = newWhereClause?.level ?? 1;
     this._order = newWhereClause?.order ?? 1;
     if (newWhereClause?.conditionId && newWhereClause.compoundExpressionId) {

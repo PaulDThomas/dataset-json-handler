@@ -39,7 +39,7 @@ export interface iDatasetJsonItem extends iSimpleTableRow {
 }
 
 export class DatasetJsonItemClass {
-  private _OID = '';
+  protected _OID = '';
 
   /**
    * Unique identifier
@@ -47,28 +47,28 @@ export class DatasetJsonItemClass {
   get OID() {
     return this._OID;
   }
-  private _name = '';
+  protected _name = '';
   /**
    * Item name
    */
   get name() {
     return this._name;
   }
-  private _label = '';
+  protected _label = '';
   /**
    * Item label
    */
   get label() {
     return this._label;
   }
-  private _type: eItemType = eItemType.string;
+  protected _type: eItemType = eItemType.string;
   /**
    * Item type
    */
   get type(): eItemType {
     return this._type;
   }
-  private _length: number | undefined = 8;
+  protected _length: number | undefined = 8;
   /**
    * Assigned item length for strings
    */
