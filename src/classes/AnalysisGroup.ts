@@ -60,14 +60,14 @@ export class AnalysisGroupClass extends WhereClauseClass {
 
   /**
    * Analysis group
-   * @param newItemGroup Analysis group parameters
+   * @param newAnalysisGroup Analysis group parameters
    */
-  public constructor(newItemGroup?: AnalysisGroup) {
-    super();
-    this._label = newItemGroup?.label ?? 'New Analysis group';
-    this._orderItem = newItemGroup?.orderItem ?? null;
-    this._valueItem = newItemGroup?.valueItem ?? null;
-    this._bigN = newItemGroup?.bigN ?? false;
-    this._levels = newItemGroup?.levels ?? null;
+  public constructor(newAnalysisGroup?: AnalysisGroup) {
+    super(newAnalysisGroup);
+    this._label = newAnalysisGroup?.label ?? 'New Analysis group';
+    this._orderItem = newAnalysisGroup?.orderItem ?? null;
+    this._valueItem = newAnalysisGroup?.valueItem ?? null;
+    this._bigN = newAnalysisGroup?.bigN ?? false;
+    this._levels = newAnalysisGroup?.levels ?? null;
   }
 }

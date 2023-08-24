@@ -1,0 +1,28 @@
+.group-table {
+  border: 1px solid black;
+  border-radius: 4px;
+  border-collapse: collapse;
+  font-size: small;
+  max-width: 250px;
+  width: 250px;
+}
+
+.group-table td:first-child {
+  min-width: 75px;
+}
+
+.group-table td:last-child {
+  max-width: 175px;
+}
+
+.id-holder {
+  display: block;
+  width: calc(100% - 10px);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow-x: hidden;
+}
+
+.group-table input {
+  width: 160px;
+}

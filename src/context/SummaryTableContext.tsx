@@ -5,6 +5,7 @@ import { DatasetJsonItemClass } from '../classes/DatasetJsonItemClass';
 import { AnalysisGroupClass } from '../classes/AnalysisGroup';
 import { WhereClauseConditionClass } from '../classes/WhereClauseConditionClass';
 import { ActionProps, SET_ITEMS, stReducer } from './stReducer';
+import { DataGroupClass } from '../main';
 
 export interface SummaryTableSchema {
   rows: DatasetJsonItemClass[];
@@ -13,7 +14,7 @@ export interface SummaryTableSchema {
   statistics: eStatistic[];
   statisticPosition: 'row' | 'column';
   whereClauseConditions: WhereClauseConditionClass[];
-  groupList: AnalysisGroupClass[];
+  groupList: (AnalysisGroupClass | DataGroupClass)[];
   itemList: DatasetJsonItemClass[];
 }
 

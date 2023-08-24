@@ -31,9 +31,10 @@ export class DataGroupClass extends WhereClauseClass {
     this._whereClause = newWhereClauseId;
   }
 
-  public constructor(newDataGroup: DataGroup) {
-    super();
-    this._valueItem = newDataGroup.valueItem ?? null;
-    this._whereClause = newDataGroup.whereClause ?? null;
+  public constructor(newDataGroup?: DataGroup) {
+    super(newDataGroup);
+    this._label = newDataGroup?.label ?? 'New data group';
+    this._valueItem = newDataGroup?.valueItem ?? null;
+    this._whereClause = newDataGroup?.whereClause ?? null;
   }
 }

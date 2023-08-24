@@ -1,0 +1,13 @@
+.add-group-button {
+  margin-top: 1px;
+  margin-bottom: 1px;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  padding: 0.25rem;
+  opacity: 0.95;
+  text-align: center;
+  white-space: nowrap;
+  border-radius: 8px;
+  border: 1px black solid;
+  font-size: small;
+}
