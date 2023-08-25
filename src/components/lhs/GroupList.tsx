@@ -1,8 +1,8 @@
-import { useContext } from 'react';
-import { SummaryTableContext } from '../../context/SummaryTableContext';
-import { Accordion } from './Accordion';
-import { AddGroupButton } from '../group/AddGroupButton';
-import { GroupTable } from '../group/GroupTable';
+import { useContext } from "react";
+import { SummaryTableContext } from "../../context/SummaryTableContext";
+import { Accordion } from "./Accordion";
+import { AddGroupButton } from "../group/AddGroupButton";
+import { GroupTable } from "../group/GroupTable";
 
 interface GroupListProps {
   id: string;
@@ -13,7 +13,7 @@ export const GroupList = ({ id }: GroupListProps) => {
 
   return (
     <Accordion
-      title='Groups'
+      title="Groups"
       id={id}
     >
       {state.groupList.map((g) => (

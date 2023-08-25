@@ -1,4 +1,4 @@
-import { ReactNode, useState } from 'react';
+import { ReactNode, useState } from "react";
 
 interface AccordionProps {
   id: string;
@@ -11,21 +11,21 @@ export const Accordion = ({ id, title, children }: AccordionProps): ReactNode =>
 
   return (
     <div
-      className='accordion'
+      className="accordion"
       id={id}
     >
       <div
-        className='accordion-title'
+        className="accordion-title"
         onClick={(e) => {
           e.stopPropagation();
           e.preventDefault();
           setExpanded(!expanded);
         }}
       >
-        <div className={`accordion-pre ${expanded ? 'expanded' : 'closed'}`}>{'\u2BC5'}</div>
+        <div className={`accordion-pre ${expanded ? "expanded" : "closed"}`}>{"\u2BC5"}</div>
         <span>{title}</span>
       </div>
-      <div className={`accordion-holder ${expanded ? 'expanded' : 'closed'}`}>{children}</div>
+      <div className={`accordion-holder ${expanded ? "expanded" : "closed"}`}>{children}</div>
     </div>
   );
 };

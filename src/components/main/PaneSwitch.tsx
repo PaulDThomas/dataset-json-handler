@@ -1,7 +1,7 @@
-import { Fragment, useContext, useEffect } from 'react';
-import { DSJContextProps, DSJContext } from '../../context/DSJContextProvider';
-import { SET_PANE } from '../../context/dsjReducer';
-import { Pane, panes } from '../../consts/panes';
+import { Fragment, useContext, useEffect } from "react";
+import { DSJContextProps, DSJContext } from "../../context/DSJContextProvider";
+import { SET_PANE } from "../../context/dsjReducer";
+import { Pane, panes } from "../../consts/panes";
 
 export const PaneSwitch = () => {
   const { state, dispatch } = useContext<DSJContextProps>(DSJContext);
@@ -9,9 +9,9 @@ export const PaneSwitch = () => {
   // Set initial page here after checking window location hash, not as a default
   useEffect(() => {
     if (state.pane === undefined) {
-      if (window.location.hash !== '')
+      if (window.location.hash !== "")
         dispatch({ operation: SET_PANE, pane: window.location.hash.slice(1) as Pane });
-      else dispatch({ operation: SET_PANE, pane: 'items' });
+      else dispatch({ operation: SET_PANE, pane: "items" });
     }
   }, [dispatch, state.pane]);
 
@@ -21,8 +21,8 @@ export const PaneSwitch = () => {
       {panes.map((k, i) => (
         <Fragment key={i}>
           <input
-            type='radio'
-            role='radio'
+            type="radio"
+            role="radio"
             checked={state.pane === k.value}
             onChange={(e) => {
               e.stopPropagation();

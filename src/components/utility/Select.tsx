@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 interface EnumSelectorProps {
   values: { value: string; label: string }[];
@@ -22,14 +22,14 @@ export const Select = ({
     <div
       className={`selector-main ${className}`}
       style={{
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
       }}
     >
       <select
-        className='selector-select'
-        style={{ borderRadius: '4px', ...style }}
+        className="selector-select"
+        style={{ borderRadius: "4px", ...style }}
         value={currentValue}
         onChange={(e) => setSelected && setSelected(e.currentTarget.value)}
       >

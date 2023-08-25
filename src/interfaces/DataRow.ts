@@ -1,4 +1,4 @@
-import { iSimpleTableRow } from '@asup/simple-table';
+import { iSimpleTableRow } from "@asup/simple-table";
 
 /**
  * Interface for data set row

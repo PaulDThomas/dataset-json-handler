@@ -1,10 +1,10 @@
-import { useContext } from 'react';
-import { SummaryTableContext } from '../../context/SummaryTableContext';
-import { UPDATE_GROUP } from '../../context/stReducer';
-import { AnalysisGroupClass, DatasetJsonItemClass } from '../../main';
-import { DebouncedInput } from '../utility/DebouncedInput';
-import './GroupTable.css';
-import { InGroupItem } from './InGroupItem';
+import { useContext } from "react";
+import { SummaryTableContext } from "../../context/SummaryTableContext";
+import { UPDATE_GROUP } from "../../context/stReducer";
+import { AnalysisGroupClass, DatasetJsonItemClass } from "../../main";
+import { DebouncedInput } from "../utility/DebouncedInput";
+import "./GroupTable.css";
+import { InGroupItem } from "./InGroupItem";
 
 interface GroupWindowProperties {
   groupId: string;
@@ -19,12 +19,12 @@ export const GroupTable = ({ groupId }: GroupWindowProperties) => {
   return !group ? (
     <div>Group ${groupId} not found</div>
   ) : (
-    <table className='group-table'>
+    <table className="group-table">
       <tbody>
         <tr>
           <td>Id</td>
           <td>
-            <span className='id-holder'>{groupId}</span>
+            <span className="id-holder">{groupId}</span>
           </td>
         </tr>
         <tr>
@@ -43,7 +43,7 @@ export const GroupTable = ({ groupId }: GroupWindowProperties) => {
           <td>Values from</td>
           <td>
             <InGroupItem
-              id='valuesFrom'
+              id="valuesFrom"
               groupId={group.id}
               item={group.valueItem}
               dropAction={(ret: DatasetJsonItemClass) => {
@@ -58,9 +58,9 @@ export const GroupTable = ({ groupId }: GroupWindowProperties) => {
             <tr>
               <td>Order by</td>
               <td>
-                {' '}
+                {" "}
                 <InGroupItem
-                  id='orderBy'
+                  id="orderBy"
                   groupId={group.id}
                   item={group.orderItem}
                   dropAction={(ret: DatasetJsonItemClass) => {
@@ -74,7 +74,7 @@ export const GroupTable = ({ groupId }: GroupWindowProperties) => {
               <td>Big N?</td>
               <td>
                 <input
-                  type='checkbox'
+                  type="checkbox"
                   checked={group.bigN}
                   onChange={(e) => {
                     e.stopPropagation();

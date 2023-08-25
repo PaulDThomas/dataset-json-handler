@@ -1,5 +1,5 @@
-import { CdiscDatasetJson } from '../main';
-import { FetchReturn } from '../interfaces/FetchReturn';
+import { CdiscDatasetJson } from "../main";
+import { FetchReturn } from "../interfaces/FetchReturn";
 
 export interface datasetJsonReturn extends FetchReturn {
   datasetJson?: CdiscDatasetJson;
@@ -14,7 +14,7 @@ export const getDataFromUrl = async (
     return new Promise((resolve) =>
       resolve({
         success: false,
-        ErrorText: 'getDataFromUrl: Invalid URL',
+        ErrorText: "getDataFromUrl: Invalid URL",
       }),
     );
   }

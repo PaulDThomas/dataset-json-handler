@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { useDebounce } from '../../hooks/useDebounce';
+import { useEffect, useState } from "react";
+import { useDebounce } from "../../hooks/useDebounce";
 
 interface DebouncedInputProps {
   value: string;
@@ -24,8 +24,8 @@ export const DebouncedInput = ({
 
   return (
     <input
-      type='text'
-      style={{ border: '1px solid black' }}
+      type="text"
+      style={{ border: "1px solid black" }}
       value={currentValue}
       onChange={(e) => {
         e.stopPropagation();

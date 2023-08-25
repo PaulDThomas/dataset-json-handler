@@ -1,15 +1,15 @@
-import { iSimpleTableRow } from '@asup/simple-table';
+import { iSimpleTableRow } from "@asup/simple-table";
 
 /**
  * Item type
  */
 export enum eItemType {
-  string = 'string',
-  integer = 'integer',
-  float = 'float',
-  date = 'Date',
-  time = 'Time',
-  datetime = 'DateTime',
+  string = "string",
+  integer = "integer",
+  float = "float",
+  date = "Date",
+  time = "Time",
+  datetime = "DateTime",
 }
 
 /**
@@ -39,7 +39,7 @@ export interface iDatasetJsonItem extends iSimpleTableRow {
 }
 
 export class DatasetJsonItemClass {
-  protected _OID = '';
+  protected _OID = "";
 
   /**
    * Unique identifier
@@ -47,14 +47,14 @@ export class DatasetJsonItemClass {
   get OID() {
     return this._OID;
   }
-  protected _name = '';
+  protected _name = "";
   /**
    * Item name
    */
   get name() {
     return this._name;
   }
-  protected _label = '';
+  protected _label = "";
   /**
    * Item label
    */

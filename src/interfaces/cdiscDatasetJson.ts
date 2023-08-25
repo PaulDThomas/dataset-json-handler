@@ -1,4 +1,4 @@
-import { eItemType } from '../classes/DatasetJsonItemClass';
+import { eItemType } from "../classes/DatasetJsonItemClass";
 
 /**
  * CDISC implementation of Dataset JSON typescript interface

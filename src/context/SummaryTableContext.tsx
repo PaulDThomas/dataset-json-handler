@@ -1,18 +1,18 @@
-import { eStatistic } from 'enums/eStatistic';
-import { createContext, useEffect, useReducer } from 'react';
-import { DatasetJsonClass } from '../classes/DatasetJsonClass';
-import { DatasetJsonItemClass } from '../classes/DatasetJsonItemClass';
-import { AnalysisGroupClass } from '../classes/AnalysisGroup';
-import { WhereClauseConditionClass } from '../classes/WhereClauseConditionClass';
-import { ActionProps, SET_ITEMS, stReducer } from './stReducer';
-import { DataGroupClass } from '../main';
+import { eStatistic } from "enums/eStatistic";
+import { createContext, useEffect, useReducer } from "react";
+import { DatasetJsonClass } from "../classes/DatasetJsonClass";
+import { DatasetJsonItemClass } from "../classes/DatasetJsonItemClass";
+import { AnalysisGroupClass } from "../classes/AnalysisGroup";
+import { WhereClauseConditionClass } from "../classes/WhereClauseConditionClass";
+import { ActionProps, SET_ITEMS, stReducer } from "./stReducer";
+import { DataGroupClass } from "../main";
 
 export interface SummaryTableSchema {
   rows: DatasetJsonItemClass[];
   columns: DatasetJsonItemClass[];
   target?: DatasetJsonItemClass;
   statistics: eStatistic[];
-  statisticPosition: 'row' | 'column';
+  statisticPosition: "row" | "column";
   whereClauseConditions: WhereClauseConditionClass[];
   groupList: (AnalysisGroupClass | DataGroupClass)[];
   itemList: DatasetJsonItemClass[];
@@ -22,7 +22,7 @@ const initialState: SummaryTableSchema = {
   rows: [],
   columns: [],
   statistics: [],
-  statisticPosition: 'column',
+  statisticPosition: "column",
   whereClauseConditions: [],
   groupList: [],
   itemList: [],
@@ -65,4 +65,4 @@ export const SummaryTableContextProvider = ({
   );
 };
 
-SummaryTableContextProvider.displayName = 'SummaryTableContextProvider';
+SummaryTableContextProvider.displayName = "SummaryTableContextProvider";

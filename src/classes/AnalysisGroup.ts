@@ -1,5 +1,5 @@
-import { DatasetJsonItemClass } from './DatasetJsonItemClass';
-import { WhereClauseClass } from './WhereClauseClass';
+import { DatasetJsonItemClass } from "./DatasetJsonItemClass";
+import { WhereClauseClass } from "./WhereClauseClass";
 
 /** Analysis group parameters */
 export interface AnalysisGroup {
@@ -67,7 +67,7 @@ export class AnalysisGroupClass extends WhereClauseClass {
    */
   public constructor(newAnalysisGroup?: AnalysisGroup) {
     super(newAnalysisGroup);
-    this._label = newAnalysisGroup?.label ?? 'New Analysis group';
+    this._label = newAnalysisGroup?.label ?? "New Analysis group";
     this._orderItem = newAnalysisGroup?.orderItem ?? null;
     this._valueItem = newAnalysisGroup?.valueItem ?? null;
     this._bigN = newAnalysisGroup?.bigN ?? false;

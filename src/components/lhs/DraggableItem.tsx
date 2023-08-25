@@ -1,8 +1,8 @@
-import { ContextMenuHandler, ContextWindow } from '@asup/context-menu';
-import React, { useContext, useMemo, useState } from 'react';
-import { SummaryTableContext } from '../../context/SummaryTableContext';
-import './DraggableItem.css';
-import { ItemProperties } from '../utility/ItemProperties';
+import { ContextMenuHandler, ContextWindow } from "@asup/context-menu";
+import React, { useContext, useMemo, useState } from "react";
+import { SummaryTableContext } from "../../context/SummaryTableContext";
+import "./DraggableItem.css";
+import { ItemProperties } from "../utility/ItemProperties";
 
 interface DraggableItemProps {
   id: string;
@@ -18,16 +18,16 @@ export const DraggableItem = ({ id, oid }: DraggableItemProps): JSX.Element => {
 
   const handleDragStart = (e: React.DragEvent) => {
     if (item) {
-      console.log('Drag start for ' + item.name);
+      console.log("Drag start for " + item.name);
       setIsBeingDragged(true);
-      e.dataTransfer.setData('application/datasetjsonitem', item.toString);
+      e.dataTransfer.setData("application/datasetjsonitem", item.toString);
     }
   };
 
   const handleDragEnd = (e: React.DragEvent) => {
     if (item) {
       console.log(e);
-      console.log('Drag end for ' + item.name);
+      console.log("Drag end for " + item.name);
       setIsBeingDragged(false);
     }
   };
@@ -35,11 +35,11 @@ export const DraggableItem = ({ id, oid }: DraggableItemProps): JSX.Element => {
   return (
     <>
       <ContextMenuHandler
-        menuItems={item ? [{ label: 'Properties', action: () => setShowProperties(true) }] : []}
+        menuItems={item ? [{ label: "Properties", action: () => setShowProperties(true) }] : []}
       >
         <div
           id={id}
-          className={`item-holder ${isBeingDragged ? 'being-dragged' : ''}`}
+          className={`item-holder ${isBeingDragged ? "being-dragged" : ""}`}
           draggable
           onDragStart={handleDragStart}
           onDragEnd={handleDragEnd}
@@ -49,7 +49,7 @@ export const DraggableItem = ({ id, oid }: DraggableItemProps): JSX.Element => {
       </ContextMenuHandler>
       {item && (
         <ContextWindow
-          id={'item-properties-window'}
+          id={"item-properties-window"}
           visible={showProperties}
           title={`${item?.label} properties`}
           onClose={() => setShowProperties(false)}
@@ -61,4 +61,4 @@ export const DraggableItem = ({ id, oid }: DraggableItemProps): JSX.Element => {
   );
 };
 
-DraggableItem.displayName = 'DraggableItem';
+DraggableItem.displayName = "DraggableItem";

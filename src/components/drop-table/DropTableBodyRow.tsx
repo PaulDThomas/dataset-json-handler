@@ -1,6 +1,6 @@
-import { useContext } from 'react';
-import './DropTableBodyRow.css';
-import { SummaryTableContext } from '../../context/SummaryTableContext';
+import { useContext } from "react";
+import "./DropTableBodyRow.css";
+import { SummaryTableContext } from "../../context/SummaryTableContext";
 
 interface DropTableBodyRowProps {
   rowIndex: number;
@@ -14,8 +14,8 @@ export const DropTableBodyRow = ({ rowIndex: index }: DropTableBodyRowProps): JS
       {state.columns.map((item, ci) => (
         <td key={item.OID ?? ci}>
           <div
-            className='data-cell'
-            style={{ textAlign: 'center' }}
+            className="data-cell"
+            style={{ textAlign: "center" }}
           >
             {state.rows[index].label}
             <br />

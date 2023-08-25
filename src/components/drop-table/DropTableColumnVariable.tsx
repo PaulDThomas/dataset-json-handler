@@ -1,12 +1,12 @@
-import { ContextMenuHandler } from '@asup/context-menu';
-import { useContext, useMemo } from 'react';
-import { DatasetJsonItemClass } from '../../classes/DatasetJsonItemClass';
-import { SummaryTableContext } from '../../context/SummaryTableContext';
-import { MOVE_COLUMN_VARIABLE, REMOVE_COLUMN_VARIABLE } from '../../context/stReducer';
-import { DropEdges } from '../drop-targets/DropEdges';
-import { DraggableItem } from '../lhs/DraggableItem';
-import { StatisticHolder } from '../lhs/StatisticHolder';
-import './DropTableColumnVariable.css';
+import { ContextMenuHandler } from "@asup/context-menu";
+import { useContext, useMemo } from "react";
+import { DatasetJsonItemClass } from "../../classes/DatasetJsonItemClass";
+import { SummaryTableContext } from "../../context/SummaryTableContext";
+import { MOVE_COLUMN_VARIABLE, REMOVE_COLUMN_VARIABLE } from "../../context/stReducer";
+import { DropEdges } from "../drop-targets/DropEdges";
+import { DraggableItem } from "../lhs/DraggableItem";
+import { StatisticHolder } from "../lhs/StatisticHolder";
+import "./DropTableColumnVariable.css";
 
 interface DropTableHeaderVariableProps {
   id: string;
@@ -23,16 +23,16 @@ export const DropTableColumnVariable = ({
   return (
     <th
       key={item.name}
-      style={{ position: 'relative' }}
+      style={{ position: "relative" }}
     >
       <ContextMenuHandler
         menuItems={[
           {
-            label: 'Remove',
+            label: "Remove",
             action: () => dispatch({ operation: REMOVE_COLUMN_VARIABLE, item }),
           },
         ]}
-        style={{ width: '100%', height: '100%' }}
+        style={{ width: "100%", height: "100%" }}
       >
         <DropEdges
           id={id}
@@ -46,11 +46,11 @@ export const DropTableColumnVariable = ({
               id={`${id}-column-header-${index}`}
               oid={item.OID}
             />
-            {state.statisticPosition === 'column' && (
+            {state.statisticPosition === "column" && (
               <div
                 style={{
-                  display: 'flex',
-                  flexDirection: 'row',
+                  display: "flex",
+                  flexDirection: "row",
                 }}
               >
                 {state.statistics.map((s, i) => (

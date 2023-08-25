@@ -1,5 +1,5 @@
-import { SummaryTableSchema } from '../context/SummaryTableContext';
-import { ActionProps, UPDATE_WHERE_CLAUSE_CONDITION } from '../context/stReducer';
+import { SummaryTableSchema } from "../context/SummaryTableContext";
+import { ActionProps, UPDATE_WHERE_CLAUSE_CONDITION } from "../context/stReducer";
 
 export function updateWhereClauseCondition(action: ActionProps, state: SummaryTableSchema) {
   if (action.whereClauseCondition === undefined)
@@ -7,7 +7,7 @@ export function updateWhereClauseCondition(action: ActionProps, state: SummaryTa
   else {
     let newState = { ...state };
     const ix = state.whereClauseConditions.findIndex(
-      (w) => w.id === (action.whereClauseCondition?.id ?? ''),
+      (w) => w.id === (action.whereClauseCondition?.id ?? ""),
     );
     if (ix === -1)
       newState = {

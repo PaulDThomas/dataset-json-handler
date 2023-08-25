@@ -1,4 +1,4 @@
-import { DatasetJsonItemClass } from '../classes/DatasetJsonItemClass';
+import { DatasetJsonItemClass } from "../classes/DatasetJsonItemClass";
 
 /**
  *  Summary group
@@ -20,7 +20,7 @@ export interface SummaryGroup {
     /**
      * Array of values to be grouped, 'All' for every value including missing, 'AllExMissing' or every value exclusing missing
      */
-    groupVariableValues: (string | number | Date)[] | 'All' | 'AllExMissing';
+    groupVariableValues: (string | number | Date)[] | "All" | "AllExMissing";
     /**
      * Pooled group order
      */

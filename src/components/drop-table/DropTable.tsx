@@ -1,9 +1,9 @@
-import { useContext } from 'react';
-import { SummaryTableContext } from '../../context/SummaryTableContext';
-import './DropTable.css';
-import { DropTableColumnVariable } from './DropTableColumnVariable';
-import { DropTableRowVariable } from './DropTableRowVariable';
-import { DropTableTopLeftCell } from './DropTableTopLeftCell';
+import { useContext } from "react";
+import { SummaryTableContext } from "../../context/SummaryTableContext";
+import "./DropTable.css";
+import { DropTableColumnVariable } from "./DropTableColumnVariable";
+import { DropTableRowVariable } from "./DropTableRowVariable";
+import { DropTableTopLeftCell } from "./DropTableTopLeftCell";
 
 interface DropTableProps {
   id: string;
@@ -13,10 +13,10 @@ export const DropTable = ({ id }: DropTableProps): JSX.Element => {
   const { state } = useContext(SummaryTableContext);
 
   return (
-    <div className='drop-table-holder'>
+    <div className="drop-table-holder">
       <table
         id={id}
-        className='drop-table'
+        className="drop-table"
       >
         <thead>
           <tr>

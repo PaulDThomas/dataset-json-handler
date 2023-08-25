@@ -1,6 +1,6 @@
-import { DatasetJsonItemClass } from '../../main';
-import { DropTarget } from '../drop-targets/DropTarget';
-import { DraggableItem } from '../lhs/DraggableItem';
+import { DatasetJsonItemClass } from "../../main";
+import { DropTarget } from "../drop-targets/DropTarget";
+import { DraggableItem } from "../lhs/DraggableItem";
 
 interface InGroupItemProps {
   id: string;
@@ -12,16 +12,16 @@ interface InGroupItemProps {
 export const InGroupItem = ({ id, groupId, item, dropAction }: InGroupItemProps) => {
   return (
     <div
-      className='itemholder-main'
+      className="itemholder-main"
       style={{
-        position: 'relative',
-        width: '166px',
-        height: '40px',
+        position: "relative",
+        width: "166px",
+        height: "40px",
       }}
     >
       <DropTarget
         id={`groupitem-${id}-droptarget`}
-        type='center'
+        type="center"
         dropAction={(ret) =>
           ret.data instanceof DatasetJsonItemClass && dropAction(ret.data as DatasetJsonItemClass)
         }
@@ -34,7 +34,7 @@ export const InGroupItem = ({ id, groupId, item, dropAction }: InGroupItemProps)
         ) : (
           <div
             id={`groupitem-${groupId}-${id}`}
-            className='item-holder'
+            className="item-holder"
           />
         )}
       </DropTarget>

@@ -1,5 +1,5 @@
-import { SummaryTableSchema } from '../context/SummaryTableContext';
-import { ActionProps, UPDATE_GROUP } from '../context/stReducer';
+import { SummaryTableSchema } from "../context/SummaryTableContext";
+import { ActionProps, UPDATE_GROUP } from "../context/stReducer";
 
 export function updateGroup(action: ActionProps, state: SummaryTableSchema) {
   if (action.group === undefined) throw `${UPDATE_GROUP}: No group`;

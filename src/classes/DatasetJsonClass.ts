@@ -1,13 +1,13 @@
-import { iSimpleTableField, iSimpleTableRow, simpleTableSortFn } from '@asup/simple-table';
-import { DataRow } from '../interfaces/DataRow';
-import { CdiscDatasetJson } from '../interfaces/CdiscDatasetJson';
-import { DatasetJsonItemClass, iDatasetJsonItem } from './DatasetJsonItemClass';
+import { iSimpleTableField, iSimpleTableRow, simpleTableSortFn } from "@asup/simple-table";
+import { DataRow } from "../interfaces/DataRow";
+import { CdiscDatasetJson } from "../interfaces/CdiscDatasetJson";
+import { DatasetJsonItemClass, iDatasetJsonItem } from "./DatasetJsonItemClass";
 
 /**
  * Typescript class for a CDISC data set JSON object
  */
 export class DatasetJsonClass {
-  protected _errorText = '';
+  protected _errorText = "";
   /**
    * Error text after internal error
    */
@@ -15,7 +15,7 @@ export class DatasetJsonClass {
     return this._errorText;
   }
 
-  protected _studyOID = '';
+  protected _studyOID = "";
   /**
    * studyOID attibute
    */
@@ -26,16 +26,16 @@ export class DatasetJsonClass {
    * Sets value of studyOID
    */
   set studyOID(newValue: string) {
-    if (newValue !== '') {
+    if (newValue !== "") {
       this._studyOID = newValue;
     }
   }
-  protected _metaDataVersionOID = 'CDISC.ADaM.2.1';
+  protected _metaDataVersionOID = "CDISC.ADaM.2.1";
   get metaDataVersionOID() {
     return this._metaDataVersionOID;
   }
 
-  protected _name = '';
+  protected _name = "";
   /**
    * Data set name
    */
@@ -46,12 +46,12 @@ export class DatasetJsonClass {
    * Data set name
    */
   set name(newValue: string) {
-    if (newValue !== '') {
+    if (newValue !== "") {
       this._name = newValue;
     }
   }
 
-  protected _label = '';
+  protected _label = "";
   /**
    * Data set label
    */
@@ -62,7 +62,7 @@ export class DatasetJsonClass {
    * Data set label
    */
   set label(newValue: string) {
-    if (newValue !== '') {
+    if (newValue !== "") {
       this._label = newValue;
     }
   }
@@ -98,7 +98,7 @@ export class DatasetJsonClass {
           ...item.data,
           sortFn: simpleTableSortFn,
           searchFn:
-            item.type === 'string'
+            item.type === "string"
               ? (row, text) =>
                   (row[item.name] as string).toLocaleLowerCase().includes(text.toLocaleLowerCase())
               : undefined,
@@ -112,7 +112,7 @@ export class DatasetJsonClass {
    */
   public addItem(newItem: DatasetJsonItemClass | iDatasetJsonItem): boolean {
     if (this.items.map((i) => i.name).includes(newItem.name)) {
-      this._errorText = 'Item name already exists';
+      this._errorText = "Item name already exists";
       return false;
     }
     this._items.push(
@@ -181,7 +181,7 @@ export class DatasetJsonClass {
       this._dataRows[ix].__isDeleted = true;
       return true;
     } else {
-      this._errorText = 'Row number not found';
+      this._errorText = "Row number not found";
       return false;
     }
   }

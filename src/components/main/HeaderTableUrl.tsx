@@ -1,10 +1,10 @@
-import { useCallback, useContext, useEffect, useState } from 'react';
-import { DSJContext, DSJContextProps } from '../../context/DSJContextProvider';
-import { LOAD_DSJ } from '../../context/dsjReducer';
-import { getDataFromUrl } from '../../functions/getDataFromUrl';
-import { loadWrapper } from '../../functions/loadWrapper';
-import { useDebounce } from '../../hooks/useDebounce';
-import { RequestStatus } from '../../interfaces/RequestStatus';
+import { useCallback, useContext, useEffect, useState } from "react";
+import { DSJContext, DSJContextProps } from "../../context/DSJContextProvider";
+import { LOAD_DSJ } from "../../context/dsjReducer";
+import { getDataFromUrl } from "../../functions/getDataFromUrl";
+import { loadWrapper } from "../../functions/loadWrapper";
+import { useDebounce } from "../../hooks/useDebounce";
+import { RequestStatus } from "../../interfaces/RequestStatus";
 
 export const HeaderTableUrl = () => {
   const { state, dispatch } = useContext<DSJContextProps>(DSJContext);
@@ -39,8 +39,8 @@ export const HeaderTableUrl = () => {
       <td>Data url</td>
       <td colSpan={4}>
         <input
-          type='text'
-          style={{ width: 'calc(100% - 0.5rem)', border: '1px solid black' }}
+          type="text"
+          style={{ width: "calc(100% - 0.5rem)", border: "1px solid black" }}
           value={rawUrl}
           onChange={(e) => setRawUrl(e.currentTarget.value)}
         />

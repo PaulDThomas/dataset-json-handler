@@ -1,5 +1,5 @@
-import { DatasetJsonItemClass } from './DatasetJsonItemClass';
-import { WhereClauseClass } from './WhereClauseClass';
+import { DatasetJsonItemClass } from "./DatasetJsonItemClass";
+import { WhereClauseClass } from "./WhereClauseClass";
 
 export interface DataGroup {
   /** Unique id */
@@ -33,7 +33,7 @@ export class DataGroupClass extends WhereClauseClass {
 
   public constructor(newDataGroup?: DataGroup) {
     super(newDataGroup);
-    this._label = newDataGroup?.label ?? 'New data group';
+    this._label = newDataGroup?.label ?? "New data group";
     this._valueItem = newDataGroup?.valueItem ?? null;
     this._whereClause = newDataGroup?.whereClause ?? null;
   }

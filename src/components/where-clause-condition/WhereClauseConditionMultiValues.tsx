@@ -1,7 +1,7 @@
-import { useContext } from 'react';
-import { SummaryTableContext } from '../../context/SummaryTableContext';
-import { UPDATE_WHERE_CLAUSE_CONDITION } from '../../context/stReducer';
-import { WhereClauseConditionProps } from './WhereClauseConditionRow';
+import { useContext } from "react";
+import { SummaryTableContext } from "../../context/SummaryTableContext";
+import { UPDATE_WHERE_CLAUSE_CONDITION } from "../../context/stReducer";
+import { WhereClauseConditionProps } from "./WhereClauseConditionRow";
 
 export const WhereClauseConditionMultiValues = ({ index, canEdit }: WhereClauseConditionProps) => {
   const { state, dispatch } = useContext(SummaryTableContext);
@@ -13,14 +13,14 @@ export const WhereClauseConditionMultiValues = ({ index, canEdit }: WhereClauseC
       value={
         whereClauseCondition.filteredItemValues &&
         whereClauseCondition.filteredItemValues.length > 0
-          ? whereClauseCondition.filteredItemValues.join('\n').toString()
-          : ''
+          ? whereClauseCondition.filteredItemValues.join("\n").toString()
+          : ""
       }
       onChange={
         canEdit
           ? (e) => {
               whereClauseCondition.filteredItemValues = [
-                ...e.currentTarget.value.trim().split('\n'),
+                ...e.currentTarget.value.trim().split("\n"),
               ];
               dispatch({
                 operation: UPDATE_WHERE_CLAUSE_CONDITION,

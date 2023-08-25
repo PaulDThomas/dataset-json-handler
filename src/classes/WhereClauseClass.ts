@@ -8,13 +8,13 @@ export interface WhereClause {
 }
 
 export class WhereClauseClass {
-  protected _id = '';
+  protected _id = "";
   /** Unique identifier */
   get id() {
     return this._id;
   }
 
-  protected _label = '';
+  protected _label = "";
   /** A short informative description that may be used for display. */
   get label() {
     return this._label;
@@ -61,11 +61,11 @@ export class WhereClauseClass {
 
   public constructor(newWhereClause?: WhereClause) {
     this._id = newWhereClause?.id ?? crypto.randomUUID();
-    this._label = newWhereClause?.label ?? 'New where clause';
+    this._label = newWhereClause?.label ?? "New where clause";
     this._level = newWhereClause?.level ?? 1;
     this._order = newWhereClause?.order ?? 1;
     if (newWhereClause?.conditionId && newWhereClause.compoundExpressionId) {
-      throw 'Where clause can only have one condition or compound expression';
+      throw "Where clause can only have one condition or compound expression";
     }
     this._condition = newWhereClause?.conditionId ?? null;
     this._compoundExpression = newWhereClause?.compoundExpressionId ?? null;

@@ -1,22 +1,22 @@
-import { useContext } from 'react';
-import { DSJContext, DSJContextProps } from '../../context/DSJContextProvider';
-import { HeaderTableUrl } from './HeaderTableUrl';
-import { PaneSwitch } from './PaneSwitch';
+import { useContext } from "react";
+import { DSJContext, DSJContextProps } from "../../context/DSJContextProvider";
+import { HeaderTableUrl } from "./HeaderTableUrl";
+import { PaneSwitch } from "./PaneSwitch";
 
 export const HeaderTable = () => {
   const { state } = useContext<DSJContextProps>(DSJContext);
 
   return (
-    <div style={{ height: '140px' }}>
+    <div style={{ height: "140px" }}>
       <table
-        id='header-table'
-        style={{ borderCollapse: 'collapse', border: '1px dotted black', width: '100%' }}
+        id="header-table"
+        style={{ borderCollapse: "collapse", border: "1px dotted black", width: "100%" }}
       >
         <tbody>
           <HeaderTableUrl />
           <tr>
-            <td width={'200px'}>studyOID</td>
-            <td width={'350px'}>{state.datasetJson?.studyOID}</td>
+            <td width={"200px"}>studyOID</td>
+            <td width={"350px"}>{state.datasetJson?.studyOID}</td>
             <td rowSpan={4}></td>
             <td rowSpan={4}>
               <PaneSwitch />

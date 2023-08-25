@@ -1,12 +1,12 @@
-import { ContextMenuHandler } from '@asup/context-menu';
-import { useContext, useMemo } from 'react';
-import { DatasetJsonItemClass } from '../../classes/DatasetJsonItemClass';
-import { SummaryTableContext } from '../../context/SummaryTableContext';
-import { MOVE_ROW_VARIABLE, REMOVE_ROW_VARIABLE } from '../../context/stReducer';
-import { DropEdges } from '../drop-targets/DropEdges';
-import { DraggableItem } from '../lhs/DraggableItem';
-import { DropTableBodyRow } from './DropTableBodyRow';
-import './DropTableRowVariable.css';
+import { ContextMenuHandler } from "@asup/context-menu";
+import { useContext, useMemo } from "react";
+import { DatasetJsonItemClass } from "../../classes/DatasetJsonItemClass";
+import { SummaryTableContext } from "../../context/SummaryTableContext";
+import { MOVE_ROW_VARIABLE, REMOVE_ROW_VARIABLE } from "../../context/stReducer";
+import { DropEdges } from "../drop-targets/DropEdges";
+import { DraggableItem } from "../lhs/DraggableItem";
+import { DropTableBodyRow } from "./DropTableBodyRow";
+import "./DropTableRowVariable.css";
 
 interface DropTableHeaderVariableProps {
   id: string;
@@ -19,11 +19,11 @@ export const DropTableRowVariable = ({ id, index }: DropTableHeaderVariableProps
 
   return (
     <tr key={item.name}>
-      <td style={{ position: 'relative' }}>
+      <td style={{ position: "relative" }}>
         <ContextMenuHandler
           menuItems={[
             {
-              label: 'Remove',
+              label: "Remove",
               action: () => dispatch({ operation: REMOVE_ROW_VARIABLE, item }),
             },
           ]}

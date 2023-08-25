@@ -1,8 +1,8 @@
-import { useContext } from 'react';
-import { SummaryTableContext } from '../../context/SummaryTableContext';
-import { UPDATE_WHERE_CLAUSE_CONDITION } from '../../context/stReducer';
-import { eItemType } from '../../classes/DatasetJsonItemClass';
-import { WhereClauseConditionProps } from './WhereClauseConditionRow';
+import { useContext } from "react";
+import { SummaryTableContext } from "../../context/SummaryTableContext";
+import { UPDATE_WHERE_CLAUSE_CONDITION } from "../../context/stReducer";
+import { eItemType } from "../../classes/DatasetJsonItemClass";
+import { WhereClauseConditionProps } from "./WhereClauseConditionRow";
 
 export const WhereClauseConditionSingleValue = ({ index, canEdit }: WhereClauseConditionProps) => {
   const { state, dispatch } = useContext(SummaryTableContext);
@@ -11,12 +11,12 @@ export const WhereClauseConditionSingleValue = ({ index, canEdit }: WhereClauseC
   if (!whereClauseCondition || !whereClauseCondition.item) return <></>;
   return (
     <input
-      style={{ borderRadius: '4px', borderWidth: '1px' }}
+      style={{ borderRadius: "4px", borderWidth: "1px" }}
       value={
         whereClauseCondition.filteredItemValues &&
         whereClauseCondition.filteredItemValues.length > 0
           ? whereClauseCondition.filteredItemValues[0].toString()
-          : ''
+          : ""
       }
       type={
         [eItemType.date, eItemType.datetime, eItemType.time].includes(

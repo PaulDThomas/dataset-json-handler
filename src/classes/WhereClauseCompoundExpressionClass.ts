@@ -1,8 +1,8 @@
-export type Operator = 'and' | 'or' | 'not';
+export type Operator = "and" | "or" | "not";
 export const Operators = [
-  { value: 'and', label: 'AND' },
-  { value: 'or', label: 'OR' },
-  { value: 'not', label: 'NOT' },
+  { value: "and", label: "AND" },
+  { value: "or", label: "OR" },
+  { value: "not", label: "NOT" },
 ];
 
 export interface WhereClauseCompoundExpression {
@@ -12,7 +12,7 @@ export interface WhereClauseCompoundExpression {
 }
 
 export class WhereClauseCompoundExpressionClass {
-  protected _id = '';
+  protected _id = "";
   /** Unique identifier */
   get id() {
     return this._id;

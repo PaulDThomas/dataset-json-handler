@@ -1,7 +1,7 @@
-import { ContextWindow } from '@asup/context-menu';
-import { useState } from 'react';
-import ReactJson from 'react-json-view';
-import './JsonWindowButton.css';
+import { ContextWindow } from "@asup/context-menu";
+import { useState } from "react";
+import ReactJson from "react-json-view";
+import "./JsonWindowButton.css";
 
 interface JsonWindowButtonProps {
   id: string;
@@ -20,7 +20,7 @@ export const JsonWindowButton = ({ id, title, object }: JsonWindowButtonProps) =
           e.stopPropagation();
           setShowWindow(!showWindow);
         }}
-        className='json-window-button'
+        className="json-window-button"
       >
         ⓘ
       </button>
@@ -29,7 +29,7 @@ export const JsonWindowButton = ({ id, title, object }: JsonWindowButtonProps) =
         visible={showWindow}
         title={title}
         onClose={() => setShowWindow(false)}
-        style={{ maxHeight: '75vh', maxWidth: '50vw', width: '400px', height: '300px' }}
+        style={{ maxHeight: "75vh", maxWidth: "50vw", width: "400px", height: "300px" }}
       >
         <ReactJson src={object} />
       </ContextWindow>

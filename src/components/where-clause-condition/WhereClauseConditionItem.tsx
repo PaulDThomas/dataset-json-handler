@@ -1,10 +1,10 @@
-import { useContext } from 'react';
-import { DatasetJsonItemClass } from '../../classes/DatasetJsonItemClass';
-import { WhereClauseConditionClass } from '../../classes/WhereClauseConditionClass';
-import { SummaryTableContext } from '../../context/SummaryTableContext';
-import { UPDATE_WHERE_CLAUSE_CONDITION } from '../../context/stReducer';
-import { DropTarget } from '../drop-targets/DropTarget';
-import { DraggableItem } from '../lhs/DraggableItem';
+import { useContext } from "react";
+import { DatasetJsonItemClass } from "../../classes/DatasetJsonItemClass";
+import { WhereClauseConditionClass } from "../../classes/WhereClauseConditionClass";
+import { SummaryTableContext } from "../../context/SummaryTableContext";
+import { UPDATE_WHERE_CLAUSE_CONDITION } from "../../context/stReducer";
+import { DropTarget } from "../drop-targets/DropTarget";
+import { DraggableItem } from "../lhs/DraggableItem";
 
 interface WhereClauseConditionItemProps {
   index: number;
@@ -15,16 +15,16 @@ export const WhereClauseConditionItem = ({ index }: WhereClauseConditionItemProp
 
   return (
     <div
-      className='itemholder-main'
+      className="itemholder-main"
       style={{
-        position: 'relative',
-        width: '166px',
-        height: '40px',
+        position: "relative",
+        width: "166px",
+        height: "40px",
       }}
     >
       <DropTarget
         id={`whereclauseconditionitem-${index}-droptarget`}
-        type='center'
+        type="center"
         dropAction={(ret) => {
           if (ret.data instanceof DatasetJsonItemClass) {
             dispatch({
@@ -47,7 +47,7 @@ export const WhereClauseConditionItem = ({ index }: WhereClauseConditionItemProp
         ) : (
           <div
             id={`whereclauseconditionitem-${index}`}
-            className='item-holder'
+            className="item-holder"
           />
         )}
       </DropTarget>

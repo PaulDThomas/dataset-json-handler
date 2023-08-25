@@ -1,6 +1,6 @@
-import { FetchReturn } from '../interfaces/FetchReturn';
-import { RequestStatus } from '../interfaces/RequestStatus';
-import _ from 'lodash';
+import { FetchReturn } from "../interfaces/FetchReturn";
+import { RequestStatus } from "../interfaces/RequestStatus";
+import _ from "lodash";
 
 export const loadWrapper = async <T1 extends FetchReturn, T2>(
   loadFunction: (target: T2, controller: AbortController) => Promise<T1>,
@@ -37,7 +37,7 @@ export const loadWrapper = async <T1 extends FetchReturn, T2>(
     } else {
       console.warn(`Failed to load: ${response.ErrorText}`);
       // Do nothing on a cancellation error
-      if (response.ErrorText !== 'Request cancelled') {
+      if (response.ErrorText !== "Request cancelled") {
         setStatus({
           requesting: false,
           error: true,

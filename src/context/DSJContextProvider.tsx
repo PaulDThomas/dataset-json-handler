@@ -1,5 +1,5 @@
-import { Dispatch, ReactNode, createContext, useReducer } from 'react';
-import { DsjActionProps, dsjReducer, dsjState } from './dsjReducer';
+import { Dispatch, ReactNode, createContext, useReducer } from "react";
+import { DsjActionProps, dsjReducer, dsjState } from "./dsjReducer";
 
 export interface DSJContextProps {
   state: dsjState;
@@ -8,7 +8,7 @@ export interface DSJContextProps {
 
 const defaultContext: dsjState = {
   rawUrl:
-    'https://raw.githubusercontent.com/cdisc-org/DataExchange-DatasetJson/master/examples/adam/adsl.json',
+    "https://raw.githubusercontent.com/cdisc-org/DataExchange-DatasetJson/master/examples/adam/adsl.json",
   datasetJson: null,
   pane: undefined,
 };

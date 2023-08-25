@@ -1,6 +1,6 @@
-import { DndData } from 'interfaces/DndData';
-import './DropEdges.css';
-import { DropTarget } from './DropTarget';
+import { DndData } from "interfaces/DndData";
+import "./DropEdges.css";
+import { DropTarget } from "./DropTarget";
 
 interface DropEdgesProps {
   id: string;
@@ -24,28 +24,28 @@ export const DropEdges = ({
       {onDropTop && (
         <DropTarget
           id={`${id}-drop-top`}
-          type='top'
+          type="top"
           dropAction={onDropTop}
         />
       )}
       {onDropLeft && (
         <DropTarget
           id={`${id}-drop-left`}
-          type='left'
+          type="left"
           dropAction={onDropLeft}
         />
-      )}{' '}
+      )}{" "}
       {onDropBottom && (
         <DropTarget
           id={`${id}-drop-bottom`}
-          type='bottom'
+          type="bottom"
           dropAction={onDropBottom}
         />
       )}
       {onDropRight && (
         <DropTarget
           id={`${id}-drop-right`}
-          type='right'
+          type="right"
           dropAction={onDropRight}
         />
       )}

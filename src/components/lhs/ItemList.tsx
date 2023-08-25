@@ -1,8 +1,8 @@
-import { useContext } from 'react';
-import { SummaryTableContext } from '../../context/SummaryTableContext';
-import { Accordion } from './Accordion';
-import './Accordion.css';
-import { DraggableItem } from './DraggableItem';
+import { useContext } from "react";
+import { SummaryTableContext } from "../../context/SummaryTableContext";
+import { Accordion } from "./Accordion";
+import "./Accordion.css";
+import { DraggableItem } from "./DraggableItem";
 
 interface ItemListProps {
   id: string;
@@ -13,7 +13,7 @@ export const ItemList = ({ id }: ItemListProps) => {
 
   return (
     <Accordion
-      title='Items'
+      title="Items"
       id={id}
     >
       {state.itemList
@@ -34,4 +34,4 @@ export const ItemList = ({ id }: ItemListProps) => {
   );
 };
 
-ItemList.displayName = 'ItemList';
+ItemList.displayName = "ItemList";

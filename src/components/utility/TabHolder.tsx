@@ -1,5 +1,5 @@
-import { useContext } from 'react';
-import { DSJContext } from '../../context/DSJContextProvider';
+import { useContext } from "react";
+import { DSJContext } from "../../context/DSJContextProvider";
 
 interface TabHolderProps {
   id?: string;
@@ -10,21 +10,21 @@ interface TabHolderProps {
   }[];
 }
 
-export const TabHolder = ({ id = 'tab', tabList }: TabHolderProps) => {
+export const TabHolder = ({ id = "tab", tabList }: TabHolderProps) => {
   const { state } = useContext(DSJContext);
   return (
     <div
-      className='tab-holder'
+      className="tab-holder"
       style={{
-        background: 'white',
-        height: 'calc(95vh - 140px - 1rem)',
+        background: "white",
+        height: "calc(95vh - 140px - 1rem)",
       }}
     >
       {tabList.map((tab, i) => (
         <div
           key={i}
           id={`${id}-${tab.value}`}
-          className='tab fader'
+          className="tab fader"
           style={{
             opacity: state.pane === tab.value ? 1 : 0,
             zIndex: state.pane === tab.value ? 1 : 0,

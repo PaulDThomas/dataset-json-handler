@@ -1,7 +1,7 @@
-import { SimpleTable } from '@asup/simple-table';
-import { fieldsForItems } from '../../consts/fieldsForItems';
-import { useContext } from 'react';
-import { DSJContext } from '../../context/DSJContextProvider';
+import { SimpleTable } from "@asup/simple-table";
+import { fieldsForItems } from "../../consts/fieldsForItems";
+import { useContext } from "react";
+import { DSJContext } from "../../context/DSJContextProvider";
 
 export const PaneForItems = () => {
   const { state } = useContext(DSJContext);
@@ -12,11 +12,11 @@ export const PaneForItems = () => {
       ) : (
         <div>
           <SimpleTable
-            id='items-table'
+            id="items-table"
             fields={fieldsForItems}
-            keyField={'OID'}
+            keyField={"OID"}
             data={state.datasetJson ? state.datasetJson.items.map((item) => item.data) : []}
-            headerLabel='Items'
+            headerLabel="Items"
             showSearch={true}
             showFilter
           />

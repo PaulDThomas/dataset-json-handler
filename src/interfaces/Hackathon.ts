@@ -25,103 +25,103 @@ export type SponsorTermId = string;
  */
 export enum OutputFileTypeEnum {
   /** Portable Document Format (PDF) */
-  pdf = 'pdf',
+  pdf = "pdf",
   /** Rich Text Format (RTF) */
-  rtf = 'rtf',
+  rtf = "rtf",
   /** Plain text */
-  txt = 'txt',
+  txt = "txt",
 }
 /**
  * Boolean operators denoting a logical operation (e.g., and, or, not).
  */
 export enum ExpressionLogicalOperatorEnum {
-  AND = 'AND',
-  OR = 'OR',
-  NOT = 'NOT',
+  AND = "AND",
+  OR = "OR",
+  NOT = "NOT",
 }
 /**
  * Comparison operators indicating how the value of a variable is compared to a (list of) prespecified value(s).
  */
 export enum ConditionComparatorEnum {
   /** Is equal to */
-  EQ = 'EQ',
+  EQ = "EQ",
   /** Is not equal to */
-  NE = 'NE',
+  NE = "NE",
   /** Is greater than */
-  GT = 'GT',
+  GT = "GT",
   /** Is greater than or equal to */
-  GE = 'GE',
+  GE = "GE",
   /** Is less than */
-  LT = 'LT',
+  LT = "LT",
   /** Is less than or equal to */
-  LE = 'LE',
+  LE = "LE",
   /** Is in */
-  IN = 'IN',
+  IN = "IN",
   /** Is not in */
-  NOTIN = 'NOTIN',
+  NOTIN = "NOTIN",
 }
 /**
  * Types of display section that contain one or more pieces of informational text.
  */
 export enum DisplaySectionTypeEnum {
-  Title = 'Title',
-  Footnote = 'Footnote',
-  Abbreviation = 'Abbreviation',
-  Legend = 'Legend',
-  Rowlabel_Header = 'Rowlabel Header',
+  Title = "Title",
+  Footnote = "Footnote",
+  Abbreviation = "Abbreviation",
+  Legend = "Legend",
+  Rowlabel_Header = "Rowlabel Header",
 }
 /**
  * The role that the referenced operation's result plays in the calculation of the result of this operation.
  */
 export enum OperationRoleEnum {
   /** The dividend of a fraction. */
-  NUMERATOR = 'NUMERATOR',
+  NUMERATOR = "NUMERATOR",
   /** The divisor of a fraction. */
-  DENOMINATOR = 'DENOMINATOR',
+  DENOMINATOR = "DENOMINATOR",
 }
 /**
  * The rationale for performing this analysis. It indicates when the analysis was planned.
  */
 export enum AnalysisReasonEnum {
   /** The analysis is specified in a protocol. */
-  SPECIFIED_IN_PROTOCOL = 'SPECIFIED IN PROTOCOL',
+  SPECIFIED_IN_PROTOCOL = "SPECIFIED IN PROTOCOL",
   /** The analysis is specified in a statistical analysis plan. */
-  SPECIFIED_IN_SAP = 'SPECIFIED IN SAP',
+  SPECIFIED_IN_SAP = "SPECIFIED IN SAP",
   /** The analysis was triggered by findings in the data. */
-  DATA_DRIVEN = 'DATA DRIVEN',
+  DATA_DRIVEN = "DATA DRIVEN",
   /** The analysis has been requested by a regulatory agency. */
-  REQUESTED_BY_REGULATORY_AGENCY = 'REQUESTED BY REGULATORY AGENCY',
+  REQUESTED_BY_REGULATORY_AGENCY = "REQUESTED BY REGULATORY AGENCY",
 }
 /**
  * The purpose of the analysis within the body of evidence (e.g., section in the clinical study report).
  */
 export enum AnalysisPurposeEnum {
   /** The outcome measure(s) of greatest importance specified in the protocol, usually the one(s) used in the power calculation, to evaluate the primary endpoint(s) associated with the primary study objective(s). (After Clinicaltrials.gov) */
-  PRIMARY_OUTCOME_MEASURE = 'PRIMARY OUTCOME MEASURE',
+  PRIMARY_OUTCOME_MEASURE = "PRIMARY OUTCOME MEASURE",
   /** The outcome measure(s) that is part of a pre-specified analysis plan used to evaluate the secondary endpoint(s) associated with secondary study objective(s) and/or used to evaluate any measure(s) ancillary to the primary or secondary endpoint(s). (After Clinicaltrials.gov). */
-  SECONDARY_OUTCOME_MEASURE = 'SECONDARY OUTCOME MEASURE',
+  SECONDARY_OUTCOME_MEASURE = "SECONDARY OUTCOME MEASURE",
   /** The outcome measure(s) that is part of a pre-specified analysis plan used to evaluate the exploratory endpoint(s) associated with exploratory study objective(s) and/or any other measures, excluding post-hoc measures, that are a focus of the study. (After clinicaltrials.gov) */
-  EXPLORATORY_OUTCOME_MEASURE = 'EXPLORATORY OUTCOME MEASURE',
+  EXPLORATORY_OUTCOME_MEASURE = "EXPLORATORY OUTCOME MEASURE",
 }
 /**
  * Extensible ARS enumerations.
  */
 export enum ExtensibleTerminologyEnum {
   /** The rationale for performing this analysis. It indicates when the analysis was planned. */
-  AnalysisReasonEnum = 'AnalysisReasonEnum',
+  AnalysisReasonEnum = "AnalysisReasonEnum",
   /** The purpose of the analysis within the body of evidence (e.g., section in the clinical study report). */
-  AnalysisPurposeEnum = 'AnalysisPurposeEnum',
-  OperationRoleEnum = 'OperationRoleEnum',
-  OutputFileTypeEnum = 'OutputFileTypeEnum',
+  AnalysisPurposeEnum = "AnalysisPurposeEnum",
+  OperationRoleEnum = "OperationRoleEnum",
+  OutputFileTypeEnum = "OutputFileTypeEnum",
 }
 /**
  * Type of reference for page references.
  */
 export enum PageRefTypeEnum {
   /** References are to page numbers. */
-  PhysicalRef = 'PhysicalRef',
+  PhysicalRef = "PhysicalRef",
   /** References are to named destinations in the referenced document. */
-  NamedDestination = 'NamedDestination',
+  NamedDestination = "NamedDestination",
 }
 
 /**

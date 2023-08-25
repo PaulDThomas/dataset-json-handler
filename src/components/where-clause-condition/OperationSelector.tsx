@@ -1,5 +1,5 @@
-import { Operation, Operations } from '../../classes/WhereClauseConditionClass';
-import { Select } from '../utility/Select';
+import { Operation, Operations } from "../../classes/WhereClauseConditionClass";
+import { Select } from "../utility/Select";
 
 interface OperationSelectorProps {
   selected: Operation;
@@ -16,12 +16,12 @@ export const OperationSelector = ({
 }: OperationSelectorProps): JSX.Element => {
   const vals: { value: string; label: string }[] = [...Operations];
   if (!vals.map((v) => v.value).includes(selected)) {
-    vals.splice(0, 0, { label: '-- Select --', value: '' });
+    vals.splice(0, 0, { label: "-- Select --", value: "" });
   }
   return (
     <Select
       className={`eoperation-selector ${className}`}
-      style={{ width: '170px', ...style }}
+      style={{ width: "170px", ...style }}
       values={vals}
       selected={selected}
       setSelected={setSelected ? (ret) => setSelected(ret as Operation) : undefined}
@@ -29,4 +29,4 @@ export const OperationSelector = ({
   );
 };
 
-OperationSelector.displayName = 'OperationSelector';
+OperationSelector.displayName = "OperationSelector";
