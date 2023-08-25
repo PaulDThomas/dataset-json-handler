@@ -41,6 +41,9 @@ export class AnalysisGroupClass extends WhereClauseClass {
   get bigN() {
     return this._bigN;
   }
+  set bigN(newValue: boolean) {
+    this._bigN = newValue;
+  }
 
   protected _levels: string[] | null = null;
   /** Unique id for a connected where clause */

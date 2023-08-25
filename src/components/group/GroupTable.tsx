@@ -1,9 +1,10 @@
 import { useContext } from 'react';
 import { SummaryTableContext } from '../../context/SummaryTableContext';
-import { AnalysisGroupClass } from '../../main';
-import './GroupTable.css';
 import { UPDATE_GROUP } from '../../context/stReducer';
+import { AnalysisGroupClass, DatasetJsonItemClass } from '../../main';
 import { DebouncedInput } from '../utility/DebouncedInput';
+import './GroupTable.css';
+import { InGroupItem } from './InGroupItem';
 
 interface GroupWindowProperties {
   groupId: string;
@@ -40,17 +41,48 @@ export const GroupTable = ({ groupId }: GroupWindowProperties) => {
         </tr>
         <tr>
           <td>Values from</td>
-          <td>{group.valueItem?.label}</td>
+          <td>
+            <InGroupItem
+              id='valuesFrom'
+              groupId={group.id}
+              item={group.valueItem}
+              dropAction={(ret: DatasetJsonItemClass) => {
+                group.valueItem = ret;
+                dispatch({ operation: UPDATE_GROUP, group });
+              }}
+            />
+          </td>
         </tr>
         {group instanceof AnalysisGroupClass ? (
           <>
             <tr>
               <td>Order by</td>
-              <td>{group.orderItem?.label}</td>
+              <td>
+                {' '}
+                <InGroupItem
+                  id='orderBy'
+                  groupId={group.id}
+                  item={group.orderItem}
+                  dropAction={(ret: DatasetJsonItemClass) => {
+                    group.orderItem = ret;
+                    dispatch({ operation: UPDATE_GROUP, group });
+                  }}
+                />
+              </td>
             </tr>
             <tr>
-              <td>Create subject count (big N)</td>
-              <td>{group.bigN}</td>
+              <td>Big N?</td>
+              <td>
+                <input
+                  type='checkbox'
+                  checked={group.bigN}
+                  onChange={(e) => {
+                    e.stopPropagation();
+                    group.bigN = !group.bigN;
+                    dispatch({ operation: UPDATE_GROUP, group });
+                  }}
+                />
+              </td>
             </tr>
             <tr>
               <td>Levels</td>

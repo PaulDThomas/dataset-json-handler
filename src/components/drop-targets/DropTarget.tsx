@@ -23,7 +23,6 @@ export const DropTarget = ({
   const { state } = useContext(SummaryTableContext);
 
   const handleDrop = (e: DragEvent) => {
-    console.log('Dropped: ' + e.dataTransfer);
     setIsOver(false);
     e.stopPropagation();
     e.preventDefault();
