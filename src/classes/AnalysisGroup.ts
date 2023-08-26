@@ -1,23 +1,31 @@
-import { DatasetJsonItemClass } from "./DatasetJsonItemClass";
+import { DatasetJsonItem, DatasetJsonItemClass } from "./DatasetJsonItemClass";
 import { WhereClauseClass } from "./WhereClauseClass";
 
 /** Analysis group parameters */
 export interface AnalysisGroup {
   /** Unique id */
-  id?: string;
+  id: string;
   /** Group label */
   label?: string;
+  /** Group type */
+  type?: string;
   /** DatasetJsonItemClass used to order the group */
-  orderItem?: DatasetJsonItemClass;
+  orderItem?: DatasetJsonItem | null;
   /** DatasetJsonItemClass used for displaying values */
-  valueItem?: DatasetJsonItemClass;
+  valueItem?: DatasetJsonItem | null;
   /** Indicator if distinct subject count is required for this group */
   bigN?: boolean;
   /** Expected/available where clause ids of the levels in this group */
   levels?: string[] | null;
 }
 
+/** Analysis group class, used around the summary table contents */
 export class AnalysisGroupClass extends WhereClauseClass {
+  /** Group type */
+  get type() {
+    return "AnalysisGroup";
+  }
+
   protected _orderItem: DatasetJsonItemClass | null = null;
   /** DatasetJsonItem used to order this group */
   get orderItem() {
@@ -53,12 +61,42 @@ export class AnalysisGroupClass extends WhereClauseClass {
   set levels(newLevels) {
     this._levels = newLevels;
   }
+  /**
+   * Add level to group
+   * @param newLevel New level to add
+   */
   public addLevel(newLevel: string) {
     if (!this.levels || this.levels.length === 0) this._levels = [newLevel];
     else (this._levels as string[]).push(newLevel);
   }
+  /**
+   * Remove level from group
+   * @param level Existing level to remove
+   */
   public removeLevel(level: string) {
     if (this.levels) this._levels = [...this.levels.filter((l) => l !== level)];
+  }
+
+  /**
+   * Data stored in the class
+   */
+  get data(): AnalysisGroup {
+    return {
+      id: this._id,
+      label: this._label,
+      type: this.type,
+      orderItem: this._orderItem?.data,
+      valueItem: this._valueItem?.data,
+      bigN: this._bigN,
+      levels: this._levels,
+    };
+  }
+
+  /**
+   * Stringified version of the class
+   */
+  get toString() {
+    return JSON.stringify(this.data);
   }
 
   /**
@@ -68,8 +106,12 @@ export class AnalysisGroupClass extends WhereClauseClass {
   public constructor(newAnalysisGroup?: AnalysisGroup) {
     super(newAnalysisGroup);
     this._label = newAnalysisGroup?.label ?? "New Analysis group";
-    this._orderItem = newAnalysisGroup?.orderItem ?? null;
-    this._valueItem = newAnalysisGroup?.valueItem ?? null;
+    this._orderItem = newAnalysisGroup?.orderItem
+      ? new DatasetJsonItemClass(newAnalysisGroup.orderItem)
+      : null;
+    this._valueItem = newAnalysisGroup?.valueItem
+      ? new DatasetJsonItemClass(newAnalysisGroup.valueItem)
+      : null;
     this._bigN = newAnalysisGroup?.bigN ?? false;
     this._levels = newAnalysisGroup?.levels ?? null;
   }

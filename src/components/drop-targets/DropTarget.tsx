@@ -2,7 +2,7 @@ import { DragEvent, useContext, useState } from "react";
 import { DndData } from "interfaces/DndData";
 import "./DropTarget.css";
 import { SummaryTableContext } from "../../context/SummaryTableContext";
-import { iDatasetJsonItem } from "../../classes/DatasetJsonItemClass";
+import { DatasetJsonItem } from "../../classes/DatasetJsonItemClass";
 
 interface DropTargetProps {
   id: string;
@@ -28,7 +28,7 @@ export const DropTarget = ({
     e.preventDefault();
     if (e.dataTransfer.types[0] === "application/datasetjsonitem") {
       try {
-        const data: iDatasetJsonItem = JSON.parse(
+        const data: DatasetJsonItem = JSON.parse(
           e.dataTransfer.getData("application/datasetjsonitem"),
         );
         console.log("Data dropped");

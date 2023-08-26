@@ -1,4 +1,4 @@
-import { DatasetJsonItemClass, eItemType } from "./DatasetJsonItemClass";
+import { DatasetJsonItem, DatasetJsonItemClass, eItemType } from "./DatasetJsonItemClass";
 
 /**
  * Available operations
@@ -26,7 +26,7 @@ export interface WhereClauseCondition {
   /** Unique identifier */
   id?: string;
   /** Item being checked */
-  item?: DatasetJsonItemClass | null;
+  item?: DatasetJsonItem | null;
   /** Operation to apply */
   whereOperation?: Operation;
   /** Value(s) in the where clause */
@@ -149,6 +149,18 @@ export class WhereClauseConditionClass {
   }
 
   /**
+   * Data stored in the class
+   */
+  get data(): WhereClauseCondition {
+    return {
+      id: this._id,
+      item: this._item?.data,
+      whereOperation: this._whereOperation,
+      filteredItemValues: this._filteredItemValues,
+    };
+  }
+
+  /**
    * Create where clause
    * @param newWhereClauseCondition
    * Parameters:
@@ -161,23 +173,25 @@ export class WhereClauseConditionClass {
    */
   public constructor(newWhereClauseCondition?: WhereClauseCondition) {
     this._id = newWhereClauseCondition?.id ?? crypto.randomUUID();
-    this._item = newWhereClauseCondition?.item ?? null;
+    this._item = newWhereClauseCondition?.item
+      ? new DatasetJsonItemClass(newWhereClauseCondition.item)
+      : null;
     this._whereOperation = newWhereClauseCondition?.whereOperation ?? "eq";
     this._filteredItemValues = newWhereClauseCondition?.filteredItemValues ?? [];
   }
 
   /**
    * Update existing where clause, and save previous version if valid
-   * @param itemName new name
+   * @param item new name
    * @param whereOperation: new operation
    * @param filteredItemValues: new item values
    */
   public update(
-    itemName: DatasetJsonItemClass,
+    item: DatasetJsonItemClass,
     whereOperation: Operation,
     filteredItemValues: (string | number | Date)[],
   ) {
-    this._item = itemName;
+    this._item = item;
     this._whereOperation = whereOperation;
     this._filteredItemValues = filteredItemValues;
   }

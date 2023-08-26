@@ -15,7 +15,7 @@ export enum eItemType {
 /**
  * Item (variable) inside a DatasetJson object
  */
-export interface iDatasetJsonItem extends iSimpleTableRow {
+export interface DatasetJsonItem extends iSimpleTableRow {
   /**
    * Item unique identifier
    */
@@ -38,6 +38,7 @@ export interface iDatasetJsonItem extends iSimpleTableRow {
   length?: number;
 }
 
+/** Data set JSON item class, individual item (variable) in the data set */
 export class DatasetJsonItemClass {
   protected _OID = "";
 
@@ -77,9 +78,9 @@ export class DatasetJsonItemClass {
   }
 
   /**
-   * Data stored in the clas
+   * Data stored in the class
    */
-  get data(): iDatasetJsonItem {
+  get data(): DatasetJsonItem {
     return {
       OID: this._OID,
       name: this._name,
@@ -100,7 +101,7 @@ export class DatasetJsonItemClass {
    * Create new data item class
    * @param newItem New data item information
    */
-  public constructor(newItem: iDatasetJsonItem) {
+  public constructor(newItem: DatasetJsonItem) {
     this._OID = newItem.OID;
     this._name = newItem.name;
     this._label = newItem.label;

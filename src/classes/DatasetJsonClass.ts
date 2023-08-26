@@ -1,7 +1,7 @@
 import { iSimpleTableField, iSimpleTableRow, simpleTableSortFn } from "@asup/simple-table";
 import { DataRow } from "../interfaces/DataRow";
 import { CdiscDatasetJson } from "../interfaces/CdiscDatasetJson";
-import { DatasetJsonItemClass, iDatasetJsonItem } from "./DatasetJsonItemClass";
+import { DatasetJsonItemClass, DatasetJsonItem } from "./DatasetJsonItemClass";
 
 /**
  * Typescript class for a CDISC data set JSON object
@@ -84,7 +84,7 @@ export class DatasetJsonClass {
   /**
    * Items (variables) in the data set
    */
-  set items(newItems: (iDatasetJsonItem | DatasetJsonItemClass)[]) {
+  set items(newItems: (DatasetJsonItem | DatasetJsonItemClass)[]) {
     if (newItems.length > 0) {
       this._items = newItems.map((i) =>
         i instanceof DatasetJsonItemClass ? i : new DatasetJsonItemClass(i),
@@ -110,7 +110,7 @@ export class DatasetJsonClass {
    * @param newItem Add data set item definition to the data set
    * @returns true is successful, false (& sets errorText) is there is an error
    */
-  public addItem(newItem: DatasetJsonItemClass | iDatasetJsonItem): boolean {
+  public addItem(newItem: DatasetJsonItemClass | DatasetJsonItem): boolean {
     if (this.items.map((i) => i.name).includes(newItem.name)) {
       this._errorText = "Item name already exists";
       return false;
