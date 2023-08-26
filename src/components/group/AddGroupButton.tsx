@@ -1,7 +1,6 @@
 import { useContext } from "react";
 import { SummaryTableContext } from "../../context/SummaryTableContext";
 import { ADD_ANAL_GROUP, ADD_DATA_GROUP } from "../../context/stReducer";
-import "./AddGroupButton.css";
 
 export const AddGroupButton = () => {
   const { dispatch } = useContext(SummaryTableContext);

@@ -1,7 +1,6 @@
 import { ContextWindow } from "@asup/context-menu";
 import { useState } from "react";
 import ReactJson from "react-json-view";
-import "./JsonWindowButton.css";
 
 interface JsonWindowButtonProps {
   id: string;
@@ -21,6 +20,7 @@ export const JsonWindowButton = ({ id, title, object }: JsonWindowButtonProps) =
           setShowWindow(!showWindow);
         }}
         className="json-window-button"
+        style={{ width: "40px" }}
       >
         ⓘ
       </button>
