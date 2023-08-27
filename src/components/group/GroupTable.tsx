@@ -5,6 +5,8 @@ import { AnalysisGroupClass, DatasetJsonItemClass } from "../../main";
 import { DebouncedInput } from "../utility/DebouncedInput";
 import "./GroupTable.css";
 import { InGroupItem } from "./InGroupItem";
+import { DraggableGroupId } from "./DraggableGroupId";
+import { DeleteGroupButton } from "./DeleteGroupButton";
 
 interface GroupWindowProperties {
   groupId: string;
@@ -23,14 +25,16 @@ export const GroupTable = ({ groupId }: GroupWindowProperties) => {
       <tbody>
         <tr>
           <td>Id</td>
-          <td>
-            <span className="id-holder">{groupId}</span>
+          <td style={{ lineHeight: "0", verticalAlign: "top" }}>
+            <DraggableGroupId id={groupId} />
+            <DeleteGroupButton id={groupId} />
           </td>
         </tr>
         <tr>
           <td>Label</td>
           <td>
             <DebouncedInput
+              style={{ width: "157px" }}
               value={group.label}
               setValue={(ret) => {
                 group.label = ret;
@@ -98,3 +102,5 @@ export const GroupTable = ({ groupId }: GroupWindowProperties) => {
     </table>
   );
 };
+
+GroupTable.displayName = "GroupTable";

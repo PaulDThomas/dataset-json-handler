@@ -14,6 +14,7 @@ import { SummaryTableData, SummaryTableSchema } from "./SummaryTableContext";
 
 export const ADD_ANAL_GROUP = "ADD_ANAL_GROUP";
 export const ADD_DATA_GROUP = "ADD_DATA_GROUP";
+export const DELETE_GROUP = "DELETE_GROUP";
 export const LOAD_STATUS = "LOAD_STATUS";
 export const MOVE_COLUMN_VARIABLE = "MOVE_COLUMN_VARIABLE";
 export const MOVE_ROW_VARIABLE = "MOVE_ROW_VARIABLE";
@@ -30,6 +31,7 @@ export const UPDATE_WHERE_CLAUSE_CONDITION = "UPDATE_WHERE_CLAUSE_CONDITION";
 type Operation =
   | "ADD_ANAL_GROUP"
   | "ADD_DATA_GROUP"
+  | "DELETE_GROUP"
   | "LOAD_STATUS"
   | "MOVE_COLUMN_VARIABLE"
   | "MOVE_ROW_VARIABLE"
@@ -47,6 +49,7 @@ export interface ActionProps {
   operation: Operation;
   columns?: DatasetJsonItemClass[];
   group?: DataGroupClass | AnalysisGroupClass;
+  deleteId?: string;
   incomingStatus?: SummaryTableData;
   items?: DatasetJsonItemClass[];
   item?: DatasetJsonItemClass;
@@ -67,6 +70,12 @@ export const stReducer = (state: SummaryTableSchema, action: ActionProps): Summa
     case ADD_DATA_GROUP:
       if (action.newId && newState.groupList.findIndex((g) => g.id === action.newId) === -1) {
         newState.groupList.push(new DataGroupClass({ id: action.newId }));
+      }
+      break;
+    case DELETE_GROUP:
+      if (action.deleteId && newState.groupList.findIndex((g) => g.id === action.deleteId) !== -1) {
+        const ix = newState.groupList.findIndex((g) => g.id === action.deleteId);
+        newState.groupList.splice(ix, 1);
       }
       break;
     case LOAD_STATUS:

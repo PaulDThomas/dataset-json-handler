@@ -5,12 +5,14 @@ interface DebouncedInputProps {
   value: string;
   setValue: (ret: string) => void;
   delay?: number;
+  style?: React.CSSProperties;
 }
 
 export const DebouncedInput = ({
   value,
   setValue,
   delay = 500,
+  style = {},
 }: DebouncedInputProps): JSX.Element => {
   const [currentValue, setCurrentValue] = useState<string>(value);
   useEffect(() => {
@@ -25,7 +27,7 @@ export const DebouncedInput = ({
   return (
     <input
       type="text"
-      style={{ border: "1px solid black" }}
+      style={{ border: "1px solid black", ...style }}
       value={currentValue}
       onChange={(e) => {
         e.stopPropagation();
@@ -34,3 +36,5 @@ export const DebouncedInput = ({
     />
   );
 };
+
+DebouncedInput.displayName = "DebouncedInput";

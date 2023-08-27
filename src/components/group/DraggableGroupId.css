@@ -1,0 +1,25 @@
+.group-id-holder {
+  margin: 1px;
+  padding: 0 4px;
+  width: 125px;
+  height: 18px;
+  background-color: white;
+  border-radius: 8px;
+  border: 1px black solid;
+  font-size: small;
+  display: inline-block;
+}
+
+.group-id-holder.being-dragged {
+  opacity: 0.5;
+}
+
+.id-holder {
+  display: block;
+  width: calc(100% - 4px);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow-x: hidden;
+  text-align: center;
+  line-height: 16px;
+}

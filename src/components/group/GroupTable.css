@@ -15,14 +15,12 @@
   max-width: 175px;
 }
 
-.id-holder {
-  display: block;
-  width: calc(100% - 10px);
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow-x: hidden;
-}
-
 .group-table input {
   width: 160px;
+}
+
+.delete-button {
+  height: 18px;
+  padding: 0 4px;
+  margin-top: 0;
 }
