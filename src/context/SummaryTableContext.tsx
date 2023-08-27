@@ -12,6 +12,7 @@ import { DataGroupClass } from "../main";
 import { DataGroup } from "../classes/DataGroup";
 
 export interface SummaryTableData {
+  page: string[];
   rows: DatasetJsonItem[];
   columns: DatasetJsonItem[];
   target?: DatasetJsonItem;
@@ -23,6 +24,7 @@ export interface SummaryTableData {
 }
 
 export interface SummaryTableSchema {
+  page: string[];
   rows: DatasetJsonItemClass[];
   columns: DatasetJsonItemClass[];
   target?: DatasetJsonItemClass;
@@ -34,6 +36,7 @@ export interface SummaryTableSchema {
 }
 
 const initialState: SummaryTableSchema = {
+  page: [],
   rows: [],
   columns: [],
   statistics: [],

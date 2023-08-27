@@ -1,27 +1,25 @@
 import { useContext } from "react";
-import { WhereClauseConditionClass, Operation } from "../../classes/WhereClauseConditionClass";
 import { SummaryTableContext } from "../../context/SummaryTableContext";
-import { OperationSelector } from "./OperationSelector";
 import {
   REMOVE_WHERE_CLAUSE_CONDITION,
   UPDATE_WHERE_CLAUSE_CONDITION,
 } from "../../context/stReducer";
+import { OperationSelector } from "./OperationSelector";
 import { WhereClauseConditionItem } from "./WhereClauseConditionItem";
-import { WhereClauseConditionSingleValue } from "./WhereClauseConditionSingleValue";
 import { WhereClauseConditionMultiValues } from "./WhereClauseConditionMultiValues";
+import { WhereClauseConditionSingleValue } from "./WhereClauseConditionSingleValue";
 
-export interface WhereClauseConditionProps {
-  index: number;
+export interface WhereClauseConditionRowProps {
+  id: string;
   canEdit: boolean;
 }
 
 export const WhereClauseConditionRow = ({
-  index,
-  canEdit,
-}: WhereClauseConditionProps): JSX.Element => {
+  id,
+  canEdit = true,
+}: WhereClauseConditionRowProps): JSX.Element => {
   const { state, dispatch } = useContext(SummaryTableContext);
-  const whereClauseCondition =
-    state.whereClauseConditions.length > index ? state.whereClauseConditions[index] : null;
+  const whereClauseCondition = state.whereClauseConditions.find((w) => w.id === id);
 
   if (!whereClauseCondition) return <></>;
   return (
@@ -56,7 +54,7 @@ export const WhereClauseConditionRow = ({
           {"\u2296"}
         </span>
       </div>
-      <WhereClauseConditionItem index={index} />
+      <WhereClauseConditionItem id={id} />
       {whereClauseCondition.item && (
         <>
           <OperationSelector
@@ -64,13 +62,10 @@ export const WhereClauseConditionRow = ({
             setSelected={
               canEdit
                 ? (ret) => {
-                    const newWhere = new WhereClauseConditionClass(
-                      state.whereClauseConditions[index],
-                    );
-                    newWhere.whereOperation = ret as Operation;
+                    whereClauseCondition.whereOperation = ret;
                     dispatch({
                       operation: UPDATE_WHERE_CLAUSE_CONDITION,
-                      whereClauseCondition: newWhere,
+                      whereClauseCondition: whereClauseCondition,
                     });
                   }
                 : undefined
@@ -89,43 +84,43 @@ export const WhereClauseConditionRow = ({
               {
                 eq: (
                   <WhereClauseConditionSingleValue
-                    index={index}
+                    id={id}
                     canEdit={canEdit}
                   />
                 ),
                 lt: (
                   <WhereClauseConditionSingleValue
-                    index={index}
+                    id={id}
                     canEdit={canEdit}
                   />
                 ),
                 le: (
                   <WhereClauseConditionSingleValue
-                    index={index}
+                    id={id}
                     canEdit={canEdit}
                   />
                 ),
                 gt: (
                   <WhereClauseConditionSingleValue
-                    index={index}
+                    id={id}
                     canEdit={canEdit}
                   />
                 ),
                 ge: (
                   <WhereClauseConditionSingleValue
-                    index={index}
+                    id={id}
                     canEdit={canEdit}
                   />
                 ),
                 in: (
                   <WhereClauseConditionMultiValues
-                    index={index}
+                    id={id}
                     canEdit={canEdit}
                   />
                 ),
                 not_in: (
                   <WhereClauseConditionMultiValues
-                    index={index}
+                    id={id}
                     canEdit={canEdit}
                   />
                 ),

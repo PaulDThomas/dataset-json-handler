@@ -7,13 +7,16 @@ import { DropTarget } from "../drop-targets/DropTarget";
 import { DraggableItem } from "../lhs/DraggableItem";
 
 interface WhereClauseConditionItemProps {
-  index: number;
+  id: string;
 }
 
-export const WhereClauseConditionItem = ({ index }: WhereClauseConditionItemProps): JSX.Element => {
+export const WhereClauseConditionItem = ({ id }: WhereClauseConditionItemProps): JSX.Element => {
   const { state, dispatch } = useContext(SummaryTableContext);
+  const whereClauseCondition = state.whereClauseConditions.find((w) => w.id === id);
 
-  return (
+  return !whereClauseCondition ? (
+    <></>
+  ) : (
     <div
       className="itemholder-main"
       style={{
@@ -23,30 +26,30 @@ export const WhereClauseConditionItem = ({ index }: WhereClauseConditionItemProp
       }}
     >
       <DropTarget
-        id={`whereclauseconditionitem-${index}-droptarget`}
+        id={`whereclauseconditionitem-${id}-droptarget`}
         type="center"
         dropAction={(ret) => {
           if (ret.data instanceof DatasetJsonItemClass) {
             dispatch({
               operation: UPDATE_WHERE_CLAUSE_CONDITION,
               whereClauseCondition: new WhereClauseConditionClass({
-                id: state.whereClauseConditions[index]?.id,
-                item: ret.data,
-                whereOperation: state.whereClauseConditions[index]?.whereOperation ?? null,
-                filteredItemValues: state.whereClauseConditions[index]?.filteredItemValues,
+                id: id,
+                item: ret.data.data,
+                whereOperation: whereClauseCondition.whereOperation ?? null,
+                filteredItemValues: whereClauseCondition.filteredItemValues,
               }),
             });
           }
         }}
       >
-        {state.whereClauseConditions[index].item ? (
+        {whereClauseCondition.item ? (
           <DraggableItem
-            id={`whereclauseconditionitem-${index}`}
-            oid={(state.whereClauseConditions[index].item as DatasetJsonItemClass).OID}
+            id={`whereclauseconditionitem-${id}`}
+            oid={whereClauseCondition.item.OID}
           />
         ) : (
           <div
-            id={`whereclauseconditionitem-${index}`}
+            id={`whereclauseconditionitem-${id}`}
             className="item-holder"
           />
         )}
@@ -54,3 +57,5 @@ export const WhereClauseConditionItem = ({ index }: WhereClauseConditionItemProp
     </div>
   );
 };
+
+WhereClauseConditionItem.displayName = "WhereClauseConditionItem";

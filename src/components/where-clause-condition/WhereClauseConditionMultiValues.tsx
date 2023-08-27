@@ -1,34 +1,57 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { SummaryTableContext } from "../../context/SummaryTableContext";
 import { UPDATE_WHERE_CLAUSE_CONDITION } from "../../context/stReducer";
-import { WhereClauseConditionProps } from "./WhereClauseConditionRow";
+import { WhereClauseConditionRowProps } from "./WhereClauseConditionRow";
+import { useDebounce } from "../../hooks/useDebounce";
+import { WhereClauseConditionClass } from "../../main";
 
-export const WhereClauseConditionMultiValues = ({ index, canEdit }: WhereClauseConditionProps) => {
+export const WhereClauseConditionMultiValues = ({
+  id,
+  canEdit,
+}: WhereClauseConditionRowProps): JSX.Element => {
   const { state, dispatch } = useContext(SummaryTableContext);
-  const whereClauseCondition =
-    state.whereClauseConditions.length > index ? state.whereClauseConditions[index] : null;
-  if (!whereClauseCondition || !whereClauseCondition.item) return <></>;
-  return (
+  const whereClauseCondition = state.whereClauseConditions.find((w) => w.id === id);
+
+  // Debounce
+  const [currentValue, setCurrentValue] = useState<string[]>(
+    (whereClauseCondition?.filteredItemValues ?? []).map((v) => v.toString()),
+  );
+  useEffect(
+    () =>
+      whereClauseCondition &&
+      setCurrentValue(whereClauseCondition.filteredItemValues.map((v) => v.toString())),
+    [whereClauseCondition],
+  );
+
+  const debouncedValue = useDebounce<string[]>(currentValue, 500);
+  useEffect(() => {
+    whereClauseCondition &&
+      debouncedValue.join("\n").trim() !==
+        whereClauseCondition.filteredItemValues
+          .map((v) => v.toString())
+          .join("\n")
+          .trim() &&
+      dispatch({
+        operation: UPDATE_WHERE_CLAUSE_CONDITION,
+        whereClauseCondition: new WhereClauseConditionClass({
+          ...whereClauseCondition.data,
+          filteredItemValues: debouncedValue.join("\n").trim().split("\n"),
+        }),
+      });
+  }, [debouncedValue, dispatch, whereClauseCondition]);
+
+  return !whereClauseCondition ? (
+    <></>
+  ) : (
     <textarea
-      value={
-        whereClauseCondition.filteredItemValues &&
-        whereClauseCondition.filteredItemValues.length > 0
-          ? whereClauseCondition.filteredItemValues.join("\n").toString()
-          : ""
-      }
-      onChange={
-        canEdit
-          ? (e) => {
-              whereClauseCondition.filteredItemValues = [
-                ...e.currentTarget.value.trim().split("\n"),
-              ];
-              dispatch({
-                operation: UPDATE_WHERE_CLAUSE_CONDITION,
-                whereClauseCondition: whereClauseCondition,
-              });
-            }
-          : undefined
-      }
+      value={currentValue.join("\n")}
+      disabled={!canEdit}
+      onChange={(e) => {
+        e.stopPropagation();
+        setCurrentValue(e.currentTarget.value.split("\n"));
+      }}
     />
   );
 };
+
+WhereClauseConditionMultiValues.displayName = "WhereClauseConditionMultiValues";

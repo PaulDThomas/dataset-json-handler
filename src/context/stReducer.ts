@@ -14,6 +14,7 @@ import { SummaryTableData, SummaryTableSchema } from "./SummaryTableContext";
 
 export const ADD_ANAL_GROUP = "ADD_ANAL_GROUP";
 export const ADD_DATA_GROUP = "ADD_DATA_GROUP";
+export const ADD_PAGE_WHERE = "ADD_PAGE_WHERE";
 export const DELETE_GROUP = "DELETE_GROUP";
 export const LOAD_STATUS = "LOAD_STATUS";
 export const MOVE_COLUMN_VARIABLE = "MOVE_COLUMN_VARIABLE";
@@ -31,6 +32,7 @@ export const UPDATE_WHERE_CLAUSE_CONDITION = "UPDATE_WHERE_CLAUSE_CONDITION";
 type Operation =
   | "ADD_ANAL_GROUP"
   | "ADD_DATA_GROUP"
+  | "ADD_PAGE_WHERE"
   | "DELETE_GROUP"
   | "LOAD_STATUS"
   | "MOVE_COLUMN_VARIABLE"
@@ -72,6 +74,16 @@ export const stReducer = (state: SummaryTableSchema, action: ActionProps): Summa
         newState.groupList.push(new DataGroupClass({ id: action.newId }));
       }
       break;
+    case ADD_PAGE_WHERE:
+      if (
+        action.newId &&
+        newState.whereClauseConditions.findIndex((w) => w.id === action.newId) === -1
+      ) {
+        const newWhere = new WhereClauseConditionClass({ id: action.newId });
+        newState.whereClauseConditions.push(newWhere);
+        newState.page.push(newWhere.id);
+      }
+      break;
     case DELETE_GROUP:
       if (action.deleteId && newState.groupList.findIndex((g) => g.id === action.deleteId) !== -1) {
         const ix = newState.groupList.findIndex((g) => g.id === action.deleteId);
@@ -80,6 +92,7 @@ export const stReducer = (state: SummaryTableSchema, action: ActionProps): Summa
       break;
     case LOAD_STATUS:
       if (action.incomingStatus) {
+        newState.page = action.incomingStatus.page;
         newState.rows = action.incomingStatus.rows.map((i) => new DatasetJsonItemClass(i));
         newState.columns = action.incomingStatus.columns.map((i) => new DatasetJsonItemClass(i));
         newState.target = action.incomingStatus.target
@@ -133,6 +146,5 @@ export const stReducer = (state: SummaryTableSchema, action: ActionProps): Summa
       newState = updateWhereClauseCondition(action, newState);
       break;
   }
-  console.dir(newState);
   return newState;
 };

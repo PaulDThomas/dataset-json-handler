@@ -1,15 +1,14 @@
+import { ContextWindow } from "@asup/context-menu";
 import { useContext, useState } from "react";
 import { SummaryTableContext } from "../../context/SummaryTableContext";
-import { UPDATE_WHERE_CLAUSE_CONDITION } from "../../context/stReducer";
-import { ContextWindow } from "@asup/context-menu";
+import { ADD_PAGE_WHERE } from "../../context/stReducer";
 import { WhereClauseConditionRow } from "./WhereClauseConditionRow";
-import { WhereClauseConditionClass } from "../../classes/WhereClauseConditionClass";
 
 interface SummaryTableWhereProps {
   editable?: boolean;
 }
 
-export const SummaryTableWhere = ({ editable = true }: SummaryTableWhereProps) => {
+export const SummaryTableWhere = ({ editable = true }: SummaryTableWhereProps): JSX.Element => {
   const { state, dispatch } = useContext(SummaryTableContext);
 
   const [showWindow, setShowWindow] = useState<boolean>(false);
@@ -42,22 +41,22 @@ export const SummaryTableWhere = ({ editable = true }: SummaryTableWhereProps) =
           style={{ width: "600px" }}
         >
           <div className="stwhere-main">
-            {state.whereClauseConditions.map((_, i) => (
-              <WhereClauseConditionRow
-                key={i}
-                index={i}
-                canEdit={true}
-              />
-            ))}
+            {state.page.map((wid, i) => {
+              const w = state.whereClauseConditions.find((w) => w.id === wid);
+              return !w ? (
+                <></>
+              ) : (
+                <WhereClauseConditionRow
+                  key={i}
+                  id={w.id}
+                  canEdit={true}
+                />
+              );
+            })}
             {editable && !state.whereClauseConditions.some((w) => !w.isValid) && (
               <div
                 className="stwhere-add-where-clause"
-                onClick={() =>
-                  dispatch({
-                    operation: UPDATE_WHERE_CLAUSE_CONDITION,
-                    whereClauseCondition: new WhereClauseConditionClass(),
-                  })
-                }
+                onClick={() => dispatch({ operation: ADD_PAGE_WHERE, newId: crypto.randomUUID() })}
               >
                 {"\u2295 "}
                 Add where clause
@@ -69,3 +68,5 @@ export const SummaryTableWhere = ({ editable = true }: SummaryTableWhereProps) =
     </div>
   );
 };
+
+SummaryTableWhere.displayName = "SummaryTableWhere";
