@@ -3,8 +3,8 @@ export interface WhereClause {
   label?: string;
   level?: number;
   order?: number;
-  conditionId?: string;
-  compoundExpressionId?: string;
+  condition?: string | null;
+  compoundExpression?: string | null;
 }
 
 export class WhereClauseClass {
@@ -59,15 +59,26 @@ export class WhereClauseClass {
     this._compoundExpression = newExpressionId;
   }
 
+  get data(): WhereClause {
+    return {
+      id: this._id,
+      label: this._label,
+      level: this._level,
+      order: this._order,
+      condition: this._condition,
+      compoundExpression: this._compoundExpression,
+    };
+  }
+
   public constructor(newWhereClause?: WhereClause) {
     this._id = newWhereClause?.id ?? crypto.randomUUID();
     this._label = newWhereClause?.label ?? "New where clause";
     this._level = newWhereClause?.level ?? 1;
     this._order = newWhereClause?.order ?? 1;
-    if (newWhereClause?.conditionId && newWhereClause.compoundExpressionId) {
+    if (newWhereClause?.condition && newWhereClause.compoundExpression) {
       throw "Where clause can only have one condition or compound expression";
     }
-    this._condition = newWhereClause?.conditionId ?? null;
-    this._compoundExpression = newWhereClause?.compoundExpressionId ?? null;
+    this._condition = newWhereClause?.condition ?? null;
+    this._compoundExpression = newWhereClause?.compoundExpression ?? null;
   }
 }

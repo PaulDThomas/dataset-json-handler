@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { SummaryTableContext } from "../../context/SummaryTableContext";
 import { UPDATE_GROUP } from "../../context/stReducer";
 import { AnalysisGroupClass, DatasetJsonItemClass } from "../../main";
@@ -7,6 +7,8 @@ import "./GroupTable.css";
 import { InGroupItem } from "./InGroupItem";
 import { DraggableGroupId } from "./DraggableGroupId";
 import { DeleteGroupButton } from "./DeleteGroupButton";
+import { ContextWindow } from "@asup/context-menu";
+import { AnalGroupLevels } from "./AnalysisGroupLevels";
 
 interface GroupWindowProperties {
   groupId: string;
@@ -17,6 +19,7 @@ export const GroupTable = ({ groupId }: GroupWindowProperties) => {
 
   const groupIndex = state.groupList.findIndex((g) => g.id === groupId);
   const group = groupIndex > -1 ? state.groupList[groupIndex] : null;
+  const [showLevelsWindow, setShowLevelsWindow] = useState<boolean>(false);
 
   return !group ? (
     <div>Group ${groupId} not found</div>
@@ -63,6 +66,7 @@ export const GroupTable = ({ groupId }: GroupWindowProperties) => {
               <td>Order by</td>
               <td>
                 {" "}
+                {/* TODO: need to ensure this is a numeric variable */}
                 <InGroupItem
                   id="orderBy"
                   groupId={group.id}
@@ -89,8 +93,25 @@ export const GroupTable = ({ groupId }: GroupWindowProperties) => {
               </td>
             </tr>
             <tr>
-              <td>Levels</td>
-              <td>-- group levels node--</td>
+              <td colSpan={2}>
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    setShowLevelsWindow(true);
+                  }}
+                >
+                  Show levels
+                </button>
+                <ContextWindow
+                  id={""}
+                  visible={showLevelsWindow}
+                  title={`${group.label} levels`}
+                  onClose={() => setShowLevelsWindow(false)}
+                >
+                  <AnalGroupLevels id={group.id} />
+                </ContextWindow>
+              </td>
             </tr>
           </>
         ) : (

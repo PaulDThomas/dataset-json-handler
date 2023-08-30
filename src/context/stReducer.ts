@@ -80,6 +80,26 @@ export const stReducer = (state: SummaryTableSchema, action: ActionProps): Summa
         newState.groupList.push(new AnalysisGroupClass({ id: action.id }));
       }
       break;
+    case ADD_ANAL_GROUP_LEVELS:
+      if (action.id && action.whereClauses && action.whereClauseConditions) {
+        const analGroup = newState.groupList.find(
+          (g) => g.id === action.id && g.type === "AnalysisGroup",
+        ) as AnalysisGroupClass;
+        if (analGroup) {
+          action.whereClauseConditions.forEach((awc) => {
+            const ix = newState.whereClauseConditions.findIndex((wc) => wc.id === awc.id);
+            if (ix === -1) newState.whereClauseConditions.push(awc);
+          });
+          action.whereClauses.forEach((aw) => {
+            const ix = newState.whereClauses.findIndex((w) => w.id === aw.id);
+            if (ix === -1) {
+              newState.whereClauses.push(aw);
+              analGroup.addLevel(aw.id);
+            }
+          });
+        }
+      }
+      break;
     case ADD_DATA_GROUP:
       if (action.id && newState.groupList.findIndex((g) => g.id === action.id) === -1) {
         newState.groupList.push(new DataGroupClass({ id: action.id }));
@@ -88,7 +108,7 @@ export const stReducer = (state: SummaryTableSchema, action: ActionProps): Summa
     case ADD_PAGE_WHERE:
       if (action.id && newState.whereClauses.findIndex((w) => w.id === action.id) === -1) {
         const newWhereCondition = new WhereClauseConditionClass({ id: crypto.randomUUID() });
-        const newWhere = new WhereClauseClass({ id: action.id, conditionId: newWhereCondition.id });
+        const newWhere = new WhereClauseClass({ id: action.id, condition: newWhereCondition.id });
         newState.whereClauses.push(newWhere);
         newState.whereClauseConditions.push(newWhereCondition);
         newState.page.push(newWhere.id);
