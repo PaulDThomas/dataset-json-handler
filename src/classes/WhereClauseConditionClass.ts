@@ -137,15 +137,15 @@ export class WhereClauseConditionClass {
    * Check if current where clause is valid
    */
   get isValid() {
-    return (
-      this._id &&
+    return this._id &&
       this._item &&
       ((["miss", "not_miss"].includes(this._whereOperation) &&
         this._filteredItemValues.length === 0) ||
         (["eq", "lt", "le", "gt", "ge"].includes(this._whereOperation) &&
           this._filteredItemValues.length === 1) ||
         ["in", "not_in"].includes(this._whereOperation))
-    );
+      ? true
+      : false;
   }
 
   /**

@@ -1,19 +1,23 @@
 import { AnalysisGroupClass } from "../classes/AnalysisGroup";
 import { DataGroupClass } from "../classes/DataGroup";
 import { DatasetJsonItemClass } from "../classes/DatasetJsonItemClass";
-import { WhereClauseConditionClass } from "../classes/WhereClauseConditionClass";
+import { WhereClauseClass } from "../classes/WhereClauseClass";
+import { loadStatus } from "../functions/loadStatus";
 import { moveColumnVariable } from "../functions/moveColumnVariable";
 import { addRowVariable } from "../functions/moveRowVariable";
 import { removeColumnVariable } from "../functions/removeColumnVariable";
 import { removeRowVariable } from "../functions/removeRowVariable";
-import { removeWhereClauseCondition } from "../functions/removeWhereClauseCondition";
+import { removeWhereClauses } from "../functions/removeWhereClauses";
 import { updateGroup } from "../functions/updateGroup";
 import { updateItem } from "../functions/updateItem";
-import { updateWhereClauseCondition } from "../functions/updateWhereClauseCondition";
+import { updateWhereClauseConditions } from "../functions/updateWhereClauseConditions";
+import { WhereClauseConditionClass } from "../main";
 import { SummaryTableData, SummaryTableSchema } from "./SummaryTableContext";
 
 export const ADD_ANAL_GROUP = "ADD_ANAL_GROUP";
+export const ADD_ANAL_GROUP_LEVELS = "ADD_ANAL_GROUP_LEVELS";
 export const ADD_DATA_GROUP = "ADD_DATA_GROUP";
+export const ADD_DATA_GROUP_WHERE = "ADD_DATA_GROUP_WHERE";
 export const ADD_PAGE_WHERE = "ADD_PAGE_WHERE";
 export const DELETE_GROUP = "DELETE_GROUP";
 export const LOAD_STATUS = "LOAD_STATUS";
@@ -21,7 +25,9 @@ export const MOVE_COLUMN_VARIABLE = "MOVE_COLUMN_VARIABLE";
 export const MOVE_ROW_VARIABLE = "MOVE_ROW_VARIABLE";
 export const REMOVE_COLUMN_VARIABLE = "REMOVE_COLUMN_VARIABLE";
 export const REMOVE_ROW_VARIABLE = "REMOVE_ROW_VARIABLE";
-export const REMOVE_WHERE_CLAUSE_CONDITION = "REMOVE_WHERE_CLAUSE_CONDITION";
+export const REMOVE_ANAL_GROUP_LEVEL = "REMOVE_ANAL_GROUP_LEVEL";
+export const REMOVE_DATA_GROUP_WHERE = "REMOVE_DATA_GROUP_WHERE";
+export const REMOVE_PAGE_WHERE = "REMOVE_PAGE_WHERE";
 export const SET_COLUMNS = "SET_COLUMNS";
 export const SET_ITEMS = "SET_ITEMS";
 export const SET_ROWS = "SET_ROWS";
@@ -31,7 +37,9 @@ export const UPDATE_WHERE_CLAUSE_CONDITION = "UPDATE_WHERE_CLAUSE_CONDITION";
 
 type Operation =
   | "ADD_ANAL_GROUP"
+  | "ADD_ANAL_GROUP_LEVELS"
   | "ADD_DATA_GROUP"
+  | "ADD_DATA_GROUP_WHERE"
   | "ADD_PAGE_WHERE"
   | "DELETE_GROUP"
   | "LOAD_STATUS"
@@ -39,7 +47,9 @@ type Operation =
   | "MOVE_ROW_VARIABLE"
   | "REMOVE_COLUMN_VARIABLE"
   | "REMOVE_ROW_VARIABLE"
-  | "REMOVE_WHERE_CLAUSE_CONDITION"
+  | "REMOVE_ANAL_GROUP_LEVELS"
+  | "REMOVE_DATA_GROUP_WHERE"
+  | "REMOVE_PAGE_WHERE"
   | "SET_COLUMNS"
   | "SET_ITEMS"
   | "SET_ROWS"
@@ -52,35 +62,35 @@ export interface ActionProps {
   columns?: DatasetJsonItemClass[];
   group?: DataGroupClass | AnalysisGroupClass;
   deleteId?: string;
+  id?: string;
   incomingStatus?: SummaryTableData;
   items?: DatasetJsonItemClass[];
   item?: DatasetJsonItemClass;
-  newId?: string;
   position?: number;
   rows?: DatasetJsonItemClass[];
-  whereClauseCondition?: WhereClauseConditionClass;
+  whereClauses?: WhereClauseClass[];
+  whereClauseConditions?: WhereClauseConditionClass[];
 }
 
 export const stReducer = (state: SummaryTableSchema, action: ActionProps): SummaryTableSchema => {
   let newState: SummaryTableSchema = { ...state };
   switch (action.operation) {
     case ADD_ANAL_GROUP:
-      if (action.newId && newState.groupList.findIndex((g) => g.id === action.newId) === -1) {
-        newState.groupList.push(new AnalysisGroupClass({ id: action.newId }));
+      if (action.id && newState.groupList.findIndex((g) => g.id === action.id) === -1) {
+        newState.groupList.push(new AnalysisGroupClass({ id: action.id }));
       }
       break;
     case ADD_DATA_GROUP:
-      if (action.newId && newState.groupList.findIndex((g) => g.id === action.newId) === -1) {
-        newState.groupList.push(new DataGroupClass({ id: action.newId }));
+      if (action.id && newState.groupList.findIndex((g) => g.id === action.id) === -1) {
+        newState.groupList.push(new DataGroupClass({ id: action.id }));
       }
       break;
     case ADD_PAGE_WHERE:
-      if (
-        action.newId &&
-        newState.whereClauseConditions.findIndex((w) => w.id === action.newId) === -1
-      ) {
-        const newWhere = new WhereClauseConditionClass({ id: action.newId });
-        newState.whereClauseConditions.push(newWhere);
+      if (action.id && newState.whereClauses.findIndex((w) => w.id === action.id) === -1) {
+        const newWhereCondition = new WhereClauseConditionClass({ id: crypto.randomUUID() });
+        const newWhere = new WhereClauseClass({ id: action.id, conditionId: newWhereCondition.id });
+        newState.whereClauses.push(newWhere);
+        newState.whereClauseConditions.push(newWhereCondition);
         newState.page.push(newWhere.id);
       }
       break;
@@ -91,23 +101,7 @@ export const stReducer = (state: SummaryTableSchema, action: ActionProps): Summa
       }
       break;
     case LOAD_STATUS:
-      if (action.incomingStatus) {
-        newState.page = action.incomingStatus.page;
-        newState.rows = action.incomingStatus.rows.map((i) => new DatasetJsonItemClass(i));
-        newState.columns = action.incomingStatus.columns.map((i) => new DatasetJsonItemClass(i));
-        newState.target = action.incomingStatus.target
-          ? new DatasetJsonItemClass(action.incomingStatus.target)
-          : undefined;
-        newState.statistics = action.incomingStatus.statistics;
-        newState.statisticPosition = action.incomingStatus.statisticPosition;
-        newState.whereClauseConditions = action.incomingStatus.whereClauseConditions.map(
-          (w) => new WhereClauseConditionClass(w),
-        );
-        newState.groupList = action.incomingStatus.groupList.map((g) =>
-          g.type === "AnalysisGroup" ? new AnalysisGroupClass(g) : new DataGroupClass(g),
-        );
-        newState.itemList = action.incomingStatus.itemList.map((i) => new DatasetJsonItemClass(i));
-      }
+      newState = loadStatus(action);
       break;
     case MOVE_COLUMN_VARIABLE:
       newState = moveColumnVariable(action, newState);
@@ -121,8 +115,11 @@ export const stReducer = (state: SummaryTableSchema, action: ActionProps): Summa
     case REMOVE_ROW_VARIABLE:
       newState = removeRowVariable(action, newState);
       break;
-    case REMOVE_WHERE_CLAUSE_CONDITION:
-      newState = removeWhereClauseCondition(action, newState);
+    case REMOVE_PAGE_WHERE:
+      newState.page = newState.page.filter(
+        (pw) => !action.whereClauses?.map((w) => w.id)?.includes(pw),
+      );
+      newState = removeWhereClauses(action, newState);
       break;
     case SET_COLUMNS:
       if (!action.columns) throw `${SET_COLUMNS}: No columns`;
@@ -143,7 +140,7 @@ export const stReducer = (state: SummaryTableSchema, action: ActionProps): Summa
       newState = updateItem(action, newState);
       break;
     case UPDATE_WHERE_CLAUSE_CONDITION:
-      newState = updateWhereClauseCondition(action, newState);
+      newState = updateWhereClauseConditions(action, newState);
       break;
   }
   return newState;

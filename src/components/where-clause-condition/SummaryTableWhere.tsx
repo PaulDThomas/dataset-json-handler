@@ -2,7 +2,7 @@ import { ContextWindow } from "@asup/context-menu";
 import { useContext, useState } from "react";
 import { SummaryTableContext } from "../../context/SummaryTableContext";
 import { ADD_PAGE_WHERE } from "../../context/stReducer";
-import { WhereClauseConditionRow } from "./WhereClauseConditionRow";
+import { WhereClauseRow } from "./WhereClauseRow";
 
 interface SummaryTableWhereProps {
   editable?: boolean;
@@ -21,8 +21,8 @@ export const SummaryTableWhere = ({ editable = true }: SummaryTableWhereProps): 
       }}
     >
       <div className="">
-        {state.whereClauseConditions.length} filter
-        {state.whereClauseConditions.length === 1 ? "" : "s"} applied
+        {state.page.length} filter
+        {state.page.length === 1 ? "" : "s"} applied
         <span
           className="stwhere-edit-button"
           title="Edit filters"
@@ -42,26 +42,39 @@ export const SummaryTableWhere = ({ editable = true }: SummaryTableWhereProps): 
         >
           <div className="stwhere-main">
             {state.page.map((wid, i) => {
-              const w = state.whereClauseConditions.find((w) => w.id === wid);
+              const w = state.whereClauses.find((w) => w.id === wid);
               return !w ? (
                 <></>
               ) : (
-                <WhereClauseConditionRow
+                <WhereClauseRow
                   key={i}
                   id={w.id}
+                  showLabel={false}
                   canEdit={true}
                 />
               );
             })}
-            {editable && !state.whereClauseConditions.some((w) => !w.isValid) && (
-              <div
-                className="stwhere-add-where-clause"
-                onClick={() => dispatch({ operation: ADD_PAGE_WHERE, newId: crypto.randomUUID() })}
-              >
-                {"\u2295 "}
-                Add where clause
-              </div>
-            )}
+            {editable &&
+              !state.page.some(
+                (pw) =>
+                  state.whereClauseConditions.find(
+                    (wc) => wc.id === state.whereClauses.find((w) => w.id === pw)?.condition,
+                  )?.isValid,
+              ) && (
+                <div
+                  style={{ cursor: "pointer" }}
+                  className="stwhere-add-where-clause"
+                  onClick={() =>
+                    dispatch({
+                      operation: ADD_PAGE_WHERE,
+                      id: crypto.randomUUID(),
+                    })
+                  }
+                >
+                  {"\u2295 "}
+                  Add where clause
+                </div>
+              )}
           </div>
         </ContextWindow>
       </div>

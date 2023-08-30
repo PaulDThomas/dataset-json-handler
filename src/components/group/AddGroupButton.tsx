@@ -12,7 +12,7 @@ export const AddGroupButton = () => {
         onClick={(e) => {
           e.preventDefault();
           e.stopPropagation();
-          dispatch({ operation: ADD_DATA_GROUP, newId: crypto.randomUUID() });
+          dispatch({ operation: ADD_DATA_GROUP, id: crypto.randomUUID() });
         }}
       >
         {"\u2295"} data
@@ -22,7 +22,7 @@ export const AddGroupButton = () => {
         onClick={(e) => {
           e.preventDefault();
           e.stopPropagation();
-          dispatch({ operation: ADD_ANAL_GROUP, newId: crypto.randomUUID() });
+          dispatch({ operation: ADD_ANAL_GROUP, id: crypto.randomUUID() });
         }}
       >
         {"\u2295"} analysis

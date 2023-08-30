@@ -32,12 +32,14 @@ export const WhereClauseConditionItem = ({ id }: WhereClauseConditionItemProps):
           if (ret.data instanceof DatasetJsonItemClass) {
             dispatch({
               operation: UPDATE_WHERE_CLAUSE_CONDITION,
-              whereClauseCondition: new WhereClauseConditionClass({
-                id: id,
-                item: ret.data.data,
-                whereOperation: whereClauseCondition.whereOperation ?? null,
-                filteredItemValues: whereClauseCondition.filteredItemValues,
-              }),
+              whereClauseConditions: [
+                new WhereClauseConditionClass({
+                  id: id,
+                  item: ret.data.data,
+                  whereOperation: whereClauseCondition.whereOperation ?? null,
+                  filteredItemValues: whereClauseCondition.filteredItemValues,
+                }),
+              ],
             });
           }
         }}

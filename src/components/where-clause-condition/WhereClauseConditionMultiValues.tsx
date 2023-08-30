@@ -33,10 +33,12 @@ export const WhereClauseConditionMultiValues = ({
           .trim() &&
       dispatch({
         operation: UPDATE_WHERE_CLAUSE_CONDITION,
-        whereClauseCondition: new WhereClauseConditionClass({
-          ...whereClauseCondition.data,
-          filteredItemValues: debouncedValue.join("\n").trim().split("\n"),
-        }),
+        whereClauseConditions: [
+          new WhereClauseConditionClass({
+            ...whereClauseCondition.data,
+            filteredItemValues: debouncedValue.join("\n").trim().split("\n"),
+          }),
+        ],
       });
   }, [debouncedValue, dispatch, whereClauseCondition]);
 

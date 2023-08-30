@@ -35,7 +35,7 @@ export const WhereClauseConditionSingleValue = ({
           whereClauseCondition.filteredItemValues = [ret];
           dispatch({
             operation: UPDATE_WHERE_CLAUSE_CONDITION,
-            whereClauseCondition: whereClauseCondition,
+            whereClauseConditions: [whereClauseCondition],
           });
         }
       }}

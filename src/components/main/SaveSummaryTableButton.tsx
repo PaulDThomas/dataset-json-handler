@@ -13,6 +13,7 @@ export const SaveSummaryTableButton = (): JSX.Element => {
       target: state.target?.data,
       statistics: state.statistics,
       statisticPosition: state.statisticPosition,
+      whereClauses: state.whereClauseConditions.map((w) => w.data),
       whereClauseConditions: state.whereClauseConditions.map((w) => w.data),
       groupList: state.groupList.map((g) => g.data),
       itemList: state.itemList.map((i) => i.data),

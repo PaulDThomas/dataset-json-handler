@@ -1,15 +1,15 @@
 import { eStatistic } from "enums/eStatistic";
 import { createContext, useEffect, useReducer } from "react";
+import { AnalysisGroup, AnalysisGroupClass } from "../classes/AnalysisGroup";
+import { DataGroup, DataGroupClass } from "../classes/DataGroup";
 import { DatasetJsonClass } from "../classes/DatasetJsonClass";
 import { DatasetJsonItem, DatasetJsonItemClass } from "../classes/DatasetJsonItemClass";
-import { AnalysisGroup, AnalysisGroupClass } from "../classes/AnalysisGroup";
+import { WhereClause, WhereClauseClass } from "../classes/WhereClauseClass";
 import {
   WhereClauseCondition,
   WhereClauseConditionClass,
 } from "../classes/WhereClauseConditionClass";
 import { ActionProps, SET_ITEMS, stReducer } from "./stReducer";
-import { DataGroupClass } from "../main";
-import { DataGroup } from "../classes/DataGroup";
 
 export interface SummaryTableData {
   page: string[];
@@ -18,6 +18,7 @@ export interface SummaryTableData {
   target?: DatasetJsonItem;
   statistics: eStatistic[];
   statisticPosition: "row" | "column";
+  whereClauses: WhereClause[];
   whereClauseConditions: WhereClauseCondition[];
   groupList: (AnalysisGroup | DataGroup)[];
   itemList: DatasetJsonItem[];
@@ -30,6 +31,7 @@ export interface SummaryTableSchema {
   target?: DatasetJsonItemClass;
   statistics: eStatistic[];
   statisticPosition: "row" | "column";
+  whereClauses: WhereClauseClass[];
   whereClauseConditions: WhereClauseConditionClass[];
   groupList: (AnalysisGroupClass | DataGroupClass)[];
   itemList: DatasetJsonItemClass[];
@@ -41,6 +43,7 @@ const initialState: SummaryTableSchema = {
   columns: [],
   statistics: [],
   statisticPosition: "column",
+  whereClauses: [],
   whereClauseConditions: [],
   groupList: [],
   itemList: [],

@@ -1,9 +1,6 @@
 import { useContext } from "react";
 import { SummaryTableContext } from "../../context/SummaryTableContext";
-import {
-  REMOVE_WHERE_CLAUSE_CONDITION,
-  UPDATE_WHERE_CLAUSE_CONDITION,
-} from "../../context/stReducer";
+import { UPDATE_WHERE_CLAUSE_CONDITION } from "../../context/stReducer";
 import { OperationSelector } from "./OperationSelector";
 import { WhereClauseConditionItem } from "./WhereClauseConditionItem";
 import { WhereClauseConditionMultiValues } from "./WhereClauseConditionMultiValues";
@@ -19,10 +16,11 @@ export const WhereClauseConditionRow = ({
   canEdit = true,
 }: WhereClauseConditionRowProps): JSX.Element => {
   const { state, dispatch } = useContext(SummaryTableContext);
-  const whereClauseCondition = state.whereClauseConditions.find((w) => w.id === id);
+  const whereClauseCondition = state.whereClauseConditions.find((wc) => wc.id === id);
 
-  if (!whereClauseCondition) return <></>;
-  return (
+  return !whereClauseCondition ? (
+    <></>
+  ) : (
     <div
       className="whereclausecondition-main"
       style={{
@@ -31,29 +29,6 @@ export const WhereClauseConditionRow = ({
         minWidth: "530px",
       }}
     >
-      <div
-        className="whereclausecondition-remove-holder"
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-        }}
-      >
-        <span
-          style={{ color: "red" }}
-          onClick={
-            canEdit
-              ? () =>
-                  dispatch({
-                    operation: REMOVE_WHERE_CLAUSE_CONDITION,
-                    whereClauseCondition: whereClauseCondition,
-                  })
-              : undefined
-          }
-        >
-          {"\u2296"}
-        </span>
-      </div>
       <WhereClauseConditionItem id={id} />
       {whereClauseCondition.item && (
         <>
@@ -65,7 +40,7 @@ export const WhereClauseConditionRow = ({
                     whereClauseCondition.whereOperation = ret;
                     dispatch({
                       operation: UPDATE_WHERE_CLAUSE_CONDITION,
-                      whereClauseCondition: whereClauseCondition,
+                      whereClauseConditions: [whereClauseCondition],
                     });
                   }
                 : undefined
@@ -140,28 +115,29 @@ export const WhereClauseConditionRow = ({
               </div>
             )}
           </div>
-          {!whereClauseCondition.isValid && (
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                paddingLeft: "4px",
-              }}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                fill="currentColor"
-                color="red"
-                viewBox="0 0 16 16"
-              >
-                <path d="M11.46.146A.5.5 0 0 0 11.107 0H4.893a.5.5 0 0 0-.353.146L.146 4.54A.5.5 0 0 0 0 4.893v6.214a.5.5 0 0 0 .146.353l4.394 4.394a.5.5 0 0 0 .353.146h6.214a.5.5 0 0 0 .353-.146l4.394-4.394a.5.5 0 0 0 .146-.353V4.893a.5.5 0 0 0-.146-.353L11.46.146zM8 4c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995A.905.905 0 0 1 8 4zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
-              </svg>
-            </div>
-          )}
         </>
+      )}
+      {!whereClauseCondition.isValid && (
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            paddingLeft: "4px",
+          }}
+          title="Where clause condition is not valid"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            color="red"
+            viewBox="0 0 16 16"
+          >
+            <path d="M11.46.146A.5.5 0 0 0 11.107 0H4.893a.5.5 0 0 0-.353.146L.146 4.54A.5.5 0 0 0 0 4.893v6.214a.5.5 0 0 0 .146.353l4.394 4.394a.5.5 0 0 0 .353.146h6.214a.5.5 0 0 0 .353-.146l4.394-4.394a.5.5 0 0 0 .146-.353V4.893a.5.5 0 0 0-.146-.353L11.46.146zM8 4c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995A.905.905 0 0 1 8 4zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+          </svg>
+        </div>
       )}
     </div>
   );
