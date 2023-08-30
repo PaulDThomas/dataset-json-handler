@@ -7,7 +7,7 @@ export interface DataGroup {
   /** Group label */
   label?: string;
   /** Group type */
-  type?: string;
+  type?: "DataGroup";
   /** DatasetJsonItemClass used for displaying values */
   valueItem?: DatasetJsonItem | null;
   /** Id of where clause used to creat the data group */
@@ -17,7 +17,7 @@ export interface DataGroup {
 /** Data group class, used in the summary table contents */
 export class DataGroupClass extends WhereClauseClass {
   /** Group type */
-  get type() {
+  get type(): "DataGroup" {
     return "DataGroup";
   }
 

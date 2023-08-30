@@ -8,7 +8,7 @@ export interface AnalysisGroup {
   /** Group label */
   label?: string;
   /** Group type */
-  type?: string;
+  type?: "AnalysisGroup";
   /** DatasetJsonItemClass used to order the group */
   orderItem?: DatasetJsonItem | null;
   /** DatasetJsonItemClass used for displaying values */
@@ -22,7 +22,7 @@ export interface AnalysisGroup {
 /** Analysis group class, used around the summary table contents */
 export class AnalysisGroupClass extends WhereClauseClass {
   /** Group type */
-  get type() {
+  get type(): "AnalysisGroup" {
     return "AnalysisGroup";
   }
 
