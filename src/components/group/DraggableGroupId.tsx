@@ -16,7 +16,10 @@ export const DraggableGroupId = ({ id }: DraggableGroupIdProps): JSX.Element => 
     if (group) {
       console.log("Drag start for " + group.label);
       setIsBeingDragged(true);
-      e.dataTransfer.setData("application/datasetjsonitem", group.toString);
+      e.dataTransfer.setData(
+        group.type === "AnalysisGroup" ? "application/analysisgroup" : "application/datagroup",
+        group.toString,
+      );
     }
   };
 

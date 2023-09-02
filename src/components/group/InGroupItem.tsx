@@ -7,9 +7,10 @@ interface InGroupItemProps {
   groupId: string;
   item: DatasetJsonItemClass | null;
   dropAction: (ret: DatasetJsonItemClass) => void;
+  removeAction: () => void;
 }
 
-export const InGroupItem = ({ id, groupId, item, dropAction }: InGroupItemProps) => {
+export const InGroupItem = ({ id, groupId, item, dropAction, removeAction }: InGroupItemProps) => {
   return (
     <div
       className="itemholder-main"
@@ -25,11 +26,13 @@ export const InGroupItem = ({ id, groupId, item, dropAction }: InGroupItemProps)
         dropAction={(ret) =>
           ret.data instanceof DatasetJsonItemClass && dropAction(ret.data as DatasetJsonItemClass)
         }
+        allowableTypes={["datasetjsonitem"]}
       >
         {item ? (
           <DraggableItem
             id={`groupitem-${groupId}-${id}`}
             oid={item.OID}
+            otherActions={[{ label: "Remove", action: removeAction }]}
           />
         ) : (
           <div

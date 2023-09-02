@@ -39,6 +39,14 @@ export const DropTableRowVariable = ({ id, index }: DropTableHeaderVariableProps
             <DraggableItem
               id={`${id}-column-header-${index}`}
               oid={item.OID}
+              otherActions={[
+                {
+                  label: "Remove",
+                  action: () => {
+                    dispatch({ operation: REMOVE_ROW_VARIABLE, item });
+                  },
+                },
+              ]}
             />
           </DropEdges>
         </ContextMenuHandler>

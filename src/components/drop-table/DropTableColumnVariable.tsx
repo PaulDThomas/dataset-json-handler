@@ -45,6 +45,14 @@ export const DropTableColumnVariable = ({
             <DraggableItem
               id={`${id}-column-header-${index}`}
               oid={item.OID}
+              otherActions={[
+                {
+                  label: "Remove",
+                  action: () => {
+                    dispatch({ operation: REMOVE_COLUMN_VARIABLE, item });
+                  },
+                },
+              ]}
             />
             {state.statisticPosition === "column" && (
               <div

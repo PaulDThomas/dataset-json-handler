@@ -57,6 +57,10 @@ export const GroupTable = ({ groupId }: GroupWindowProperties) => {
                 group.valueItem = ret;
                 dispatch({ operation: UPDATE_GROUP, group });
               }}
+              removeAction={() => {
+                group.valueItem = null;
+                dispatch({ operation: UPDATE_GROUP, group });
+              }}
             />
           </td>
         </tr>
@@ -73,6 +77,10 @@ export const GroupTable = ({ groupId }: GroupWindowProperties) => {
                   item={group.orderItem}
                   dropAction={(ret: DatasetJsonItemClass) => {
                     group.orderItem = ret;
+                    dispatch({ operation: UPDATE_GROUP, group });
+                  }}
+                  removeAction={() => {
+                    group.orderItem = null;
                     dispatch({ operation: UPDATE_GROUP, group });
                   }}
                 />

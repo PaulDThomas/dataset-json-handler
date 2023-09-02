@@ -1,17 +1,19 @@
 import { DatasetJsonItemClass } from "../classes/DatasetJsonItemClass";
 import { eStatistic } from "../enums/eStatistic";
+import { AnalysisGroupClass, DataGroupClass } from "../main";
+
+export type dndItem = "datasetjsonitem" | "analysisgroup" | "datagroup" | "statistic";
 
 /**
  * Drag data contents
  */
-
 export interface DndData {
   /**
    * Variable or statistic
    */
-  type: "variable" | "statistic";
+  type: dndItem;
   /**
    * Dragged item definition
    */
-  data: DatasetJsonItemClass | eStatistic;
+  data: AnalysisGroupClass | DataGroupClass | DatasetJsonItemClass | eStatistic | null;
 }

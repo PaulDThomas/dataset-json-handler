@@ -1,4 +1,4 @@
-import { ContextMenuHandler, ContextWindow } from "@asup/context-menu";
+import { ContextMenuHandler, ContextWindow, iMenuItem } from "@asup/context-menu";
 import React, { useContext, useMemo, useState } from "react";
 import { SummaryTableContext } from "../../context/SummaryTableContext";
 import "./DraggableItem.css";
@@ -7,9 +7,10 @@ import { ItemProperties } from "../utility/ItemProperties";
 interface DraggableItemProps {
   id: string;
   oid: string;
+  otherActions?: iMenuItem[];
 }
 
-export const DraggableItem = ({ id, oid }: DraggableItemProps): JSX.Element => {
+export const DraggableItem = ({ id, oid, otherActions }: DraggableItemProps): JSX.Element => {
   const { state } = useContext(SummaryTableContext);
   const [isBeingDragged, setIsBeingDragged] = useState<boolean>(false);
   const [showProperties, setShowProperties] = useState<boolean>(false);
@@ -35,7 +36,14 @@ export const DraggableItem = ({ id, oid }: DraggableItemProps): JSX.Element => {
   return (
     <>
       <ContextMenuHandler
-        menuItems={item ? [{ label: "Properties", action: () => setShowProperties(true) }] : []}
+        menuItems={
+          item
+            ? [
+                ...(otherActions ?? []),
+                { label: "Properties", action: () => setShowProperties(true) },
+              ]
+            : []
+        }
       >
         <div
           id={id}
