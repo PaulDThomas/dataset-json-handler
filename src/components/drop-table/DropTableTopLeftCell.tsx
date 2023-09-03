@@ -1,9 +1,10 @@
 import { useContext } from "react";
 import { DatasetJsonItemClass } from "../../classes/DatasetJsonItemClass";
 import { SummaryTableContext } from "../../context/SummaryTableContext";
-import { MOVE_COLUMN_VARIABLE, MOVE_ROW_VARIABLE } from "../../context/stReducer";
+import { MOVE_ROW_VARIABLE, SET_COLUMN_ANALYSIS_GROUP } from "../../context/stReducer";
 import { DropEdges } from "../drop-targets/DropEdges";
 import "./DropTableTopLeftCell.css";
+import { AnalysisGroupClass } from "../../main";
 
 interface DropTableTopLeftCellProps {
   id: string;
@@ -21,8 +22,11 @@ export const DropTableTopLeftCell = ({ id }: DropTableTopLeftCellProps): JSX.Ele
           }
         }}
         onDropRight={(ret) => {
-          if (ret.data instanceof DatasetJsonItemClass)
-            dispatch({ operation: MOVE_COLUMN_VARIABLE, position: 0, item: ret.data });
+          if (ret.data instanceof AnalysisGroupClass)
+            dispatch({ operation: SET_COLUMN_ANALYSIS_GROUP, group: ret.data });
+        }}
+        allowableTypes={{
+          right: ["analysisgroup"],
         }}
       >
         <div className="tl-cell-holder" />

@@ -1,7 +1,7 @@
 import { ContextWindow } from "@asup/context-menu";
 import { useContext, useState } from "react";
 import { SummaryTableContext } from "../../context/SummaryTableContext";
-import { ADD_PAGE_WHERE } from "../../context/stReducer";
+import { ADD_PAGE_WHERE, REMOVE_PAGE_WHERE } from "../../context/stReducer";
 import { WhereClauseRow } from "./WhereClauseRow";
 
 interface SummaryTableWhereProps {
@@ -51,6 +51,9 @@ export const SummaryTableWhere = ({ editable = true }: SummaryTableWhereProps): 
                   id={w.id}
                   showLabel={false}
                   canEdit={true}
+                  removeOp={() => {
+                    dispatch({ operation: REMOVE_PAGE_WHERE, deleteId: w.id });
+                  }}
                 />
               );
             })}

@@ -1,25 +1,42 @@
 import { useContext } from "react";
 import { SummaryTableContext } from "../../context/SummaryTableContext";
-import { REMOVE_PAGE_WHERE, UPDATE_WHERE_CLAUSE } from "../../context/stReducer";
-import { WhereClauseConditionRow } from "./WhereClauseConditionRow";
+import { UPDATE_WHERE_CLAUSE } from "../../context/stReducer";
 import { DebouncedInput } from "../utility/DebouncedInput";
+import { WhereClauseConditionRow } from "./WhereClauseConditionRow";
 
 export interface WhereClauseRowProps {
   id: string;
   showLabel?: boolean;
+  removeOp: () => void;
   canEdit?: boolean;
 }
 
 export const WhereClauseRow = ({
   id,
   showLabel = true,
+  removeOp,
   canEdit = true,
 }: WhereClauseRowProps): JSX.Element => {
   const { state, dispatch } = useContext(SummaryTableContext);
   const whereClause = state.whereClauses.find((w) => w.id === id);
 
   return !whereClause ? (
-    <></>
+    <tr>
+      <td
+        className="whereclausecondition-remove-holder"
+        style={{
+          justifyContent: "center",
+        }}
+      >
+        <span
+          style={{ color: "red", cursor: "pointer" }}
+          onClick={canEdit ? removeOp : undefined}
+        >
+          {"\u2296"}
+        </span>
+      </td>
+      <td colSpan={3}>Level not found</td>
+    </tr>
   ) : (
     <tr
       className="whereclause-main"
@@ -35,15 +52,7 @@ export const WhereClauseRow = ({
       >
         <span
           style={{ color: "red", cursor: "pointer" }}
-          onClick={
-            canEdit
-              ? () =>
-                  dispatch({
-                    operation: REMOVE_PAGE_WHERE,
-                    whereClauses: [whereClause],
-                  })
-              : undefined
-          }
+          onClick={canEdit ? removeOp : undefined}
         >
           {"\u2296"}
         </span>

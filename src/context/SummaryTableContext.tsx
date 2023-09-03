@@ -14,7 +14,8 @@ import { ActionProps, SET_ITEMS, stReducer } from "./stReducer";
 export interface SummaryTableData {
   page: string[];
   rows: DatasetJsonItem[];
-  columns: DatasetJsonItem[];
+  columnAnalysisGroup: AnalysisGroup | null;
+  columns: string[];
   target?: DatasetJsonItem;
   statistics: eStatistic[];
   statisticPosition: "row" | "column";
@@ -27,7 +28,8 @@ export interface SummaryTableData {
 export interface SummaryTableSchema {
   page: string[];
   rows: DatasetJsonItemClass[];
-  columns: DatasetJsonItemClass[];
+  columnAnalysisGroup: AnalysisGroupClass | null;
+  columns: string[];
   target?: DatasetJsonItemClass;
   statistics: eStatistic[];
   statisticPosition: "row" | "column";
@@ -40,6 +42,7 @@ export interface SummaryTableSchema {
 const initialState: SummaryTableSchema = {
   page: [],
   rows: [],
+  columnAnalysisGroup: null,
   columns: [],
   statistics: [],
   statisticPosition: "column",

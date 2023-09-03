@@ -11,7 +11,7 @@ interface DropTargetProps {
   children?: null | string | JSX.Element | (string | JSX.Element)[];
   style?: React.CSSProperties;
   type?: "top" | "left" | "bottom" | "right" | "center";
-  allowableTypes: dndItem[];
+  allowableTypes?: dndItem[];
 }
 
 export const DropTarget = ({

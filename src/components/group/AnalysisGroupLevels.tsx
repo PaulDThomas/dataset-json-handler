@@ -1,18 +1,19 @@
 import { useContext } from "react";
-import { AnalysisGroup } from "../../classes/AnalysisGroup";
+import { AnalysisGroupClass } from "../../classes/AnalysisGroup";
 import { SummaryTableContext } from "../../context/SummaryTableContext";
+import { REMOVE_ANAL_GROUP_LEVEL } from "../../context/stReducer";
 import { WhereClauseRow } from "../where-clause-condition/WhereClauseRow";
-import { AddNewLevelButton } from "./AddNewLevelButton";
 import { AddDataLevelsButton } from "./AddDataLevelsButton";
+import { AddNewLevelButton } from "./AddNewLevelButton";
 
 interface AnalGroupLevelsProps {
   id: string;
 }
 export const AnalGroupLevels = ({ id }: AnalGroupLevelsProps): JSX.Element => {
-  const { state } = useContext(SummaryTableContext);
+  const { state, dispatch } = useContext(SummaryTableContext);
 
   const analysisGroup = state.groupList.find((g) => g.id === id && g.type === "AnalysisGroup") as
-    | AnalysisGroup
+    | AnalysisGroupClass
     | undefined;
 
   return !analysisGroup ? (
@@ -29,12 +30,19 @@ export const AnalGroupLevels = ({ id }: AnalGroupLevelsProps): JSX.Element => {
                 (state.whereClauses?.find((w) => a === w.id)?.order ?? 0) -
                 (state.whereClauses?.find((w) => b === w.id)?.order ?? 0),
             )
-            .map((level, i) => (
+            .map((level) => (
               <WhereClauseRow
-                key={i}
+                key={level}
                 id={level}
                 canEdit
                 showLabel
+                removeOp={() => {
+                  dispatch({
+                    operation: REMOVE_ANAL_GROUP_LEVEL,
+                    group: analysisGroup,
+                    deleteId: level,
+                  });
+                }}
               />
             ))}
         </tbody>

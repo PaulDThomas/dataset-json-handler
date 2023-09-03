@@ -23,8 +23,8 @@ export const DropTable = ({ id }: DropTableProps): JSX.Element => {
             <DropTableTopLeftCell id={`${id}-tl-cell`} />
             {state.columns.map((v, i) => (
               <DropTableColumnVariable
-                key={`${i}:${v.OID}`}
-                id={`${id}-header-variable-${i}`}
+                key={`${i}`}
+                id={`${id}-header-${i}`}
                 index={i}
               />
             ))}

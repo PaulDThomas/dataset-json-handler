@@ -3,11 +3,11 @@ import { DataGroupClass } from "../classes/DataGroup";
 import { DatasetJsonItemClass } from "../classes/DatasetJsonItemClass";
 import { WhereClauseClass } from "../classes/WhereClauseClass";
 import { loadStatus } from "../functions/loadStatus";
-import { moveColumnVariable } from "../functions/moveColumnVariable";
 import { addRowVariable } from "../functions/moveRowVariable";
-import { removeColumnVariable } from "../functions/removeColumnVariable";
+import { removeAnalGroupLevel } from "../functions/removeAnalGroupLevel";
 import { removeRowVariable } from "../functions/removeRowVariable";
-import { removeWhereClauses } from "../functions/removeWhereClauses";
+import { removeWhereClause } from "../functions/removeWhereClause";
+import { setColumnAnalysisGroup } from "../functions/setColumnsAnalysisGroup";
 import { updateGroup } from "../functions/updateGroup";
 import { updateItem } from "../functions/updateItem";
 import { updateWhereClauseConditions } from "../functions/updateWhereClauseConditions";
@@ -22,14 +22,12 @@ export const ADD_DATA_GROUP_WHERE = "ADD_DATA_GROUP_WHERE";
 export const ADD_PAGE_WHERE = "ADD_PAGE_WHERE";
 export const DELETE_GROUP = "DELETE_GROUP";
 export const LOAD_STATUS = "LOAD_STATUS";
-export const MOVE_COLUMN_VARIABLE = "MOVE_COLUMN_VARIABLE";
 export const MOVE_ROW_VARIABLE = "MOVE_ROW_VARIABLE";
-export const REMOVE_COLUMN_VARIABLE = "REMOVE_COLUMN_VARIABLE";
 export const REMOVE_ROW_VARIABLE = "REMOVE_ROW_VARIABLE";
 export const REMOVE_ANAL_GROUP_LEVEL = "REMOVE_ANAL_GROUP_LEVEL";
 export const REMOVE_DATA_GROUP_WHERE = "REMOVE_DATA_GROUP_WHERE";
 export const REMOVE_PAGE_WHERE = "REMOVE_PAGE_WHERE";
-export const SET_COLUMNS = "SET_COLUMNS";
+export const SET_COLUMN_ANALYSIS_GROUP = "SET_COLUMN_ANALYSIS_GROUP";
 export const SET_ITEMS = "SET_ITEMS";
 export const SET_ROWS = "SET_ROWS";
 export const UPDATE_GROUP = "UPDATE_GROUP";
@@ -45,14 +43,12 @@ type Operation =
   | "ADD_PAGE_WHERE"
   | "DELETE_GROUP"
   | "LOAD_STATUS"
-  | "MOVE_COLUMN_VARIABLE"
   | "MOVE_ROW_VARIABLE"
-  | "REMOVE_COLUMN_VARIABLE"
   | "REMOVE_ROW_VARIABLE"
-  | "REMOVE_ANAL_GROUP_LEVELS"
+  | "REMOVE_ANAL_GROUP_LEVEL"
   | "REMOVE_DATA_GROUP_WHERE"
   | "REMOVE_PAGE_WHERE"
-  | "SET_COLUMNS"
+  | "SET_COLUMN_ANALYSIS_GROUP"
   | "SET_ITEMS"
   | "SET_ROWS"
   | "UPDATE_GROUP"
@@ -126,27 +122,25 @@ export const stReducer = (state: SummaryTableSchema, action: ActionProps): Summa
     case LOAD_STATUS:
       newState = loadStatus(action);
       break;
-    case MOVE_COLUMN_VARIABLE:
-      newState = moveColumnVariable(action, newState);
-      break;
     case MOVE_ROW_VARIABLE:
       newState = addRowVariable(action, newState);
       break;
-    case REMOVE_COLUMN_VARIABLE:
-      newState = removeColumnVariable(action, newState);
+    case REMOVE_ANAL_GROUP_LEVEL:
+      if (action.group && action.group.type === "AnalysisGroup" && action.deleteId)
+        newState = removeAnalGroupLevel(action.group?.id, action.deleteId, state);
       break;
     case REMOVE_ROW_VARIABLE:
       newState = removeRowVariable(action, newState);
       break;
     case REMOVE_PAGE_WHERE:
-      newState.page = newState.page.filter(
-        (pw) => !action.whereClauses?.map((w) => w.id)?.includes(pw),
-      );
-      newState = removeWhereClauses(action, newState);
+      if (action.deleteId) {
+        newState.page = newState.page.filter((pw) => pw !== action.deleteId);
+        newState = removeWhereClause(action.deleteId, newState);
+      }
       break;
-    case SET_COLUMNS:
-      if (!action.columns) throw `${SET_COLUMNS}: No columns`;
-      else newState.columns = action.columns;
+    case SET_COLUMN_ANALYSIS_GROUP:
+      if (!action.group) throw `${SET_COLUMN_ANALYSIS_GROUP}: No group`;
+      else newState = setColumnAnalysisGroup(action, newState);
       break;
     case SET_ITEMS:
       if (!action.items) throw `${SET_ITEMS}: No items`;
