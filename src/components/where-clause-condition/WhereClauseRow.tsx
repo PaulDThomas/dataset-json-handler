@@ -1,7 +1,8 @@
 import { useContext } from "react";
 import { SummaryTableContext } from "../../context/SummaryTableContext";
-import { REMOVE_PAGE_WHERE } from "../../context/stReducer";
+import { REMOVE_PAGE_WHERE, UPDATE_WHERE_CLAUSE } from "../../context/stReducer";
 import { WhereClauseConditionRow } from "./WhereClauseConditionRow";
+import { DebouncedInput } from "../utility/DebouncedInput";
 
 export interface WhereClauseRowProps {
   id: string;
@@ -20,19 +21,15 @@ export const WhereClauseRow = ({
   return !whereClause ? (
     <></>
   ) : (
-    <div
+    <tr
       className="whereclause-main"
       style={{
-        display: "flex",
-        flexDirection: "row",
         minWidth: "530px",
       }}
     >
-      <div
+      <td
         className="whereclausecondition-remove-holder"
         style={{
-          display: "flex",
-          flexDirection: "row",
           justifyContent: "center",
         }}
       >
@@ -50,25 +47,51 @@ export const WhereClauseRow = ({
         >
           {"\u2296"}
         </span>
-        {showLabel && (
-          <>
-            <span>{whereClause.order}</span>
+      </td>
+      {showLabel && (
+        <>
+          <td>
+            <span>
+              <input
+                type="number"
+                value={whereClause.order}
+                style={{ width: "40px" }}
+                onChange={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  whereClause.order = parseInt(e.currentTarget.value) ?? 0;
+                  dispatch({ operation: UPDATE_WHERE_CLAUSE, whereClauses: [whereClause] });
+                }}
+              />
+            </span>
+          </td>
+          <td>
             <span
               style={{
                 marginLeft: "4px",
               }}
             >
-              {whereClause.label}
+              {/* {whereClause.label} */}
+              <DebouncedInput
+                type="text"
+                value={whereClause.label}
+                setValue={(ret) => {
+                  whereClause.label = ret;
+                  dispatch({ operation: UPDATE_WHERE_CLAUSE, whereClauses: [whereClause] });
+                }}
+              />
             </span>
-          </>
-        )}
+          </td>
+        </>
+      )}
+      <td>
         {whereClause.condition && (
           <WhereClauseConditionRow
             id={whereClause.condition}
             canEdit={canEdit}
           />
         )}
-      </div>
-    </div>
+      </td>
+    </tr>
   );
 };

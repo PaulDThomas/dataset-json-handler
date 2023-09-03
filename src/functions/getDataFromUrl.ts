@@ -22,7 +22,6 @@ export const getDataFromUrl = async (
     const signal = controller.signal;
     const response = await fetch(_url, { signal });
     const json = await response.json();
-    console.log(json);
     return {
       success: true,
       datasetJson: json,

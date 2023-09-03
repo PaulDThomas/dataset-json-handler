@@ -1,4 +1,3 @@
-import { ContextMenuHandler } from "@asup/context-menu";
 import { useContext, useMemo } from "react";
 import { DatasetJsonItemClass } from "../../classes/DatasetJsonItemClass";
 import { SummaryTableContext } from "../../context/SummaryTableContext";
@@ -20,36 +19,27 @@ export const DropTableRowVariable = ({ id, index }: DropTableHeaderVariableProps
   return (
     <tr key={item.name}>
       <td style={{ position: "relative" }}>
-        <ContextMenuHandler
-          menuItems={[
-            {
-              label: "Remove",
-              action: () => dispatch({ operation: REMOVE_ROW_VARIABLE, item }),
-            },
-          ]}
+        <DropEdges
+          id={`${id}`}
+          onDropBottom={(ret) => {
+            if (ret.data instanceof DatasetJsonItemClass) {
+              dispatch({ operation: MOVE_ROW_VARIABLE, position: index + 1, item: ret.data });
+            }
+          }}
         >
-          <DropEdges
-            id={`${id}`}
-            onDropBottom={(ret) => {
-              if (ret.data instanceof DatasetJsonItemClass) {
-                dispatch({ operation: MOVE_ROW_VARIABLE, position: index + 1, item: ret.data });
-              }
-            }}
-          >
-            <DraggableItem
-              id={`${id}-column-header-${index}`}
-              oid={item.OID}
-              otherActions={[
-                {
-                  label: "Remove",
-                  action: () => {
-                    dispatch({ operation: REMOVE_ROW_VARIABLE, item });
-                  },
+          <DraggableItem
+            id={`${id}-column-header-${index}`}
+            oid={item.OID}
+            otherActions={[
+              {
+                label: "Remove",
+                action: () => {
+                  dispatch({ operation: REMOVE_ROW_VARIABLE, item });
                 },
-              ]}
-            />
-          </DropEdges>
-        </ContextMenuHandler>
+              },
+            ]}
+          />
+        </DropEdges>
       </td>
       <DropTableBodyRow rowIndex={index} />
     </tr>

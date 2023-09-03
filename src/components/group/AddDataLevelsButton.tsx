@@ -35,12 +35,6 @@ function itemLevelsToWhere(
           filteredItemValues: [item.value],
         });
         ret.newWhereClauseConditions.push(wcValue);
-        // const wcOrder = new WhereClauseConditionClass({
-        //   id: crypto.randomUUID(),
-        //   item: orderItem,
-        //   whereOperation: "eq",
-        //   filteredItemValues: [item.order],
-        // });
         const w = new WhereClauseClass({
           id: crypto.randomUUID(),
           label: item.value.toString(),

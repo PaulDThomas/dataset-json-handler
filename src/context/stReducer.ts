@@ -11,6 +11,7 @@ import { removeWhereClauses } from "../functions/removeWhereClauses";
 import { updateGroup } from "../functions/updateGroup";
 import { updateItem } from "../functions/updateItem";
 import { updateWhereClauseConditions } from "../functions/updateWhereClauseConditions";
+import { updateWhereClauses } from "../functions/updateWhereClauses";
 import { WhereClauseConditionClass } from "../main";
 import { SummaryTableData, SummaryTableSchema } from "./SummaryTableContext";
 
@@ -33,6 +34,7 @@ export const SET_ITEMS = "SET_ITEMS";
 export const SET_ROWS = "SET_ROWS";
 export const UPDATE_GROUP = "UPDATE_GROUP";
 export const UPDATE_ITEM = "UPDATE_ITEM";
+export const UPDATE_WHERE_CLAUSE = "UPDATE_WHERE_CLAUSE";
 export const UPDATE_WHERE_CLAUSE_CONDITION = "UPDATE_WHERE_CLAUSE_CONDITION";
 
 type Operation =
@@ -55,6 +57,7 @@ type Operation =
   | "SET_ROWS"
   | "UPDATE_GROUP"
   | "UPDATE_ITEM"
+  | "UPDATE_WHERE_CLAUSE"
   | "UPDATE_WHERE_CLAUSE_CONDITION";
 
 export interface ActionProps {
@@ -158,6 +161,9 @@ export const stReducer = (state: SummaryTableSchema, action: ActionProps): Summa
       break;
     case UPDATE_ITEM:
       newState = updateItem(action, newState);
+      break;
+    case UPDATE_WHERE_CLAUSE:
+      newState = updateWhereClauses(action, newState);
       break;
     case UPDATE_WHERE_CLAUSE_CONDITION:
       newState = updateWhereClauseConditions(action, newState);

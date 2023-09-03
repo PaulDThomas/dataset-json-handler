@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { AnalysisGroup } from "../../classes/AnalysisGroup";
 import { SummaryTableContext } from "../../context/SummaryTableContext";
 import { WhereClauseRow } from "../where-clause-condition/WhereClauseRow";
+import { AddNewLevelButton } from "./AddNewLevelButton";
 import { AddDataLevelsButton } from "./AddDataLevelsButton";
 
 interface AnalGroupLevelsProps {
@@ -19,15 +20,25 @@ export const AnalGroupLevels = ({ id }: AnalGroupLevelsProps): JSX.Element => {
   ) : (
     <div className="group-levels-display">
       <AddDataLevelsButton id={id} />
-      {analysisGroup.levels?.map((level, i) => (
-        <div key={i}>
-          <WhereClauseRow
-            id={level}
-            canEdit
-            showLabel
-          />
-        </div>
-      ))}
+      <AddNewLevelButton id={id} />
+      <table className="group-levels-table">
+        <tbody>
+          {analysisGroup.levels
+            ?.sort(
+              (a, b) =>
+                (state.whereClauses?.find((w) => a === w.id)?.order ?? 0) -
+                (state.whereClauses?.find((w) => b === w.id)?.order ?? 0),
+            )
+            .map((level, i) => (
+              <WhereClauseRow
+                key={i}
+                id={level}
+                canEdit
+                showLabel
+              />
+            ))}
+        </tbody>
+      </table>
     </div>
   );
 };
