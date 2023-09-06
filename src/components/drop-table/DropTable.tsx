@@ -1,9 +1,11 @@
-import { useContext } from "react";
+import { Fragment, useContext } from "react";
 import { SummaryTableContext } from "../../context/SummaryTableContext";
 import "./DropTable.css";
 import { DropTableColumnVariable } from "./DropTableColumnVariable";
 import { DropTableRowVariable } from "./DropTableRowVariable";
 import { DropTableTopLeftCell } from "./DropTableTopLeftCell";
+import { eStatistic } from "../../enums/eStatistic";
+import { DropTableRowStatistic } from "./DropTableRowStatistic";
 
 interface DropTableProps {
   id: string;
@@ -32,11 +34,21 @@ export const DropTable = ({ id }: DropTableProps): JSX.Element => {
         </thead>
         <tbody>
           {state.rows.map((v, i) => (
-            <DropTableRowVariable
-              key={`${i}:${v.OID}`}
-              id={`${id}-row-variable-${i}`}
-              index={i}
-            />
+            <Fragment key={i}>
+              <DropTableRowVariable
+                key={`${i}:${v.OID}`}
+                id={`${id}-row-variable-${i}`}
+                index={i}
+              />
+              {(Object.keys(eStatistic) as eStatistic[]).map((s, j) => (
+                <DropTableRowStatistic
+                  key={`${i}:${j}`}
+                  id={`${id}-row-variable-${i}-${j}`}
+                  index={i}
+                  statistic={s}
+                />
+              ))}
+            </Fragment>
           ))}
         </tbody>
       </table>

@@ -12,9 +12,6 @@ export const setColumnAnalysisGroup = (
   else {
     const newState = { ...state };
     newState.columnAnalysisGroup = action.group as AnalysisGroupClass;
-    newState.columns = action.group.levels?.map(
-      (l) => newState.whereClauses.find((w) => w.id === l)?.label ?? "No label found",
-    ) ?? ["No group levels present"];
     return newState;
   }
 };

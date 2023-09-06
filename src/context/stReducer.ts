@@ -8,6 +8,7 @@ import { removeAnalGroupLevel } from "../functions/removeAnalGroupLevel";
 import { removeRowVariable } from "../functions/removeRowVariable";
 import { removeWhereClause } from "../functions/removeWhereClause";
 import { setColumnAnalysisGroup } from "../functions/setColumnsAnalysisGroup";
+import { refreshTable } from "functions/refreshTable";
 import { updateGroup } from "../functions/updateGroup";
 import { updateItem } from "../functions/updateItem";
 import { updateWhereClauseConditions } from "../functions/updateWhereClauseConditions";
@@ -96,6 +97,7 @@ export const stReducer = (state: SummaryTableSchema, action: ActionProps): Summa
               analGroup.addLevel(aw.id);
             }
           });
+          newState = refreshTable(newState);
         }
       }
       break;
@@ -126,8 +128,10 @@ export const stReducer = (state: SummaryTableSchema, action: ActionProps): Summa
       newState = addRowVariable(action, newState);
       break;
     case REMOVE_ANAL_GROUP_LEVEL:
-      if (action.group && action.group.type === "AnalysisGroup" && action.deleteId)
+      if (action.group && action.group.type === "AnalysisGroup" && action.deleteId) {
         newState = removeAnalGroupLevel(action.group?.id, action.deleteId, state);
+        newState = refreshTable(newState);
+      }
       break;
     case REMOVE_ROW_VARIABLE:
       newState = removeRowVariable(action, newState);
@@ -141,6 +145,7 @@ export const stReducer = (state: SummaryTableSchema, action: ActionProps): Summa
     case SET_COLUMN_ANALYSIS_GROUP:
       if (!action.group) throw `${SET_COLUMN_ANALYSIS_GROUP}: No group`;
       else newState = setColumnAnalysisGroup(action, newState);
+      newState = refreshTable(newState);
       break;
     case SET_ITEMS:
       if (!action.items) throw `${SET_ITEMS}: No items`;
@@ -152,15 +157,18 @@ export const stReducer = (state: SummaryTableSchema, action: ActionProps): Summa
       break;
     case UPDATE_GROUP:
       newState = updateGroup(action, newState);
+      newState = refreshTable(newState);
       break;
     case UPDATE_ITEM:
       newState = updateItem(action, newState);
       break;
     case UPDATE_WHERE_CLAUSE:
       newState = updateWhereClauses(action, newState);
+      newState = refreshTable(newState);
       break;
     case UPDATE_WHERE_CLAUSE_CONDITION:
       newState = updateWhereClauseConditions(action, newState);
+      newState = refreshTable(newState);
       break;
   }
   return newState;

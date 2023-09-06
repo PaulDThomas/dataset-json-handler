@@ -9,7 +9,8 @@ export const SaveSummaryTableButton = (): JSX.Element => {
     const toSave: SummaryTableData = {
       page: state.page,
       rows: state.rows.map((i) => i.data),
-      columns: state.columns.map((i) => i.data),
+      columnAnalysisGroup: state.columnAnalysisGroup?.data ?? null,
+      columns: state.columns,
       target: state.target?.data,
       statistics: state.statistics,
       statisticPosition: state.statisticPosition,

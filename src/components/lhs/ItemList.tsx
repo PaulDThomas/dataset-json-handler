@@ -18,10 +18,7 @@ export const ItemList = ({ id }: ItemListProps) => {
     >
       {state.itemList
         .filter(
-          (v) =>
-            !state.columns.map((c) => c.name).includes(v.name) &&
-            !state.rows.map((r) => r.name).includes(v.name) &&
-            state.target?.name !== v.name,
+          (v) => !state.rows.map((r) => r.name).includes(v.name) && state.target?.name !== v.name,
         )
         .map((variable, index) => (
           <DraggableItem

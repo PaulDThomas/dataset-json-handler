@@ -13,7 +13,10 @@ export function loadStatus(action: ActionProps) {
     const newState: SummaryTableSchema = {
       page: action.incomingStatus.page,
       rows: action.incomingStatus.rows.map((i) => new DatasetJsonItemClass(i)),
-      columns: action.incomingStatus.columns.map((i) => new DatasetJsonItemClass(i)),
+      columnAnalysisGroup: action.incomingStatus.columnAnalysisGroup
+        ? new AnalysisGroupClass(action.incomingStatus.columnAnalysisGroup)
+        : null,
+      columns: action.incomingStatus.columns,
       target: action.incomingStatus.target
         ? new DatasetJsonItemClass(action.incomingStatus.target)
         : undefined,

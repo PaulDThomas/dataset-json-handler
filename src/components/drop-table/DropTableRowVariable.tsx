@@ -7,17 +7,17 @@ import { DraggableItem } from "../lhs/DraggableItem";
 import { DropTableBodyRow } from "./DropTableBodyRow";
 import "./DropTableRowVariable.css";
 
-interface DropTableHeaderVariableProps {
+interface DropTableRowVariableProps {
   id: string;
   index: number;
 }
 
-export const DropTableRowVariable = ({ id, index }: DropTableHeaderVariableProps): JSX.Element => {
+export const DropTableRowVariable = ({ id, index }: DropTableRowVariableProps): JSX.Element => {
   const { state, dispatch } = useContext(SummaryTableContext);
   const item = useMemo<DatasetJsonItemClass>(() => state.rows[index], [state.rows, index]);
 
   return (
-    <tr key={item.name}>
+    <tr>
       <td style={{ position: "relative" }}>
         <DropEdges
           id={`${id}`}
