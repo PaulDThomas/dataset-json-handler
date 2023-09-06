@@ -12,27 +12,29 @@ export const JsonWindowButton = ({ id, title, object }: JsonWindowButtonProps) =
   const [showWindow, setShowWindow] = useState<boolean>(false);
   return (
     <>
-      <button
-        id={id}
-        onClick={(e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          setShowWindow(!showWindow);
-        }}
-        className="json-window-button"
-        style={{ width: "40px" }}
-      >
-        ⓘ
-      </button>
-      <ContextWindow
-        id={`${id}-window`}
-        visible={showWindow}
-        title={title}
-        onClose={() => setShowWindow(false)}
-        style={{ maxHeight: "75vh", maxWidth: "50vw", width: "400px", height: "300px" }}
-      >
-        <ReactJson src={object} />
-      </ContextWindow>
+      <div>
+        <button
+          id={id}
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            setShowWindow(!showWindow);
+          }}
+          className="json-window-button"
+          style={{ width: "40px" }}
+        >
+          ⓘ
+        </button>
+        <ContextWindow
+          id={`${id}-window`}
+          visible={showWindow}
+          title={title}
+          onClose={() => setShowWindow(false)}
+          style={{ maxHeight: "75vh", maxWidth: "75vw", width: "400px", height: "300px" }}
+        >
+          <ReactJson src={object} />
+        </ContextWindow>
+      </div>
     </>
   );
 };

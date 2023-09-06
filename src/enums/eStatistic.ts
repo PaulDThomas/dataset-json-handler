@@ -1,7 +1,7 @@
 export enum eStatistic {
   n = "n",
   pct = "%",
-  mean = "n",
+  mean = "mean",
   sd = "SD",
   p0 = "Min",
   p25 = "Q1",
