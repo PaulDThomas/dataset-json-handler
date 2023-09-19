@@ -8,7 +8,7 @@ import { removeAnalGroupLevel } from "../functions/removeAnalGroupLevel";
 import { removeRowVariable } from "../functions/removeRowVariable";
 import { removeWhereClause } from "../functions/removeWhereClause";
 import { setColumnAnalysisGroup } from "../functions/setColumnsAnalysisGroup";
-import { refreshTable } from "functions/refreshTable";
+import { refreshTable } from "../functions/refreshTable";
 import { updateGroup } from "../functions/updateGroup";
 import { updateItem } from "../functions/updateItem";
 import { updateWhereClauseConditions } from "../functions/updateWhereClauseConditions";
