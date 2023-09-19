@@ -141,16 +141,18 @@ export const getARS = (state: SummaryTableSchema, dataset: string): ReportingEve
                 },
                 {
                   sectionType: "Row Header",
-                  orderedSubSections: [
-                    ...state.rows.map((r, i) => ({
-                      order: i * 2 + 1,
+                  orderedSubSections: state.rows.flatMap((r, i) => [
+                    {
+                      order: i + 1,
+                      id: `DISPLAY_${r.name}`,
                       text: r.name,
-                    })),
-                    ...state.statistics.map((s, i) => ({
-                      order: i * 2 + 2,
+                    },
+                    ...state.statistics.map((s, j) => ({
+                      order: i + 1 + j / 100,
+                      id: `DISPLAY_${r.name}-${s}`,
                       text: s.toString(),
                     })),
-                  ],
+                  ]),
                 },
               ],
             },
