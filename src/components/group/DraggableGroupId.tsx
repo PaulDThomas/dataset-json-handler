@@ -14,7 +14,6 @@ export const DraggableGroupId = ({ id }: DraggableGroupIdProps): JSX.Element => 
 
   const handleDragStart = (e: React.DragEvent) => {
     if (group) {
-      console.log("Drag start for " + group.label);
       setIsBeingDragged(true);
       e.dataTransfer.setData(
         group.type === "AnalysisGroup" ? "application/analysisgroup" : "application/datagroup",
@@ -23,10 +22,8 @@ export const DraggableGroupId = ({ id }: DraggableGroupIdProps): JSX.Element => 
     }
   };
 
-  const handleDragEnd = (e: React.DragEvent) => {
+  const handleDragEnd = () => {
     if (group) {
-      console.log(e);
-      console.log("Drag end for " + group.label);
       setIsBeingDragged(false);
     }
   };

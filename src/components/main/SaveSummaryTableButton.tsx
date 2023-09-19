@@ -29,6 +29,7 @@ export const SaveSummaryTableButton = (): JSX.Element => {
   return (
     <div style={{ display: "inline-block" }}>
       <button
+        disabled={window.localStorage.getItem("summaryTable") !== undefined}
         onClick={(e) => {
           e.stopPropagation();
           e.preventDefault();

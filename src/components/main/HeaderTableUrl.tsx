@@ -31,19 +31,43 @@ export const HeaderTableUrl = () => {
   );
 
   useEffect(() => {
-    getData(debouncedUrl);
-  }, [debouncedUrl, getData]);
+    if (debouncedUrl !== loadStatus.requestedId && debouncedUrl !== loadStatus.requestingId)
+      getData(debouncedUrl);
+  }, [debouncedUrl, getData, loadStatus.requestedId, loadStatus.requestingId]);
 
   return (
     <tr>
       <td>Data url</td>
       <td colSpan={4}>
-        <input
-          type="text"
-          style={{ width: "calc(100% - 0.5rem)", border: "1px solid black" }}
-          value={rawUrl}
-          onChange={(e) => setRawUrl(e.currentTarget.value)}
-        />
+        <div style={{ position: "relative" }}>
+          {loadStatus.requesting && (
+            <div
+              style={{
+                position: "absolute",
+                opacity: 0.85,
+                zIndex: 1,
+                backgroundColor: "orange",
+                width: "100%",
+                textAlign: "center",
+              }}
+            >
+              Loading
+            </div>
+          )}
+          <input
+            type="text"
+            style={{
+              width: "calc(100% - 0.5rem)",
+              border: "1px solid black",
+              backgroundColor: loadStatus.error ? "red" : "white",
+            }}
+            value={rawUrl}
+            onChange={(e) => {
+              setLoadStatus({ ...loadStatus, error: false });
+              setRawUrl(e.currentTarget.value);
+            }}
+          />
+        </div>
       </td>
     </tr>
   );

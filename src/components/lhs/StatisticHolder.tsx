@@ -1,6 +1,6 @@
+import { eStatistic } from "enums/eStatistic";
 import React, { useState } from "react";
 import "./StatisticHolder.css";
-import { eStatistic } from "enums/eStatistic";
 
 interface StatisticHolderProps {
   id: string;
@@ -11,7 +11,6 @@ export const StatisticHolder = ({ id, statistic }: StatisticHolderProps): JSX.El
   const [isBeingDragged, setIsBeingDragged] = useState<boolean>(false);
 
   const handleDragStart = (e: React.DragEvent) => {
-    console.log("Drag start for " + statistic);
     setIsBeingDragged(true);
     e.dataTransfer.setData(
       "application/json",
@@ -19,9 +18,7 @@ export const StatisticHolder = ({ id, statistic }: StatisticHolderProps): JSX.El
     );
   };
 
-  const handleDragEnd = (e: React.DragEvent) => {
-    console.log(e);
-    console.log("Drag end for " + statistic);
+  const handleDragEnd = () => {
     setIsBeingDragged(false);
   };
 

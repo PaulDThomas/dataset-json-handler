@@ -40,6 +40,7 @@ export const loadWrapper = async <T1 extends FetchReturn, T2>(
       if (response.ErrorText !== "Request cancelled") {
         setStatus({
           requesting: false,
+          requestedId: target,
           error: true,
           errorText: response.ErrorText,
         });

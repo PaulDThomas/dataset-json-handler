@@ -19,16 +19,13 @@ export const DraggableItem = ({ id, oid, otherActions }: DraggableItemProps): JS
 
   const handleDragStart = (e: React.DragEvent) => {
     if (item) {
-      console.log("Drag start for " + item.name);
       setIsBeingDragged(true);
       e.dataTransfer.setData("application/datasetjsonitem", item.toString);
     }
   };
 
-  const handleDragEnd = (e: React.DragEvent) => {
+  const handleDragEnd = () => {
     if (item) {
-      console.log(e);
-      console.log("Drag end for " + item.name);
       setIsBeingDragged(false);
     }
   };

@@ -49,8 +49,6 @@ export const DropTarget = ({
           break;
         default:
       }
-      console.log("Data dropped");
-      console.log(data);
       dropAction && dropAction({ type: "datasetjsonitem", data });
     } catch (error) {
       console.warn(`Something has gone wrong :( dropping on ${id}`);
