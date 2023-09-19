@@ -64,9 +64,10 @@ export const SummaryTableWhere = ({ editable = true }: SummaryTableWhereProps): 
                     (wc) => wc.id === state.whereClauses.find((w) => w.id === pw)?.condition,
                   )?.isValid,
               ) && (
-                <div
+                <button
                   style={{ cursor: "pointer" }}
                   className="stwhere-add-where-clause"
+                  disabled
                   onClick={() =>
                     dispatch({
                       operation: ADD_PAGE_WHERE,
@@ -75,8 +76,8 @@ export const SummaryTableWhere = ({ editable = true }: SummaryTableWhereProps): 
                   }
                 >
                   {"\u2295 "}
-                  Add where clause
-                </div>
+                  Add
+                </button>
               )}
           </div>
         </ContextWindow>

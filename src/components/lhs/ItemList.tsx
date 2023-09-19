@@ -16,17 +16,13 @@ export const ItemList = ({ id }: ItemListProps) => {
       title="Items"
       id={id}
     >
-      {state.itemList
-        .filter(
-          (v) => !state.rows.map((r) => r.name).includes(v.name) && state.target?.name !== v.name,
-        )
-        .map((variable, index) => (
-          <DraggableItem
-            key={variable.OID ?? index}
-            oid={variable.OID}
-            id={`${id}-${variable.name}`}
-          />
-        ))}
+      {state.itemList.map((variable, index) => (
+        <DraggableItem
+          key={variable.OID ?? index}
+          oid={variable.OID}
+          id={`${id}-${variable.name}`}
+        />
+      ))}
     </Accordion>
   );
 };

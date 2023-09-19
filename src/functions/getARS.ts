@@ -7,11 +7,11 @@ export const getARS = (state: SummaryTableSchema, dataset: string): ReportingEve
   const ret: ReportingEvent = {
     id: "ARS",
     version: 0.1,
-    name: "ARS, exploring holistic overview, local example",
+    name: "Analysis Results Standard, Exploring the Holistic Overview in a Localhost Example",
     listOfPlannedAnalyses: {
       listItems: [
         {
-          outputId: "TAB-1",
+          outputId: "TAB_1",
           name: "Local example table",
           level: 1,
           order: 1,
@@ -29,7 +29,7 @@ export const getARS = (state: SummaryTableSchema, dataset: string): ReportingEve
     listOfPlannedOutputs: {
       listItems: [
         {
-          outputId: "TAB-1",
+          outputId: "TAB_1",
           name: "Local example table",
           level: 1,
           order: 1,
@@ -77,19 +77,33 @@ export const getARS = (state: SummaryTableSchema, dataset: string): ReportingEve
         name: "Summary of by group of a continuous variable",
         id: "M_GRP_SUM_CONTIN",
         label: "Summarise continuous variable",
-        description: "AZSOL standard summary statistics for a continuous variable",
-        documentRefs: [
-          {
-            referenceDocumentId: "AZSOL",
-            pageRefs: [{ refType: "PhysicalRef", label: "Chapter 4", pageNumbers: [12] }],
-          },
-        ],
+        description: "Standard summary statistics for a continuous variable",
+        documentRefs: [],
         operations: (Object.keys(eStatistic) as eStatistic[]).map((s, j) => ({
           id: `M_GRP_SUM_CONTIN_${s.toUpperCase()}`,
           label: `${Object.values(eStatistic)[j]}`,
           name: s,
           resultPattern: "3sf",
         })),
+      },
+      {
+        name: "Summary of by group of a categorical variable",
+        id: "M_GRP_SUM_CAT",
+        label: "Summarise categorical variable",
+        description: "N and percent statistics for a continuous variable",
+        documentRefs: [],
+        operations: [
+          { id: "M_GRP_SUM_CAT_N", label: "n", name: "n", resultPattern: "0dp" },
+          { id: "M_GRP_SUM_CAT_PCT", label: "%", name: "percent", resultPattern: "1dp" },
+        ],
+      },
+      {
+        name: "Big N",
+        id: "BIG_N",
+        label: "N",
+        description: "Subject population numbers for analysis groups",
+        documentRefs: [],
+        operations: [{ id: "M_GRP_BIG_N", label: "N", name: "N", resultPattern: "0dp" }],
       },
     ],
     analyses: state.rows.map((item, i) => ({
@@ -104,6 +118,46 @@ export const getARS = (state: SummaryTableSchema, dataset: string): ReportingEve
       level: 2,
       order: i + 1,
     })),
+    outputs: [
+      {
+        name: "Local example table",
+        id: "TAB_1",
+        version: 1,
+        displays: [
+          {
+            order: 1,
+            display: {
+              name: "Example",
+              id: "DISP_1",
+              version: 1,
+              displayTitle: "Example display",
+              displaySections: [
+                {
+                  sectionType: "Column Headers",
+                  orderedSubSections: state.columns.map((c, i) => ({
+                    order: i,
+                    text: c,
+                  })),
+                },
+                {
+                  sectionType: "Row Header",
+                  orderedSubSections: [
+                    ...state.rows.map((r, i) => ({
+                      order: i * 2 + 1,
+                      text: r.name,
+                    })),
+                    ...state.statistics.map((s, i) => ({
+                      order: i * 2 + 2,
+                      text: s.toString(),
+                    })),
+                  ],
+                },
+              ],
+            },
+          },
+        ],
+      },
+    ],
   };
   return ret;
 };

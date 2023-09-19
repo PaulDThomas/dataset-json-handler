@@ -1,8 +1,8 @@
 import { useContext } from "react";
 import { SummaryTableContext } from "../../context/SummaryTableContext";
-import { Accordion } from "./Accordion";
 import { AddGroupButton } from "../group/AddGroupButton";
 import { GroupTable } from "../group/GroupTable";
+import { Accordion } from "./Accordion";
 
 interface GroupListProps {
   id: string;

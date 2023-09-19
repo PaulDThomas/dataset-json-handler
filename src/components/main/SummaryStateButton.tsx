@@ -18,8 +18,10 @@ export const SummaryStateButton = () => {
       />
       <JsonWindowButton
         id="ars-button"
+        buttonLabel="ARS"
         title="ARS output"
         object={getARS(summaryTableContext.state, dsjState.datasetJson?.name ?? "DATASET")}
+        canSave
       />
     </>
   );

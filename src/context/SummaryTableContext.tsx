@@ -45,7 +45,7 @@ const initialState: SummaryTableSchema = {
   columnAnalysisGroup: null,
   columns: [],
   statistics: [],
-  statisticPosition: "column",
+  statisticPosition: "row",
   whereClauses: [],
   whereClauseConditions: [],
   groupList: [],

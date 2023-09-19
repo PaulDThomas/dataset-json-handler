@@ -9,6 +9,7 @@ export const AddGroupButton = () => {
     <>
       <button
         className="add-group-button"
+        disabled
         onClick={(e) => {
           e.preventDefault();
           e.stopPropagation();

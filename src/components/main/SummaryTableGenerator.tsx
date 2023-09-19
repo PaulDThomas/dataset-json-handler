@@ -53,16 +53,25 @@ export const SummaryTableGenerator = (): JSX.Element => {
                   </div>
                 </div>
                 <div
-                  className="summarytable-rhs"
+                  className="small-scrollbar-holder"
                   style={{
-                    width: "calc(100% - 190px)",
-                    height: "100%",
-                    display: "flex",
-                    flexDirection: "column",
+                    minWidth: "500px",
+                    width: "calc(100%)",
+                    height: "calc(100% - 8px)",
                   }}
                 >
-                  <SummaryTableWhere />
-                  <DropTable id={"summarytable"} />
+                  <div
+                    className="summarytable-rhs small-scrollbar"
+                    style={{
+                      // width: "calc(100% - 190px)",
+                      // height: "100%",
+                      display: "flex",
+                      flexDirection: "column",
+                    }}
+                  >
+                    <SummaryTableWhere />
+                    <DropTable id={"summarytable"} />
+                  </div>
                 </div>
               </div>
             </div>

@@ -15,6 +15,7 @@ import { updateWhereClauseConditions } from "../functions/updateWhereClauseCondi
 import { updateWhereClauses } from "../functions/updateWhereClauses";
 import { WhereClauseConditionClass } from "../main";
 import { SummaryTableData, SummaryTableSchema } from "./SummaryTableContext";
+import { eStatistic } from "../enums/eStatistic";
 
 export const ADD_ANAL_GROUP = "ADD_ANAL_GROUP";
 export const ADD_ANAL_GROUP_LEVELS = "ADD_ANAL_GROUP_LEVELS";
@@ -126,6 +127,9 @@ export const stReducer = (state: SummaryTableSchema, action: ActionProps): Summa
       break;
     case MOVE_ROW_VARIABLE:
       newState = addRowVariable(action, newState);
+      if (newState.statistics.length === 0) {
+        newState.statistics = Object.keys(eStatistic) as eStatistic[];
+      }
       break;
     case REMOVE_ANAL_GROUP_LEVEL:
       if (action.group && action.group.type === "AnalysisGroup" && action.deleteId) {
