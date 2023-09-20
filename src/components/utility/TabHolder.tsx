@@ -30,7 +30,7 @@ export const TabHolder = ({ id = "tab", tabList }: TabHolderProps) => {
             zIndex: state.pane === tab.value ? 1 : 0,
           }}
         >
-          {tab.element()}
+          {tab.value === state.pane && tab.element()}
         </div>
       ))}
     </div>

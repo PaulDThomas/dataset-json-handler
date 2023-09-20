@@ -63,8 +63,6 @@ export const SummaryTableGenerator = (): JSX.Element => {
                   <div
                     className="summarytable-rhs small-scrollbar"
                     style={{
-                      // width: "calc(100% - 190px)",
-                      // height: "100%",
                       display: "flex",
                       flexDirection: "column",
                     }}

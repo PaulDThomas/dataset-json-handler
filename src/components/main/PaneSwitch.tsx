@@ -31,7 +31,12 @@ export const PaneSwitch = () => {
             }}
             id={`pane-switch-${k.value}`}
           />
-          <label htmlFor={`pane-switch-${k.value}`}>{k.label}</label>
+          <label
+            htmlFor={`pane-switch-${k.value}`}
+            style={{ paddingRight: "8px" }}
+          >
+            {k.label}
+          </label>
         </Fragment>
       ))}
     </>
