@@ -1,4 +1,4 @@
-import { useCallback, useContext } from "react";
+import { useCallback, useContext, useState } from "react";
 import { SummaryTableContext, SummaryTableData } from "../../context/SummaryTableContext";
 import { LOAD_STATUS } from "../../context/stReducer";
 
@@ -25,11 +25,14 @@ export const SaveSummaryTableButton = (): JSX.Element => {
     const newStatus = JSON.parse(window.localStorage.getItem("summaryTable") ?? "{}");
     dispatch({ operation: LOAD_STATUS, incomingStatus: newStatus });
   }, [dispatch]);
+  const [canLoad, setCanLoad] = useState<boolean>(
+    window.localStorage.getItem("summaryTable") === null,
+  );
 
   return (
     <div style={{ display: "inline-block" }}>
       <button
-        disabled={window.localStorage.getItem("summaryTable") !== undefined}
+        disabled={canLoad}
         onClick={(e) => {
           e.stopPropagation();
           e.preventDefault();
@@ -43,6 +46,7 @@ export const SaveSummaryTableButton = (): JSX.Element => {
           e.stopPropagation();
           e.preventDefault();
           DoSave();
+          setCanLoad(false);
         }}
       >
         Save
