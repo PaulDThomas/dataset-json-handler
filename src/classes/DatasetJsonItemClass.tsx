@@ -1,22 +1,21 @@
-import { iSimpleTableRow } from '@asup/simple-table';
-import { JSX } from 'react';
+import { iSimpleTableRow } from "@asup/simple-table";
 
 /**
  * Item type
  */
 export enum eItemType {
-  string = 'string',
-  integer = 'integer',
-  float = 'float',
-  date = 'Date',
-  time = 'Time',
-  datetime = 'DateTime',
+  string = "string",
+  integer = "integer",
+  float = "float",
+  date = "Date",
+  time = "Time",
+  datetime = "DateTime",
 }
 
 /**
  * Item (variable) inside a DatasetJson object
  */
-export interface iDatasetJsonItem extends iSimpleTableRow {
+export interface DatasetJsonItem extends iSimpleTableRow {
   /**
    * Item unique identifier
    */
@@ -39,8 +38,9 @@ export interface iDatasetJsonItem extends iSimpleTableRow {
   length?: number;
 }
 
+/** Data set JSON item class, individual item (variable) in the data set */
 export class DatasetJsonItemClass {
-  private _OID = '';
+  protected _OID = "";
 
   /**
    * Unique identifier
@@ -48,28 +48,28 @@ export class DatasetJsonItemClass {
   get OID() {
     return this._OID;
   }
-  private _name = '';
+  protected _name = "";
   /**
    * Item name
    */
   get name() {
     return this._name;
   }
-  private _label = '';
+  protected _label = "";
   /**
    * Item label
    */
   get label() {
     return this._label;
   }
-  private _type: eItemType = eItemType.string;
+  protected _type: eItemType = eItemType.string;
   /**
    * Item type
    */
   get type(): eItemType {
     return this._type;
   }
-  private _length: number | undefined = 8;
+  protected _length: number | undefined = 8;
   /**
    * Assigned item length for strings
    */
@@ -78,9 +78,9 @@ export class DatasetJsonItemClass {
   }
 
   /**
-   * Data stored in the clas
+   * Data stored in the class
    */
-  get data(): iDatasetJsonItem {
+  get data(): DatasetJsonItem {
     return {
       OID: this._OID,
       name: this._name,
@@ -101,17 +101,10 @@ export class DatasetJsonItemClass {
    * Create new data item class
    * @param newItem New data item information
    */
-  public constructor(newItem: iDatasetJsonItem) {
+  public constructor(newItem: DatasetJsonItem) {
     this._OID = newItem.OID;
     this._name = newItem.name;
     this._label = newItem.label;
     this._length = newItem.length;
-  }
-
-  /**
-   * Return JSX span with the class name
-   */
-  get component(): JSX.Element {
-    return <span className='datasetjson-item'>{this._name}</span>;
   }
 }

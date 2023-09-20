@@ -1,18 +1,40 @@
-import { DatasetJsonItemClass } from '../../classes/DatasetJsonItemClass';
+import { useContext, useMemo } from "react";
+import { SummaryTableContext } from "../../context/SummaryTableContext";
 
 interface ItemPropertiesProps {
-  item: DatasetJsonItemClass;
-  setItem?: (ret: DatasetJsonItemClass) => void;
+  oid: string;
 }
 
-export const ItemProperties = ({ item, setItem }: ItemPropertiesProps): JSX.Element => {
+export const ItemProperties = ({ oid }: ItemPropertiesProps): JSX.Element => {
+  const { state } = useContext(SummaryTableContext);
+  const item = useMemo(() => state.itemList.find((i) => i.OID === oid), [oid, state]);
+
+  if (!item) return <></>;
   return (
-    <div>
-      <div>{item.OID}</div>
-      <div>{item.name}</div>
-      <div>{item.label}</div>
-      <div>{item.type}</div>
-      <div>{item.length}</div>
-    </div>
+    <table>
+      <tbody>
+        <tr>
+          <td>OID</td>
+          <td>{oid}</td>
+        </tr>
+        {[
+          { name: "name", label: "Name" },
+          { name: "label", label: "Label" },
+          { name: "type", label: "Type" },
+          { name: "length", label: "Length" },
+        ].map((p, i) => (
+          <tr key={i}>
+            <td>{p.name}</td>
+            <td>
+              <input
+                aria-label={p.label}
+                value={item.data[p.name]?.toString() ?? ""}
+                disabled
+              />
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
   );
 };

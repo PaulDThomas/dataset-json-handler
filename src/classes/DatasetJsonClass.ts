@@ -1,13 +1,13 @@
-import { iSimpleTableField, iSimpleTableRow, simpleTableSortFn } from '@asup/simple-table';
-import { ItemDataRow } from '../interfaces/ItemDataRow';
-import { CdiscDatasetJson } from '../interfaces/CdiscDatasetJson';
-import { DatasetJsonItemClass, iDatasetJsonItem } from './DatasetJsonItemClass';
+import { iSimpleTableField, iSimpleTableRow, simpleTableSortFn } from "@asup/simple-table";
+import { DataRow } from "../interfaces/DataRow";
+import { CdiscDatasetJson } from "../interfaces/CdiscDatasetJson";
+import { DatasetJsonItemClass, DatasetJsonItem } from "./DatasetJsonItemClass";
 
 /**
  * Typescript class for a CDISC data set JSON object
  */
 export class DatasetJsonClass {
-  private _errorText = '';
+  protected _errorText = "";
   /**
    * Error text after internal error
    */
@@ -15,7 +15,7 @@ export class DatasetJsonClass {
     return this._errorText;
   }
 
-  private _studyOID = '';
+  protected _studyOID = "";
   /**
    * studyOID attibute
    */
@@ -26,16 +26,16 @@ export class DatasetJsonClass {
    * Sets value of studyOID
    */
   set studyOID(newValue: string) {
-    if (newValue !== '') {
+    if (newValue !== "") {
       this._studyOID = newValue;
     }
   }
-  private _metaDataVersionOID = 'CDISC.ADaM.2.1';
+  protected _metaDataVersionOID = "CDISC.ADaM.2.1";
   get metaDataVersionOID() {
     return this._metaDataVersionOID;
   }
 
-  private _name = '';
+  protected _name = "";
   /**
    * Data set name
    */
@@ -46,12 +46,12 @@ export class DatasetJsonClass {
    * Data set name
    */
   set name(newValue: string) {
-    if (newValue !== '') {
+    if (newValue !== "") {
       this._name = newValue;
     }
   }
 
-  private _label = '';
+  protected _label = "";
   /**
    * Data set label
    */
@@ -62,7 +62,7 @@ export class DatasetJsonClass {
    * Data set label
    */
   set label(newValue: string) {
-    if (newValue !== '') {
+    if (newValue !== "") {
       this._label = newValue;
     }
   }
@@ -71,10 +71,10 @@ export class DatasetJsonClass {
    * Number of records in the data set
    */
   get records() {
-    return this.itemData.length;
+    return this.dataRows.length;
   }
 
-  private _items: DatasetJsonItemClass[] = [];
+  protected _items: DatasetJsonItemClass[] = [];
   /**
    * Items (variables) in the data set
    */
@@ -84,7 +84,7 @@ export class DatasetJsonClass {
   /**
    * Items (variables) in the data set
    */
-  set items(newItems: (iDatasetJsonItem | DatasetJsonItemClass)[]) {
+  set items(newItems: (DatasetJsonItem | DatasetJsonItemClass)[]) {
     if (newItems.length > 0) {
       this._items = newItems.map((i) =>
         i instanceof DatasetJsonItemClass ? i : new DatasetJsonItemClass(i),
@@ -98,7 +98,7 @@ export class DatasetJsonClass {
           ...item.data,
           sortFn: simpleTableSortFn,
           searchFn:
-            item.type === 'string'
+            item.type === "string"
               ? (row, text) =>
                   (row[item.name] as string).toLocaleLowerCase().includes(text.toLocaleLowerCase())
               : undefined,
@@ -110,15 +110,15 @@ export class DatasetJsonClass {
    * @param newItem Add data set item definition to the data set
    * @returns true is successful, false (& sets errorText) is there is an error
    */
-  public addItem(newItem: DatasetJsonItemClass | iDatasetJsonItem): boolean {
+  public addItem(newItem: DatasetJsonItemClass | DatasetJsonItem): boolean {
     if (this.items.map((i) => i.name).includes(newItem.name)) {
-      this._errorText = 'Item name already exists';
+      this._errorText = "Item name already exists";
       return false;
     }
     this._items.push(
       newItem instanceof DatasetJsonItemClass ? newItem : new DatasetJsonItemClass(newItem),
     );
-    this._itemData.forEach((row) => {
+    this._dataRows.forEach((row) => {
       row[newItem.name] = undefined;
     });
     return true;
@@ -131,7 +131,7 @@ export class DatasetJsonClass {
     const ix = this._items.findIndex((i) => i.name === oldItemName);
     if (ix > -1) {
       this._items.splice(ix, 1);
-      this._itemData.forEach((row) => {
+      this._dataRows.forEach((row) => {
         if (Object.keys(row).includes(oldItemName)) {
           delete row.oldItemName;
         }
@@ -139,18 +139,18 @@ export class DatasetJsonClass {
     }
   }
 
-  public _itemData: ItemDataRow[] = [];
+  public _dataRows: DataRow[] = [];
   /**
    * Data stored in the data set
    */
-  get itemData() {
-    return this._itemData.filter((row) => !row.__isDeleted);
+  get dataRows() {
+    return this._dataRows.filter((row) => !row.__isDeleted);
   }
   /**
    * Data stored in the data set
    */
-  set itemData(newItemDataRows: iSimpleTableRow[]) {
-    this._itemData = newItemDataRows.map((row, i) => ({
+  set dataRows(newItemDataRows: iSimpleTableRow[]) {
+    this._dataRows = newItemDataRows.map((row, i) => ({
       ...new Map(this._items.map((item) => [item.name, row[item.name]])),
       __rowNumber: i + 1,
       __isDeleted: false,
@@ -159,14 +159,14 @@ export class DatasetJsonClass {
 
   /**
    * Add single row to the data
-   * @param newItemDataRow New row data
+   * @param newDataRow New row data
    * @returns true is successful, false (& sets errorText) is there is an error
    */
-  public addItemData(newItemDataRow: iSimpleTableRow): boolean {
-    const newItem = Object.fromEntries(
-      new Map(this._items.map((item) => [item.name, newItemDataRow[item.name]])),
+  public addDataRow(newDataRow: iSimpleTableRow): boolean {
+    const _newDataRow = Object.fromEntries(
+      new Map(this._items.map((item) => [item.name, newDataRow[item.name]])),
     );
-    this._itemData.push({ ...newItem, __rowNumber: this._itemData.length, __isDeleted: false });
+    this._dataRows.push({ ..._newDataRow, __rowNumber: this._dataRows.length, __isDeleted: false });
     return true;
   }
 
@@ -175,13 +175,13 @@ export class DatasetJsonClass {
    * @param rowNumber Row number to remove
    * @returns true is successful, false (& sets errorText) is there is an error
    */
-  public removeItemData(rowNumber: number): boolean {
-    const ix = this._itemData.findIndex((row) => row.__rowNumber === rowNumber);
+  public removeDataRow(rowNumber: number): boolean {
+    const ix = this._dataRows.findIndex((row) => row.__rowNumber === rowNumber);
     if (ix > -1) {
-      this._itemData[ix].__isDeleted = true;
+      this._dataRows[ix].__isDeleted = true;
       return true;
     } else {
-      this._errorText = 'Row number not found';
+      this._errorText = "Row number not found";
       return false;
     }
   }
@@ -197,7 +197,7 @@ export class DatasetJsonClass {
     this._name = ds.name;
     this._label = ds.label;
     this.items = ds.items;
-    this._itemData = ds.itemData.map((arrayRow, ai) => {
+    this._dataRows = ds.itemData.map((arrayRow, ai) => {
       const newItem = Object.fromEntries(
         new Map(ds.items.map((item, i) => [item.name, arrayRow[i]])),
       );

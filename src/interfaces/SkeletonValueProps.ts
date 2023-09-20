@@ -9,5 +9,5 @@ export interface SkeletonValueProps {
   /**
    * Value frequency
    */
-  valueType: 'always' | 'when-present';
+  valueType: "always" | "when-present";
 }

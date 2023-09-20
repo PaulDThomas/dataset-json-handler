@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import './StatisticHolder.css';
-import { eStatistic } from 'enums/eStatistic';
+import { eStatistic } from "enums/eStatistic";
+import React, { useState } from "react";
+import "./StatisticHolder.css";
 
 interface StatisticHolderProps {
   id: string;
@@ -11,24 +11,21 @@ export const StatisticHolder = ({ id, statistic }: StatisticHolderProps): JSX.El
   const [isBeingDragged, setIsBeingDragged] = useState<boolean>(false);
 
   const handleDragStart = (e: React.DragEvent) => {
-    console.log('Drag start for ' + statistic);
     setIsBeingDragged(true);
     e.dataTransfer.setData(
-      'application/json',
-      JSON.stringify({ type: 'statistic', data: statistic }),
+      "application/json",
+      JSON.stringify({ type: "statistic", data: statistic }),
     );
   };
 
-  const handleDragEnd = (e: React.DragEvent) => {
-    console.log(e);
-    console.log('Drag end for ' + statistic);
+  const handleDragEnd = () => {
     setIsBeingDragged(false);
   };
 
   return (
     <div
       id={id}
-      className={`statistic-holder ${isBeingDragged ? 'being-dragged' : ''}`}
+      className={`statistic-holder ${isBeingDragged ? "being-dragged" : ""}`}
       draggable
       onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}

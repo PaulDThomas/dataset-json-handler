@@ -1,0 +1,26 @@
+.group-table {
+  border: 1px solid black;
+  border-radius: 4px;
+  border-collapse: collapse;
+  font-size: small;
+  max-width: 250px;
+  width: 250px;
+}
+
+.group-table td:first-child {
+  min-width: 75px;
+}
+
+.group-table td:last-child {
+  max-width: 175px;
+}
+
+.group-table input {
+  width: 160px;
+}
+
+.delete-button {
+  height: 18px;
+  padding: 0 4px;
+  margin-top: 0;
+}

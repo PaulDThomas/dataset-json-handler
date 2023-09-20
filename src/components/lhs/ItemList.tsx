@@ -1,36 +1,30 @@
-import { useContext } from 'react';
-import { DraggableItem } from './DraggableItem';
-import './ItemList.css';
-import { SummaryTableContext } from '../../context/SummaryTableContext';
+import { useContext } from "react";
+import { SummaryTableContext } from "../../context/SummaryTableContext";
+import { Accordion } from "./Accordion";
+import "./Accordion.css";
+import { DraggableItem } from "./DraggableItem";
 
 interface ItemListProps {
   id: string;
 }
 
 export const ItemList = ({ id }: ItemListProps) => {
-  const { state, itemList } = useContext(SummaryTableContext);
+  const { state } = useContext(SummaryTableContext);
 
   return (
-    <div
-      className='item-list simpletable-main small-scrollbar'
+    <Accordion
+      title="Items"
       id={id}
     >
-      <div className='simpletable-holder'>
-        {itemList
-          .filter(
-            (v) =>
-              !state.columns.map((c) => c.name).includes(v.name) &&
-              !state.rows.map((r) => r.name).includes(v.name) &&
-              state.target?.name !== v.name,
-          )
-          .map((variable, index) => (
-            <DraggableItem
-              key={variable.OID ?? index}
-              id={`${id}-${variable.name}`}
-              item={variable}
-            />
-          ))}
-      </div>
-    </div>
+      {state.itemList.map((variable, index) => (
+        <DraggableItem
+          key={variable.OID ?? index}
+          oid={variable.OID}
+          id={`${id}-${variable.name}`}
+        />
+      ))}
+    </Accordion>
   );
 };
+
+ItemList.displayName = "ItemList";

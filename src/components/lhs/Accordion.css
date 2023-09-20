@@ -1,0 +1,60 @@
+.accordion-title {
+  cursor: pointer;
+  display: flex;
+}
+
+.accordion-pre {
+  min-width: 14px;
+  min-height: 14px;
+  padding-right: 4px;
+  display: inline-block;
+}
+
+.accordion-pre.expanded {
+  transform: rotate(180deg) translateX(2px) translateY(0px);
+  transition: transform 0.3s linear;
+}
+
+.accordion-pre.closed {
+  transform: rotate(90deg) translateX(4px) translateY(-2px);
+  transition: transform 0.3s linear;
+}
+
+.accordion-holder {
+  overflow: hidden;
+}
+
+.accordion-holder.expanded {
+  /* height: max-content; */
+  transition: height 0.3s linear;
+}
+
+.accordion-holder.closed {
+  height: 0;
+  transition: height 0.3s linear;
+}
+
+.small-scrollbar {
+  overflow: auto;
+  height: 100%;
+  width: 100%;
+}
+
+.small-scrollbar::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.small-scrollbar::-webkit-scrollbar-track {
+  border-radius: 100px;
+}
+
+.small-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.6);
+  border: none;
+  border-radius: 100px;
+}
+
+.small-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.9);
+}

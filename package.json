@@ -1,6 +1,6 @@
 {
   "name": "@asup/dataset-json-handler",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Handler for Dataset-JSON",
   "author": "Paul Thomas <@PaulDThomas>",
   "private": false,
@@ -18,15 +18,13 @@
     "cdisc dataset-json"
   ],
   "homepage": ".",
-  "main": "dist/cjs/main.js",
-  "module": "dist/esm/main.js",
-  "types": "dist/dataset-json-handler.d.ts",
   "files": [
     "dist"
   ],
   "scripts": {
     "prepare": "husky install",
     "build": "parcel build src/main.ts",
+    "build-demo": "parcel build demo/index.html --dist-dir demo/build --public-url /ars-hackathon/",
     "start": "parcel demo/index.html --dist-dir demo/dist",
     "test": "jest --watch",
     "test:coverage-report": "npm test -- --coverage --watchAll=false"
@@ -53,8 +51,10 @@
     "@asup/context-menu": "^1.0.5",
     "@asup/simple-table": "^1.2.2",
     "@swc/helpers": "^0.5.1",
+    "lodash": "^4.17.21",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-json-view": "^1.21.3"
   },
   "peer-dependencies": {
     "react": "^18.2.0",
@@ -66,12 +66,12 @@
     "@parcel/transformer-sass": "^2.8.2",
     "@parcel/transformer-typescript-types": "^2.8.3",
     "@parcel/transformer-webmanifest": "^2.8.2",
-    "@prettier/plugin-php": "^0.19.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^14.4.3",
     "@types/jest": "^29.2.5",
-    "@types/node": "^16.11.57",
+    "@types/lodash": "^4.14.196",
+    "@types/node": "^18.17.17",
     "@types/react": "^18.0.18",
     "@types/react-dom": "^18.0.6",
     "@typescript-eslint/eslint-plugin": "^5.48.1",

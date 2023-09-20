@@ -1,8 +1,20 @@
-import { DatasetJsonClass } from './classes/DatasetJsonClass';
-import { DatasetJsonItemClass, eItemType } from './classes/DatasetJsonItemClass';
-import { SummaryTableGenerator } from './components/SummaryTableGenerator';
-import { CdiscDatasetJson } from './interfaces/CdiscDatasetJson';
-import { ItemDataRow } from './interfaces/ItemDataRow';
+import { AnalysisGroupClass } from "./classes/AnalysisGroup";
+import { DataGroupClass } from "./classes/DataGroup";
+import { DatasetJsonClass } from "./classes/DatasetJsonClass";
+import { DatasetJsonItemClass, eItemType } from "./classes/DatasetJsonItemClass";
+import { WhereClauseClass } from "./classes/WhereClauseClass";
+import { WhereClauseConditionClass } from "./classes/WhereClauseConditionClass";
+import { SummaryTableGenerator } from "./components/main/SummaryTableGenerator";
+import { CdiscDatasetJson } from "./interfaces/CdiscDatasetJson";
+import { DataRow } from "./interfaces/DataRow";
 
-export { SummaryTableGenerator, DatasetJsonClass as DatasetJson, DatasetJsonItemClass };
-export type { CdiscDatasetJson, eItemType, ItemDataRow };
+export {
+  DatasetJsonClass,
+  DatasetJsonItemClass,
+  WhereClauseConditionClass,
+  WhereClauseClass,
+  AnalysisGroupClass,
+  DataGroupClass,
+};
+export { SummaryTableGenerator };
+export type { CdiscDatasetJson, eItemType, DataRow };
