@@ -1,7 +1,7 @@
 import { SummaryTableSchema } from "../context/SummaryTableContext";
-import { ActionProps, UPDATE_ITEM } from "../context/stReducer";
+import { StActionProps, UPDATE_ITEM } from "../context/stReducer";
 
-export function updateItem(action: ActionProps, state: SummaryTableSchema) {
+export function updateItem(action: StActionProps, state: SummaryTableSchema) {
   if (action.item === undefined) throw `${UPDATE_ITEM}: No item`;
   else {
     const newState = { ...state };

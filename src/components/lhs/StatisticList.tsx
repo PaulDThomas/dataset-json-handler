@@ -22,3 +22,5 @@ export const StatisticList = ({ id }: StatisticListProps) => {
     </div>
   );
 };
+
+StatisticList.displayName = "StatisticList";

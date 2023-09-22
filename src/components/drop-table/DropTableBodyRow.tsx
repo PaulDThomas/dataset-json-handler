@@ -34,3 +34,5 @@ export const DropTableBodyRow = ({
     </>
   );
 };
+
+DropTableBodyRow.displayName = "DropTableBodyRow";

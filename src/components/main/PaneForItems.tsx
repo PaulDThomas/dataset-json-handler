@@ -25,3 +25,5 @@ export const PaneForItems = () => {
     </>
   );
 };
+
+PaneForItems.displayName = "PaneForItems";

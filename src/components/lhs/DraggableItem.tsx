@@ -1,8 +1,8 @@
 import { ContextMenuHandler, ContextWindow, iMenuItem } from "@asup/context-menu";
 import React, { useContext, useMemo, useState } from "react";
-import { SummaryTableContext } from "../../context/SummaryTableContext";
-import "./DraggableItem.css";
+import { DSJContext } from "../../context/DSJContextProvider";
 import { ItemProperties } from "../utility/ItemProperties";
+import "./DraggableItem.css";
 
 interface DraggableItemProps {
   id: string;
@@ -11,11 +11,11 @@ interface DraggableItemProps {
 }
 
 export const DraggableItem = ({ id, oid, otherActions }: DraggableItemProps): JSX.Element => {
-  const { state } = useContext(SummaryTableContext);
+  const { state } = useContext(DSJContext);
   const [isBeingDragged, setIsBeingDragged] = useState<boolean>(false);
   const [showProperties, setShowProperties] = useState<boolean>(false);
 
-  const item = useMemo(() => state.itemList.find((i) => i.OID === oid), [oid, state]);
+  const item = useMemo(() => state.datasetJson?.items.find((i) => i.OID === oid), [oid, state]);
 
   const handleDragStart = (e: React.DragEvent) => {
     if (item) {

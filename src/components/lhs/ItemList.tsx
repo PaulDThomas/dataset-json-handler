@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { SummaryTableContext } from "../../context/SummaryTableContext";
+import { DSJContext } from "../../context/DSJContextProvider";
 import { Accordion } from "./Accordion";
 import "./Accordion.css";
 import { DraggableItem } from "./DraggableItem";
@@ -9,14 +9,14 @@ interface ItemListProps {
 }
 
 export const ItemList = ({ id }: ItemListProps) => {
-  const { state } = useContext(SummaryTableContext);
+  const { state } = useContext(DSJContext);
 
   return (
     <Accordion
       title="Items"
       id={id}
     >
-      {state.itemList.map((variable, index) => (
+      {state.datasetJson?.items.map((variable, index) => (
         <DraggableItem
           key={variable.OID ?? index}
           oid={variable.OID}

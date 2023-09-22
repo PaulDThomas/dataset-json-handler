@@ -1,7 +1,7 @@
 import { SummaryTableSchema } from "../context/SummaryTableContext";
-import { ActionProps, UPDATE_WHERE_CLAUSE_CONDITION } from "../context/stReducer";
+import { StActionProps, UPDATE_WHERE_CLAUSE_CONDITION } from "../context/stReducer";
 
-export function updateWhereClauseConditions(action: ActionProps, state: SummaryTableSchema) {
+export function updateWhereClauseConditions(action: StActionProps, state: SummaryTableSchema) {
   if (action.whereClauseConditions === undefined)
     throw `${UPDATE_WHERE_CLAUSE_CONDITION}: No where clause conditions specified`;
   else {

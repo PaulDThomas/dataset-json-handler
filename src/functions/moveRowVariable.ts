@@ -1,8 +1,8 @@
 import { SummaryTableSchema } from "../context/SummaryTableContext";
 import { moveVariable } from "./moveVariable";
-import { MOVE_ROW_VARIABLE, ActionProps } from "../context/stReducer";
+import { MOVE_ROW_VARIABLE, StActionProps } from "../context/stReducer";
 
-export function addRowVariable(action: ActionProps, state: SummaryTableSchema) {
+export function addRowVariable(action: StActionProps, state: SummaryTableSchema) {
   if (action.item === undefined) throw `${MOVE_ROW_VARIABLE}: No variable specified`;
   else if (action.position === undefined) throw `${MOVE_ROW_VARIABLE}: No position defined`;
   else if (action.position > state.rows.length) throw `${MOVE_ROW_VARIABLE}: Position is too high`;

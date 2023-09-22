@@ -35,3 +35,5 @@ export const DropTableRowVariable = ({ id, index }: DropTableRowVariableProps): 
     </tr>
   );
 };
+
+DropTableRowVariable.displayName = "DropTableBodyRow";

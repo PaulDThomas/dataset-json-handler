@@ -26,3 +26,5 @@ export const SummaryStateButton = () => {
     </>
   );
 };
+
+SummaryStateButton.displayName = "SummaryStateButton";

@@ -4,9 +4,9 @@ import { DatasetJsonItemClass } from "../classes/DatasetJsonItemClass";
 import { WhereClauseClass } from "../classes/WhereClauseClass";
 import { WhereClauseConditionClass } from "../classes/WhereClauseConditionClass";
 import { SummaryTableSchema } from "../context/SummaryTableContext";
-import { ActionProps, LOAD_STATUS } from "../context/stReducer";
+import { StActionProps, LOAD_STATUS } from "../context/stReducer";
 
-export function loadStatus(action: ActionProps) {
+export function loadStatus(action: StActionProps) {
   if (action.incomingStatus === undefined) {
     throw `${LOAD_STATUS}: No incoming data`;
   } else {

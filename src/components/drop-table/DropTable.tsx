@@ -55,3 +55,5 @@ export const DropTable = ({ id }: DropTableProps): JSX.Element => {
     </div>
   );
 };
+
+DropTable.displayName = "DropTable";

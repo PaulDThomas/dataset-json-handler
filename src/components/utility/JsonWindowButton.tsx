@@ -63,3 +63,5 @@ export const JsonWindowButton = ({
     </>
   );
 };
+
+JsonWindowButton.displayName = "JsonWindowButton";

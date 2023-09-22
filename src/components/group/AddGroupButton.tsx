@@ -31,3 +31,5 @@ export const AddGroupButton = () => {
     </>
   );
 };
+
+AddGroupButton.displayName = "AddGroupButton";

@@ -29,3 +29,5 @@ export const Accordion = ({ id, title, children }: AccordionProps): ReactNode =>
     </div>
   );
 };
+
+Accordion.displayName = "Accordion";

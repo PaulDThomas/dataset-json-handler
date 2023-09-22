@@ -34,3 +34,5 @@ export const StatisticHolder = ({ id, statistic }: StatisticHolderProps): JSX.El
     </div>
   );
 };
+
+StatisticHolder.displayName = "StatisticHolder";

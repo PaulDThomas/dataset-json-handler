@@ -34,3 +34,5 @@ export const DropTableTopLeftCell = ({ id }: DropTableTopLeftCellProps): JSX.Ele
     </th>
   );
 };
+
+DropTableTopLeftCell.displayName = "DropTabelTopLeftCell";

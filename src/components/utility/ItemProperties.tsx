@@ -38,3 +38,5 @@ export const ItemProperties = ({ oid }: ItemPropertiesProps): JSX.Element => {
     </table>
   );
 };
+
+ItemProperties.displayName = "ItemProperties";

@@ -1,7 +1,7 @@
 import { SummaryTableSchema } from "../context/SummaryTableContext";
-import { ActionProps } from "../context/stReducer";
+import { StActionProps } from "../context/stReducer";
 
-export function updateGroup(action: ActionProps, state: SummaryTableSchema) {
+export function updateGroup(action: StActionProps, state: SummaryTableSchema) {
   if (action.group === undefined) throw `${action.operation}: No group`;
   else {
     const newState = { ...state };

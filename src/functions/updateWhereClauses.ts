@@ -1,7 +1,7 @@
 import { SummaryTableSchema } from "../context/SummaryTableContext";
-import { ActionProps } from "../context/stReducer";
+import { StActionProps } from "../context/stReducer";
 
-export function updateWhereClauses(action: ActionProps, state: SummaryTableSchema) {
+export function updateWhereClauses(action: StActionProps, state: SummaryTableSchema) {
   if (action.whereClauses === undefined) throw `${action.operation}: No where clauses specified`;
   else {
     const newState = { ...state };

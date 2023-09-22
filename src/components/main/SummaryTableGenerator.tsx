@@ -79,3 +79,5 @@ export const SummaryTableGenerator = (): JSX.Element => {
     </>
   );
 };
+
+SummaryTableGenerator.displayName = "SummaryTableGenerator";

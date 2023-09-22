@@ -12,3 +12,5 @@ export const DropTableColumnVariable = ({ index }: DropTableHeaderVariableProps)
 
   return <th>{state.columns[index]}</th>;
 };
+
+DropTableColumnVariable.displayName = "DropTableColumnVariable";

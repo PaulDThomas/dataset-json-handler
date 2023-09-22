@@ -22,3 +22,5 @@ export const PaneForData = () => {
     </>
   );
 };
+
+PaneForData.displayName = "PaneForData";

@@ -45,3 +45,5 @@ export const Select = ({
     </div>
   );
 };
+
+Select.displayName = "Select";

@@ -37,7 +37,7 @@ export const UPDATE_ITEM = "UPDATE_ITEM";
 export const UPDATE_WHERE_CLAUSE = "UPDATE_WHERE_CLAUSE";
 export const UPDATE_WHERE_CLAUSE_CONDITION = "UPDATE_WHERE_CLAUSE_CONDITION";
 
-type Operation =
+type StOperation =
   | "ADD_ANAL_GROUP"
   | "ADD_ANAL_GROUP_LEVELS"
   | "ADD_DATA_GROUP"
@@ -58,8 +58,8 @@ type Operation =
   | "UPDATE_WHERE_CLAUSE"
   | "UPDATE_WHERE_CLAUSE_CONDITION";
 
-export interface ActionProps {
-  operation: Operation;
+export interface StActionProps {
+  operation: StOperation;
   columns?: DatasetJsonItemClass[];
   group?: DataGroupClass | AnalysisGroupClass;
   deleteId?: string;
@@ -73,7 +73,7 @@ export interface ActionProps {
   whereClauseConditions?: WhereClauseConditionClass[];
 }
 
-export const stReducer = (state: SummaryTableSchema, action: ActionProps): SummaryTableSchema => {
+export const stReducer = (state: SummaryTableSchema, action: StActionProps): SummaryTableSchema => {
   let newState: SummaryTableSchema = { ...state };
   switch (action.operation) {
     case ADD_ANAL_GROUP:

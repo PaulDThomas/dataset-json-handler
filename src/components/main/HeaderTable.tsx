@@ -39,3 +39,5 @@ export const HeaderTable = () => {
     </div>
   );
 };
+
+HeaderTable.displayName = "HeaderTable";

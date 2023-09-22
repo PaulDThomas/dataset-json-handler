@@ -9,7 +9,7 @@ import {
   WhereClauseCondition,
   WhereClauseConditionClass,
 } from "../classes/WhereClauseConditionClass";
-import { ActionProps, SET_ITEMS, stReducer } from "./stReducer";
+import { StActionProps, SET_ITEMS, stReducer } from "./stReducer";
 
 export interface SummaryTableData {
   page: string[];
@@ -54,7 +54,7 @@ const initialState: SummaryTableSchema = {
 
 export interface SummaryTableContextProps {
   state: SummaryTableSchema;
-  dispatch: React.Dispatch<ActionProps>;
+  dispatch: React.Dispatch<StActionProps>;
 }
 
 export const SummaryTableContext = createContext<SummaryTableContextProps>({

@@ -26,3 +26,5 @@ export const GroupList = ({ id }: GroupListProps) => {
     </Accordion>
   );
 };
+
+GroupList.displayName = "GroupList";

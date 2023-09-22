@@ -44,3 +44,5 @@ export const InGroupItem = ({ id, groupId, item, dropAction, removeAction }: InG
     </div>
   );
 };
+
+InGroupItem.displayName = "InGroupItem";

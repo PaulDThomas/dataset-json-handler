@@ -1,9 +1,9 @@
 import { SummaryTableSchema } from "../context/SummaryTableContext";
-import { ActionProps } from "../context/stReducer";
+import { StActionProps } from "../context/stReducer";
 import { AnalysisGroupClass } from "../main";
 
 export const setColumnAnalysisGroup = (
-  action: ActionProps,
+  action: StActionProps,
   state: SummaryTableSchema,
 ): SummaryTableSchema => {
   if (action.group === undefined) throw `${action.operation}: No group`;

@@ -104,3 +104,5 @@ export const WhereClauseRow = ({
     </tr>
   );
 };
+
+WhereClauseRow.displayName = "WhereClauseRow";

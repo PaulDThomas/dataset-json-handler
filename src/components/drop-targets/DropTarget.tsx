@@ -77,3 +77,5 @@ export const DropTarget = ({
     </div>
   );
 };
+
+DropTarget.displayName = "DropTarget";

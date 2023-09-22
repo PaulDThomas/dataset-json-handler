@@ -72,3 +72,5 @@ export const HeaderTableUrl = () => {
     </tr>
   );
 };
+
+HeaderTableUrl.displayName = "HeaderTableUrl";
