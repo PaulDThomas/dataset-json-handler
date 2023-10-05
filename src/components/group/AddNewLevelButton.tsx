@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { AnalysisGroupClass } from "../../classes/AnalysisGroup";
+import { AnalysisGroupClass } from "../../classes/AnalysisGroupClass";
 import { SummaryTableContext } from "../../context/SummaryTableContext";
 import { ADD_ANAL_GROUP_LEVELS } from "../../context/stReducer";
 import { WhereClauseClass, WhereClauseConditionClass } from "../../main";

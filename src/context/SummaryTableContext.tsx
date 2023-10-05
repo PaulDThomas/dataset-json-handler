@@ -1,7 +1,7 @@
 import { eStatistic } from "enums/eStatistic";
 import { createContext, useEffect, useReducer } from "react";
-import { AnalysisGroup, AnalysisGroupClass } from "../classes/AnalysisGroup";
-import { DataGroup, DataGroupClass } from "../classes/DataGroup";
+import { AnalysisGroup, AnalysisGroupClass } from "../classes/AnalysisGroupClass";
+import { DataGroup, DataGroupClass } from "../classes/DataGroupClass";
 import { DatasetJsonClass } from "../classes/DatasetJsonClass";
 import { DatasetJsonItem, DatasetJsonItemClass } from "../classes/DatasetJsonItemClass";
 import { WhereClause, WhereClauseClass } from "../classes/WhereClauseClass";

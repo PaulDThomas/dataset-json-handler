@@ -1,6 +1,6 @@
 import _ from "lodash";
-import { DatasetJsonItemClass } from "../main";
 import { ListingData, ListingHeader, ListingSchema } from "./ListingContext";
+import { DatasetJsonItemClass } from "../../classes/DatasetJsonItemClass";
 
 export const ADD_COLUMN = "ADD_COLUMN";
 export const LOAD_LISTING = "LOAD_LISTING";

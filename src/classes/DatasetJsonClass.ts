@@ -1,7 +1,31 @@
 import { iSimpleTableField, iSimpleTableRow, simpleTableSortFn } from "@asup/simple-table";
 import { DataRow } from "../interfaces/DataRow";
-import { CdiscDatasetJson } from "../interfaces/CdiscDatasetJson";
-import { DatasetJsonItemClass, DatasetJsonItem } from "./DatasetJsonItemClass";
+import { DatasetJsonItemClass, DatasetJsonItem, eItemType } from "./DatasetJsonItemClass";
+
+/**
+ * CDISC implementation of Dataset JSON typescript interface
+ */
+export interface CdiscDatasetJson {
+  clinicalData: {
+    studyOID: string;
+    metaDataVersionOID: string;
+    itemGroupData: {
+      [key: string]: {
+        records: number;
+        name: string;
+        label: string;
+        items: {
+          OID: string;
+          name: string;
+          label: string;
+          type: eItemType;
+          length?: number;
+        }[];
+        itemData: (string | number | null)[][];
+      };
+    };
+  };
+}
 
 /**
  * Typescript class for a CDISC data set JSON object
@@ -102,7 +126,7 @@ export class DatasetJsonClass {
               ? (row, text) =>
                   (row[item.name] as string).toLocaleLowerCase().includes(text.toLocaleLowerCase())
               : undefined,
-        } as iSimpleTableField),
+        }) as iSimpleTableField,
     );
   }
   /**

@@ -1,5 +1,5 @@
-import { AnalysisGroup, AnalysisGroupClass } from "../classes/AnalysisGroup";
-import { DataGroup, DataGroupClass } from "../classes/DataGroup";
+import { AnalysisGroup, AnalysisGroupClass } from "../classes/AnalysisGroupClass";
+import { DataGroup, DataGroupClass } from "../classes/DataGroupClass";
 import { DatasetJsonItemClass } from "../classes/DatasetJsonItemClass";
 import { WhereClauseClass } from "../classes/WhereClauseClass";
 import { WhereClauseConditionClass } from "../classes/WhereClauseConditionClass";

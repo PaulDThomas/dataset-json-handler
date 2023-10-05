@@ -1,7 +1,7 @@
 import { simpleTableSortFn } from "@asup/simple-table";
 import _ from "lodash";
 import { useContext } from "react";
-import { AnalysisGroupClass } from "../../classes/AnalysisGroup";
+import { AnalysisGroupClass } from "../../classes/AnalysisGroupClass";
 import { DatasetJsonItemClass } from "../../classes/DatasetJsonItemClass";
 import { DSJContext } from "../../context/DSJContextProvider";
 import { SummaryTableContext } from "../../context/SummaryTableContext";

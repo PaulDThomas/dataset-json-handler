@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { ListingContext, ListingHeader } from "../../context/ListingContext";
+import { ListingContext, ListingHeader } from "./ListingContext";
 import { UPDATE_COLUMN } from "../../context/lsReducer";
 
 interface MarkDownEditProps {

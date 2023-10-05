@@ -1,11 +1,10 @@
 import { ContextWindowStack } from "@asup/context-menu";
-import { ListingContextProvider } from "../../context/ListingContext";
+import { ListingContextProvider } from "../listing/ListingContext";
 import { useContext } from "react";
 import { DSJContext } from "../../context/DSJContextProvider";
 import { ListingStateButton } from "./ListingStateButton";
 import { ItemList } from "../lhs/ItemList";
 import { ListingPreview } from "../listing/ListingPreview";
-import { ListingHeaderEditor } from "../listing/ListingHeaderEditor";
 
 export const ListingGenerator = (): JSX.Element => {
   const { state } = useContext(DSJContext);
@@ -38,7 +37,7 @@ export const ListingGenerator = (): JSX.Element => {
                     <ItemList id={"listing-item-list"} />
                   </div>
                 </div>
-                <div
+                {/* <div
                   className="small-scrollbar-holder"
                   style={{
                     height: "calc(100% - 8px)",
@@ -58,7 +57,7 @@ export const ListingGenerator = (): JSX.Element => {
                   >
                     <ListingHeaderEditor />
                   </div>
-                </div>
+                </div> */}
                 <div
                   className="small-scrollbar-holder"
                   style={{

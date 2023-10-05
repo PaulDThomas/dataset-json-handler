@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { ListingContext } from "../../context/ListingContext";
+import { ListingContext } from "../listing/ListingContext";
 import { JsonWindowButton } from "../utility/JsonWindowButton";
 import { SaveListingButton } from "./SaveListingButton";
 

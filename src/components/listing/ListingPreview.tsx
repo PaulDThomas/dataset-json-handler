@@ -1,7 +1,7 @@
 import { SimpleTable } from "@asup/simple-table";
 import { useContext } from "react";
 import { DSJContext } from "../../context/DSJContextProvider";
-import { ListingContext } from "../../context/ListingContext";
+import { ListingContext } from "./ListingContext";
 import { RenderMarkDown } from "./RenderMarkDown";
 
 export const ListingPreview = (): JSX.Element => {
