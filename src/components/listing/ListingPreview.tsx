@@ -6,7 +6,7 @@ import { DropTarget } from "../drop-targets/DropTarget";
 import { ListingContext } from "./ListingContext";
 import { ListingHeaderCell } from "./ListingHeaderCell";
 import { RenderMarkDown } from "./RenderMarkDown";
-import { ADD_COLUMN } from "./functions/lsReducer";
+import { ADD_COLUMN, UPDATE_WIDTHS } from "./functions/lsReducer";
 
 export const ListingPreview = (): JSX.Element => {
   const { state: dsjState } = useContext(DSJContext);
@@ -44,12 +44,13 @@ export const ListingPreview = (): JSX.Element => {
             .map((lh) => ({
               name: lh.item.name,
               label: lh.label,
-              width: "",
+              width: lh.width,
               renderFn: ({ rowData }) => RenderMarkDown(rowData, lh.md),
               headerRenderFn: ListingHeaderCell,
             }))}
           keyField={"ITEMGROUPDATASEQ"}
           data={dsjState.datasetJson?.dataRows ?? []}
+          onWidthChange={(ret) => dispatch({ operation: UPDATE_WIDTHS, columnWidths: ret })}
         />
       )}
     </>

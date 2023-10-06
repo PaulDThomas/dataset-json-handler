@@ -7,8 +7,15 @@ export const LOAD_LISTING = "LOAD_LISTING";
 export const REMOVE_COLUMN = "REMOVE_COLUMN";
 export const SET_ITEMS = "SET_ITEMS";
 export const UPDATE_COLUMN = "UPDATE_COLUMN";
+export const UPDATE_WIDTHS = "UPDATE_WIDTHS";
 
-type LsOperation = "ADD_COLUMN" | "LOAD_LISTING" | "SET_ITEMS" | "REMOVE_COLUMN" | "UPDATE_COLUMN";
+type LsOperation =
+  | "ADD_COLUMN"
+  | "LOAD_LISTING"
+  | "SET_ITEMS"
+  | "REMOVE_COLUMN"
+  | "UPDATE_COLUMN"
+  | "UPDATE_WIDTHS";
 
 export interface LsActionProps {
   operation: LsOperation;
@@ -17,6 +24,7 @@ export interface LsActionProps {
   newColumn?: DatasetJsonItemClass;
   columnPosition?: number;
   columnUpdate?: ListingHeader;
+  columnWidths?: (string | undefined)[];
 }
 
 export const lsReducer = (state: ListingSchema, action: LsActionProps): ListingSchema => {
@@ -32,6 +40,7 @@ export const lsReducer = (state: ListingSchema, action: LsActionProps): ListingS
           colno: action.columnPosition,
           item: action.newColumn.data,
           label: action.newColumn.label,
+          width: "150px",
           md: `[${action.newColumn.name}]`,
         };
         newState.listingHeaders.splice(action.columnPosition, 0, newColumn);
@@ -56,6 +65,14 @@ export const lsReducer = (state: ListingSchema, action: LsActionProps): ListingS
     case UPDATE_COLUMN:
       if (action.columnUpdate) {
         newState.listingHeaders.splice(action.columnUpdate.colno, 1, action.columnUpdate);
+      }
+      break;
+    case UPDATE_WIDTHS:
+      if (action.columnWidths) {
+        newState.listingHeaders = newState.listingHeaders.map((h, i) => ({
+          ...h,
+          width: (action.columnWidths as (string | undefined)[])[i],
+        }));
       }
       break;
   }

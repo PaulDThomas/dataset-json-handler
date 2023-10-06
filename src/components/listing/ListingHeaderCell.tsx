@@ -18,53 +18,7 @@ export const ListingHeaderCell = ({ columnNumber, field }: ListingHeaderCellProp
   const col = state.listingHeaders[columnNumber];
 
   return (
-    <div>
-      <DropTarget
-        id="lastId"
-        allowableTypes={["datasetjsonitem"]}
-        style={{
-          position: "absolute",
-          color: "forestgreen",
-          backgroundColor: "greenyellow",
-          left: columnNumber === 0 ? "-4px" : "-16px",
-          bottom: "-20px",
-          paddingLeft: "4px",
-          paddingRight: "4px",
-          paddingBottom: "4px",
-          fontSize: "12px",
-          opacity: "0.7",
-        }}
-        dropAction={(ret) =>
-          ret.data instanceof DatasetJsonItemClass &&
-          dispatch({ operation: ADD_COLUMN, newColumn: ret.data, columnPosition: columnNumber })
-        }
-      >
-        &#8853;
-      </DropTarget>
-      {columnNumber + 1 === state.listingHeaders.length && (
-        <DropTarget
-          id="lastId"
-          allowableTypes={["datasetjsonitem"]}
-          style={{
-            position: "absolute",
-            color: "forestgreen",
-            backgroundColor: "greenyellow",
-            right: "-4px",
-            bottom: "-16px",
-            paddingLeft: "4px",
-            paddingRight: "4px",
-            paddingBottom: "4px",
-            fontSize: "12px",
-            opacity: "0.7",
-          }}
-          dropAction={(ret) =>
-            ret.data instanceof DatasetJsonItemClass &&
-            dispatch({ operation: ADD_COLUMN, newColumn: ret.data, columnPosition: columnNumber })
-          }
-        >
-          &#8853;
-        </DropTarget>
-      )}
+    <>
       <ContextMenuHandler
         menuItems={[
           {
@@ -76,7 +30,60 @@ export const ListingHeaderCell = ({ columnNumber, field }: ListingHeaderCellProp
           { label: "Properties", action: () => setShowProperties(true) },
         ]}
       >
-        <span>{col.label}</span>
+        <div style={{ marginTop: "16px" }}>
+          <DropTarget
+            id="lastId"
+            allowableTypes={["datasetjsonitem"]}
+            style={{
+              position: "absolute",
+              color: "forestgreen",
+              backgroundColor: "greenyellow",
+              left: columnNumber === 0 ? "-4px" : "-16px",
+              top: 0,
+              paddingLeft: "4px",
+              paddingRight: "4px",
+              paddingBottom: "4px",
+              fontSize: "12px",
+              opacity: "0.7",
+            }}
+            dropAction={(ret) =>
+              ret.data instanceof DatasetJsonItemClass &&
+              dispatch({ operation: ADD_COLUMN, newColumn: ret.data, columnPosition: columnNumber })
+            }
+          >
+            &#8853;
+          </DropTarget>
+          {columnNumber + 1 === state.listingHeaders.length && (
+            <DropTarget
+              id="lastId"
+              allowableTypes={["datasetjsonitem"]}
+              style={{
+                position: "absolute",
+                color: "forestgreen",
+                backgroundColor: "greenyellow",
+                right: "-4px",
+                top: 0,
+                paddingLeft: "4px",
+                paddingRight: "4px",
+                paddingBottom: "4px",
+                fontSize: "12px",
+                opacity: "0.7",
+              }}
+              dropAction={(ret) =>
+                ret.data instanceof DatasetJsonItemClass &&
+                dispatch({
+                  operation: ADD_COLUMN,
+                  newColumn: ret.data,
+                  columnPosition: columnNumber + 1,
+                })
+              }
+            >
+              &#8853;
+            </DropTarget>
+          )}
+
+          <span>{col.label}</span>
+        </div>
       </ContextMenuHandler>
       <ContextWindow
         id={`listing-properties-colno-${columnNumber}`}
@@ -125,6 +132,6 @@ export const ListingHeaderCell = ({ columnNumber, field }: ListingHeaderCellProp
           </tbody>
         </table>
       </ContextWindow>
-    </div>
+    </>
   );
 };

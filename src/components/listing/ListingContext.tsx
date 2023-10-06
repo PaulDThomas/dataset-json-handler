@@ -8,6 +8,7 @@ export interface ListingHeader extends iSimpleTableRow {
   colno: number;
   item: DatasetJsonItem;
   label: string;
+  width: string | undefined;
   md: string;
 }
 
