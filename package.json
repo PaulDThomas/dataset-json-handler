@@ -18,6 +18,9 @@
     "cdisc dataset-json"
   ],
   "homepage": ".",
+  "main": "dist/cjs/main.js",
+  "module": "dist/esm/main.js",
+  "types": "dist/dsj-handler.d.ts",
   "files": [
     "dist"
   ],

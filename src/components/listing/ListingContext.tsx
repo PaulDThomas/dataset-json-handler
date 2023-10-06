@@ -2,7 +2,7 @@ import { iSimpleTableRow } from "@asup/simple-table";
 import { ReactNode, createContext, useEffect, useReducer } from "react";
 import { DatasetJsonItem, DatasetJsonItemClass } from "../../classes/DatasetJsonItemClass";
 import { DatasetJsonClass } from "../../main";
-import { LsActionProps, SET_ITEMS, lsReducer } from "./lsReducer";
+import { LsActionProps, SET_ITEMS, lsReducer } from "./functions/lsReducer";
 
 export interface ListingHeader extends iSimpleTableRow {
   colno: number;

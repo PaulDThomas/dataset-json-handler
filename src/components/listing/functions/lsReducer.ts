@@ -1,6 +1,6 @@
 import _ from "lodash";
-import { ListingData, ListingHeader, ListingSchema } from "./ListingContext";
-import { DatasetJsonItemClass } from "../../classes/DatasetJsonItemClass";
+import { ListingData, ListingHeader, ListingSchema } from "../ListingContext";
+import { DatasetJsonItemClass } from "../../../classes/DatasetJsonItemClass";
 
 export const ADD_COLUMN = "ADD_COLUMN";
 export const LOAD_LISTING = "LOAD_LISTING";
@@ -44,7 +44,7 @@ export const lsReducer = (state: ListingSchema, action: LsActionProps): ListingS
       }
       break;
     case REMOVE_COLUMN:
-      if (action.columnPosition) {
+      if (action.columnPosition !== undefined) {
         newState.listingHeaders.splice(action.columnPosition, 1);
       }
       break;

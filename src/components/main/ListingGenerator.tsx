@@ -61,8 +61,8 @@ export const ListingGenerator = (): JSX.Element => {
                 <div
                   className="small-scrollbar-holder"
                   style={{
-                    height: "calc(100% - 8px)",
-                    width: "calc(100% - 890px)",
+                    height: "calc(100% - 6px)",
+                    width: "calc(100% - 12px)",
                   }}
                 >
                   <div

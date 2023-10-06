@@ -22,7 +22,7 @@ export const TabHolder = ({ id = "tab", tabList }: TabHolderProps) => {
       }}
     >
       {tabList
-        .filter((tab) => tab.value === state.pane)
+        // .filter((tab) => tab.value === state.pane)
         .map((tab, i) => (
           <div
             key={i}

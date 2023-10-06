@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { ListingContext, ListingHeader } from "./ListingContext";
-import { UPDATE_COLUMN } from "./lsReducer";
+import { UPDATE_COLUMN } from "./functions/lsReducer";
 
 interface LabelEditProps {
   rowData: ListingHeader;

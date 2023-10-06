@@ -1,7 +1,7 @@
 import { SimpleTable, iSimpleTableField } from "@asup/simple-table";
 import { useCallback, useContext, useMemo } from "react";
 import { ListingContext, ListingHeader } from "./ListingContext";
-import { ADD_COLUMN, REMOVE_COLUMN } from "./lsReducer";
+import { ADD_COLUMN, REMOVE_COLUMN } from "./functions/lsReducer";
 import { DatasetJsonItemClass } from "../../main";
 import { DropEdges } from "../drop-targets/DropEdges";
 import { DropTarget } from "../drop-targets/DropTarget";

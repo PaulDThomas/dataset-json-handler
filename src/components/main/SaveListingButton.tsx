@@ -1,6 +1,6 @@
 import { useCallback, useContext, useState } from "react";
 import { ListingContext, ListingData } from "../listing/ListingContext";
-import { LOAD_LISTING } from "../listing/lsReducer";
+import { LOAD_LISTING } from "../listing/functions/lsReducer";
 
 export const SaveListingButton = (): JSX.Element => {
   const { state, dispatch } = useContext(ListingContext);
