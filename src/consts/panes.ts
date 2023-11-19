@@ -1,7 +1,7 @@
-import { SummaryTableGenerator } from "../main";
+import { ListingGenerator } from "../components/main/ListingGenerator";
 import { PaneForData } from "../components/main/PaneForData";
 import { PaneForItems } from "../components/main/PaneForItems";
-import { ListingGenerator } from "../components/main/ListingGenerator";
+import { SummaryTableGenerator } from "../components/main/SummaryTableGenerator";
 
 export type Pane = "items" | "data" | "summary" | "listing";
 

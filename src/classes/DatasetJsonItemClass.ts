@@ -1,5 +1,3 @@
-import { iSimpleTableRow } from "@asup/simple-table";
-
 /**
  * Item type
  */
@@ -15,7 +13,7 @@ export enum eItemType {
 /**
  * Item (variable) inside a DatasetJson object
  */
-export interface DatasetJsonItem extends iSimpleTableRow {
+export interface DatasetJsonItem {
   /**
    * Item unique identifier
    */

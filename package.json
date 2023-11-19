@@ -18,14 +18,15 @@
     "cdisc dataset-json"
   ],
   "homepage": ".",
-  "comment-out": "\"main\": \"dist/cjs/main.js\", \"module\": \"dist/esm/main.js\", \"types\": \"dist/dsj-handler.d.ts\",",
+  "main": "dist/cjs/main.js",
+  "module": "dist/esm/main.js",
+  "types": "dist/dsj-handler.d.ts",
   "files": [
     "dist"
   ],
   "scripts": {
     "prepare": "husky install",
     "build": "parcel build src/main.ts",
-    "build-demo": "parcel build demo/index.html --dist-dir demo/build --public-url /ars-hackathon/",
     "start": "parcel demo/index.html --dist-dir demo/dist",
     "test": "jest --watch",
     "test:coverage-report": "npm test -- --coverage --watchAll=false"

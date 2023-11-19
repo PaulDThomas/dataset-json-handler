@@ -34,6 +34,7 @@ export const DebouncedInput = ({
       disabled={!setValue}
       onChange={(e) => {
         e.stopPropagation();
+        e.preventDefault();
         setCurrentValue(e.currentTarget.value);
       }}
     />
