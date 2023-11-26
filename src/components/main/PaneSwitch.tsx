@@ -26,7 +26,6 @@ export const PaneSwitch = () => {
             checked={state.pane === k.value}
             onChange={(e) => {
               e.stopPropagation();
-              window.location.hash = k.value;
               dispatch({ operation: SET_PANE, pane: k.value });
             }}
             id={`pane-switch-${k.value}`}

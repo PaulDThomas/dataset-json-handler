@@ -27,7 +27,10 @@ export const dsjReducer = (state: dsjState, action: DsjActionProps): dsjState =>
       if (action.datasetJson) newState.datasetJson = new DatasetJsonClass(action.datasetJson);
       break;
     case "SET_PANE":
-      if (action.pane) newState.pane = action.pane;
+      if (action.pane) {
+        if (window.location.hash !== action.pane) window.location.hash = action.pane;
+        newState.pane = action.pane;
+      }
       break;
   }
 
