@@ -43,8 +43,8 @@ const config: Config = {
   collectCoverage: true,
   coverageProvider: "v8",
   collectCoverageFrom: [
-    "src/components/**/*.{js,jsx}",
-    "src/components/**/*.{ts,tsx}",
+    "src/**/*.{js,jsx}",
+    "src/**/*.{ts,tsx}",
     "!**/index.ts",
     "!**/interface.ts",
     "!**/node_modules/**",
