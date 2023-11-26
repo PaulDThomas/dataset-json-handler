@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useDebounce } from "../../hooks/useDebounce";
 
 interface DebouncedInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   value: string;
@@ -18,47 +18,11 @@ export const DebouncedInput = ({
   type = "text",
   ...rest
 }: DebouncedInputProps): JSX.Element => {
-  const [currentValue, setCurrentValue] = useState<string>(value);
-  const [debouncedValue, setDebouncedValue] = useState<string>(value);
-  const debounceController = useRef<AbortController | null>(null);
-  // Top down update
-  useEffect(() => {
-    if (debounceController.current) {
-      debounceController.current.abort();
-    }
-    setCurrentValue(value);
-    setDebouncedValue(value);
-  }, [value]);
-
-  // Update value from debouncedValue
-  useEffect(() => {
-    if (
-      debouncedValue !== value &&
-      debounceController.current &&
-      !debounceController.current?.signal.aborted &&
-      setValue
-    ) {
-      setValue(debouncedValue);
-    }
-  }, [debouncedValue, setValue, value]);
-
-  // Update debounce from current
-  useEffect(() => {
-    if (currentValue !== debouncedValue) {
-      if (debounceController.current) debounceController.current.abort();
-      debounceController.current = new AbortController();
-
-      const timer = setTimeout(() => {
-        if (!debounceController.current?.signal.aborted) {
-          setDebouncedValue(currentValue);
-        }
-      }, debounceMilliseconds);
-      return () => {
-        clearTimeout(timer);
-      };
-    }
-  }, [currentValue, debounceMilliseconds, debouncedValue]);
-
+  const { currentValue, setCurrentValue } = useDebounce(
+    value,
+    setValue ?? (() => ({})),
+    debounceMilliseconds,
+  );
   return (
     <input
       {...rest}
@@ -67,23 +31,13 @@ export const DebouncedInput = ({
       value={currentValue}
       disabled={!setValue || disabled}
       onChange={(e) => {
-        e.stopPropagation();
         e.preventDefault();
         setValue && setCurrentValue(e.currentTarget.value);
       }}
-      onBlur={
-        setValue
-          ? (e) => {
-              const n = e.currentTarget.value;
-              if (debounceController.current) {
-                debounceController.current.abort();
-              }
-              setCurrentValue(n);
-              setDebouncedValue(n);
-              n !== value && setValue(n);
-            }
-          : undefined
-      }
+      onBlur={(e) => {
+        e.preventDefault();
+        setValue && setValue(e.currentTarget.value);
+      }}
     />
   );
 };

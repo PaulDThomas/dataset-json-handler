@@ -1,6 +1,6 @@
 import { useCallback, useContext, useEffect, useState } from "react";
 import { DSJContext, DSJContextProps } from "../../context/DSJContextProvider";
-import { LOAD_DSJ } from "../../context/dsjReducer";
+import { LOAD_DSJ, SET_PANE } from "../../context/dsjReducer";
 import { getDataFromUrl } from "../../functions/getDataFromUrl";
 import { loadWrapper } from "../../functions/loadWrapper";
 import { useDebounce } from "../../hooks/useDebounce";
@@ -8,8 +8,6 @@ import { RequestStatus } from "../../interfaces/RequestStatus";
 
 export const HeaderTableUrl = () => {
   const { state, dispatch } = useContext<DSJContextProps>(DSJContext);
-  const [rawUrl, setRawUrl] = useState<string>(state.rawUrl);
-  const debouncedUrl = useDebounce<string>(rawUrl, 2000);
   const [loadStatus, setLoadStatus] = useState<RequestStatus<string>>({
     requesting: false,
     error: false,
@@ -24,16 +22,24 @@ export const HeaderTableUrl = () => {
         setLoadStatus,
       );
       if (response && response.success && response?.datasetJson) {
+        dispatch({ operation: SET_PANE, pane: "items" });
         dispatch({ operation: LOAD_DSJ, datasetJson: response.datasetJson });
       }
     },
     [dispatch, loadStatus],
   );
 
+  const [loadedUrl, setLoadedUrl] = useState<string>(state.rawUrl);
+  const { currentValue, setCurrentValue } = useDebounce(
+    loadedUrl,
+    (value) => {
+      setLoadedUrl(value);
+    },
+    2000,
+  );
   useEffect(() => {
-    if (debouncedUrl !== loadStatus.requestedId && debouncedUrl !== loadStatus.requestingId)
-      getData(debouncedUrl);
-  }, [debouncedUrl, getData, loadStatus.requestedId, loadStatus.requestingId]);
+    getData(loadedUrl);
+  }, [getData, loadedUrl]);
 
   return (
     <tr>
@@ -61,10 +67,15 @@ export const HeaderTableUrl = () => {
               border: "1px solid black",
               backgroundColor: loadStatus.error ? "red" : "white",
             }}
-            value={rawUrl}
+            value={currentValue}
             onChange={(e) => {
+              e.preventDefault();
               setLoadStatus({ ...loadStatus, error: false });
-              setRawUrl(e.currentTarget.value);
+              setCurrentValue(e.currentTarget.value);
+            }}
+            onBlur={(e) => {
+              e.preventDefault();
+              setLoadStatus({ ...loadStatus, error: false });
             }}
           />
         </div>
