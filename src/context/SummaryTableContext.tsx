@@ -39,7 +39,7 @@ export interface SummaryTableSchema {
   itemList: DatasetJsonItemClass[];
 }
 
-const initialState: SummaryTableSchema = {
+export const initialSummaryTableSchema: SummaryTableSchema = {
   page: [],
   rows: [],
   columnAnalysisGroup: null,
@@ -58,7 +58,7 @@ export interface SummaryTableContextProps {
 }
 
 export const SummaryTableContext = createContext<SummaryTableContextProps>({
-  state: initialState,
+  state: initialSummaryTableSchema,
   dispatch: () => ({}),
 });
 
@@ -71,7 +71,7 @@ export const SummaryTableContextProvider = ({
   dataset,
   children,
 }: SummaryTableContextProviderProps): JSX.Element => {
-  const [state, dispatch] = useReducer(stReducer, initialState);
+  const [state, dispatch] = useReducer(stReducer, initialSummaryTableSchema);
 
   useEffect(() => {
     dispatch({ operation: SET_ITEMS, items: dataset.items });

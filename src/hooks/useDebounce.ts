@@ -1,3 +1,4 @@
+import _ from "lodash";
 import { Dispatch, useEffect, useRef, useState } from "react";
 
 /**
@@ -7,28 +8,32 @@ import { Dispatch, useEffect, useRef, useState } from "react";
  * @param debounceMilliseconds Number of milliseconds to debounce by, defaults to 500
  * @returns currentValue, setCurrentValue
  */
-export const useDebounce = (
-  value: string,
-  setValue: Dispatch<string>,
+export const useDebounce = <T>(
+  value: T,
+  setValue: Dispatch<T>,
   debounceMilliseconds = 500,
 ): {
-  currentValue: string;
-  setCurrentValue: Dispatch<string>;
+  currentValue: T;
+  setCurrentValue: Dispatch<T>;
 } => {
-  const [currentValue, setCurrentValue] = useState<string>(value);
-  const [debouncedValue, setDebouncedValue] = useState<string>(value);
+  const [currentValue, setCurrentValue] = useState<T>(value);
+  const [debouncedValue, setDebouncedValue] = useState<T>(value);
   const debounceController = useRef<AbortController>(new AbortController());
 
   // Top down update
+  const [lastValue, setLastValue] = useState<T>(value);
   useEffect(() => {
-    debounceController.current.abort();
-    setCurrentValue(value);
-    setDebouncedValue(value);
-  }, [value]);
+    if (!_.isEqual(value, lastValue)) {
+      debounceController.current.abort();
+      setCurrentValue(value);
+      setDebouncedValue(value);
+      setLastValue(value);
+    }
+  }, [lastValue, value]);
 
   // Update value from debouncedValue
   useEffect(() => {
-    if (debouncedValue !== value && !debounceController.current.signal.aborted) {
+    if (!_.isEqual(debouncedValue, value)) {
       setCurrentValue(debouncedValue);
       setValue(debouncedValue);
     }
@@ -36,7 +41,7 @@ export const useDebounce = (
 
   // Update debounce from current
   useEffect(() => {
-    if (currentValue !== debouncedValue) {
+    if (!_.isEqual(currentValue, debouncedValue)) {
       debounceController.current.abort();
       debounceController.current = new AbortController();
 
