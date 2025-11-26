@@ -15,7 +15,7 @@ export const DraggableItem = ({ id, oid, otherActions }: DraggableItemProps): JS
   const [isBeingDragged, setIsBeingDragged] = useState<boolean>(false);
   const [showProperties, setShowProperties] = useState<boolean>(false);
 
-  const item = useMemo(() => state.itemList.find((i) => i.OID === oid), [oid, state]);
+  const item = useMemo(() => state.itemList.find((i) => i.itemOid === oid), [oid, state]);
 
   const handleDragStart = (e: React.DragEvent) => {
     if (item) {

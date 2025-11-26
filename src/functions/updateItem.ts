@@ -5,7 +5,7 @@ export function updateItem(action: ActionProps, state: SummaryTableSchema) {
   if (action.item === undefined) throw `${UPDATE_ITEM}: No item`;
   else {
     const newState = { ...state };
-    const ix = state.itemList.findIndex((i) => i.OID === action.item?.OID);
+    const ix = state.itemList.findIndex((i) => i.itemOid === action.item?.itemOid);
     if (ix === -1) {
       newState.itemList.push(action.item);
     } else {

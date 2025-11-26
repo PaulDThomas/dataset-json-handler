@@ -1,7 +1,7 @@
 import { iSimpleTableField, iSimpleTableRow, simpleTableSortFn } from "@asup/simple-table";
 import { DataRow } from "../interfaces/DataRow";
-import { CdiscDatasetJson } from "../interfaces/CdiscDatasetJson";
 import { DatasetJsonItemClass, DatasetJsonItem } from "./DatasetJsonItemClass";
+import { CdiscDatasetJson } from "interfaces/CdiscDatasetJson";
 
 /**
  * Typescript class for a CDISC data set JSON object
@@ -191,15 +191,15 @@ export class DatasetJsonClass {
    * @param newJson Raw dataset JSON
    */
   public constructor(newJson: CdiscDatasetJson) {
-    this._studyOID = newJson.clinicalData.studyOID;
-    this._metaDataVersionOID = newJson.clinicalData.metaDataVersionOID;
-    const ds = Object.values(newJson.clinicalData.itemGroupData)[0];
+    this._studyOID = newJson.studyOID;
+    this._metaDataVersionOID = newJson.metaDataVersionOID;
+    const ds = newJson;
     this._name = ds.name;
     this._label = ds.label;
-    this.items = ds.items;
-    this._dataRows = ds.itemData.map((arrayRow, ai) => {
+    this.items = ds.columns;
+    this._dataRows = ds.rows.map((arrayRow, ai) => {
       const newItem = Object.fromEntries(
-        new Map(ds.items.map((item, i) => [item.name, arrayRow[i]])),
+        new Map(ds.columns.map((item, i) => [item.name, arrayRow[i]])),
       );
       return { ...newItem, __rowNumber: ai + 1, __isDeleted: false };
     });

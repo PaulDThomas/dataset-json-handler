@@ -14,7 +14,7 @@ export const PaneForItems = () => {
           <SimpleTable
             id="items-table"
             fields={fieldsForItems}
-            keyField={"OID"}
+            keyField={"itemOID"}
             data={state.datasetJson ? state.datasetJson.items.map((item) => item.data) : []}
             headerLabel="Items"
             showSearch={true}

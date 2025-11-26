@@ -1,26 +1,26 @@
-import { eItemType } from "../classes/DatasetJsonItemClass";
+import { DatasetJsonItem } from "classes/DatasetJsonItemClass";
+import { DataRow } from "main";
 
 /**
  * CDISC implementation of Dataset JSON typescript interface
  */
 export interface CdiscDatasetJson {
-  clinicalData: {
-    studyOID: string;
-    metaDataVersionOID: string;
-    itemGroupData: {
-      [key: string]: {
-        records: number;
-        name: string;
-        label: string;
-        items: {
-          OID: string;
-          name: string;
-          label: string;
-          type: eItemType;
-          length?: number;
-        }[];
-        itemData: (string | number | null)[][];
-      };
-    };
+  datasetJSONCreationDateTime: string;
+  datasetJSONVersion: string;
+  fileOID: string;
+  dbLastModifiedDateTime: string;
+  originator: string;
+  sourceSystem: {
+    name: string;
+    version: string;
   };
+  studyOID: string;
+  metaDataVersionOID: string;
+  metaDataRef: string;
+  itemGroupOID: string;
+  records: number;
+  name: string;
+  label: string;
+  columns: DatasetJsonItem[];
+  rows: DataRow[];
 }

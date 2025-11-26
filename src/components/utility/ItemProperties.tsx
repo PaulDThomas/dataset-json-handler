@@ -7,7 +7,7 @@ interface ItemPropertiesProps {
 
 export const ItemProperties = ({ oid }: ItemPropertiesProps): JSX.Element => {
   const { state } = useContext(SummaryTableContext);
-  const item = useMemo(() => state.itemList.find((i) => i.OID === oid), [oid, state]);
+  const item = useMemo(() => state.itemList.find((i) => i.itemOid === oid), [oid, state]);
 
   if (!item) return <></>;
   return (

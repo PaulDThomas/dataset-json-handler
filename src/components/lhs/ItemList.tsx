@@ -18,8 +18,8 @@ export const ItemList = ({ id }: ItemListProps) => {
     >
       {state.itemList.map((variable, index) => (
         <DraggableItem
-          key={variable.OID ?? index}
-          oid={variable.OID}
+          key={variable.itemOid ?? index}
+          oid={variable.itemOid}
           id={`${id}-${variable.name}`}
         />
       ))}

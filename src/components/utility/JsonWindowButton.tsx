@@ -1,6 +1,6 @@
 import { ContextWindow } from "@asup/context-menu";
 import { useState } from "react";
-import ReactJson from "react-json-view";
+// import ReactJson from "react-json-view";
 import { jsonToFile } from "../../functions/jsonToFile";
 
 interface JsonWindowButtonProps {
@@ -56,7 +56,7 @@ export const JsonWindowButton = ({
                 Save
               </button>
             )}
-            <ReactJson src={object} />
+            {/* <ReactJson src={object} /> */}
           </>
         </ContextWindow>
       </div>

@@ -19,7 +19,7 @@ export interface DatasetJsonItem extends iSimpleTableRow {
   /**
    * Item unique identifier
    */
-  OID: string;
+  itemOID: string;
   /**
    * Item name
    */
@@ -36,17 +36,21 @@ export interface DatasetJsonItem extends iSimpleTableRow {
    * Item length (for strings)
    */
   length?: number;
+  /**
+   * Key sequence number (if part of a key)
+   */
+  keySequence?: number;
 }
 
 /** Data set JSON item class, individual item (variable) in the data set */
 export class DatasetJsonItemClass {
-  protected _OID = "";
+  protected _itemOID = "";
 
   /**
    * Unique identifier
    */
-  get OID() {
-    return this._OID;
+  get itemOid() {
+    return this._itemOID;
   }
   protected _name = "";
   /**
@@ -82,7 +86,7 @@ export class DatasetJsonItemClass {
    */
   get data(): DatasetJsonItem {
     return {
-      OID: this._OID,
+      itemOID: this._itemOID,
       name: this._name,
       label: this._label,
       type: this._type,
@@ -102,7 +106,7 @@ export class DatasetJsonItemClass {
    * @param newItem New data item information
    */
   public constructor(newItem: DatasetJsonItem) {
-    this._OID = newItem.OID;
+    this._itemOID = newItem.itemOID;
     this._name = newItem.name;
     this._label = newItem.label;
     this._length = newItem.length;

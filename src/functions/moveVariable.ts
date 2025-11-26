@@ -5,7 +5,7 @@ export const moveVariable = (
   variable: DatasetJsonItemClass,
   newPosition: number,
 ): DatasetJsonItemClass[] => {
-  const ix = originalArray.findIndex((v) => v.OID === variable.OID ?? "");
+  const ix = originalArray.findIndex((v) => v.itemOid === variable.itemOid ?? "");
   const newArray: DatasetJsonItemClass[] = [...originalArray];
   if (ix >= 0) {
     newArray.splice(ix, 1);

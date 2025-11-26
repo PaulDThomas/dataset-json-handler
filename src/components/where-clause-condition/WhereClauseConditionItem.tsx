@@ -47,7 +47,7 @@ export const WhereClauseConditionItem = ({ id }: WhereClauseConditionItemProps):
         {whereClauseCondition.item ? (
           <DraggableItem
             id={`whereclauseconditionitem-${id}`}
-            oid={whereClauseCondition.item.OID}
+            oid={whereClauseCondition.item.itemOid}
           />
         ) : (
           <div

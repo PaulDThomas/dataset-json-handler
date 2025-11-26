@@ -2,8 +2,8 @@ import { iSimpleTableField, simpleTableSortFn } from "@asup/simple-table";
 
 export const fieldsForItems: iSimpleTableField[] = [
   {
-    name: "OID",
-    label: "OID",
+    name: "itemOID",
+    label: "itemOID",
     sortFn: simpleTableSortFn,
     searchFn: (row, text) =>
       (row.name as string).toLocaleLowerCase().includes(text.toLocaleLowerCase()),

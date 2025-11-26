@@ -31,7 +31,7 @@ export const InGroupItem = ({ id, groupId, item, dropAction, removeAction }: InG
         {item ? (
           <DraggableItem
             id={`groupitem-${groupId}-${id}`}
-            oid={item.OID}
+            oid={item.itemOid}
             otherActions={[{ label: "Remove", action: removeAction }]}
           />
         ) : (

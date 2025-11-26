@@ -6,7 +6,7 @@ export function removeRowVariable(action: ActionProps, state: SummaryTableSchema
   else {
     return {
       ...state,
-      rows: state.rows.filter((i) => i.OID !== action.item?.OID),
+      rows: state.rows.filter((i) => i.itemOid !== action.item?.itemOid),
     };
   }
 }

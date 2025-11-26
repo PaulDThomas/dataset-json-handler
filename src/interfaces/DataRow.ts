@@ -1,10 +1,7 @@
-import { iSimpleTableRow } from "@asup/simple-table";
-
 /**
  * Interface for data set row
  */
-
-export interface DataRow extends iSimpleTableRow {
+export interface DataRow extends Record<string, string | number | boolean | undefined> {
   /**
    * Number of the row in the data set
    */

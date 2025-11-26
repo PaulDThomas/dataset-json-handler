@@ -9,7 +9,7 @@ export function addRowVariable(action: ActionProps, state: SummaryTableSchema) {
   else {
     return {
       ...state,
-      columns: state.columns.filter((i) => i !== action.item?.OID),
+      columns: state.columns.filter((i) => i !== action.item?.itemOid),
       rows: moveVariable(state.rows, action.item, action.position),
     };
   }

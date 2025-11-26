@@ -20,7 +20,7 @@ export const DropTableRowVariable = ({ id, index }: DropTableRowVariableProps): 
       <td style={{ position: "relative" }}>
         <DraggableItem
           id={`${id}-column-header-${index}`}
-          oid={item.OID}
+          oid={item.itemOid}
           otherActions={[
             {
               label: "Remove",

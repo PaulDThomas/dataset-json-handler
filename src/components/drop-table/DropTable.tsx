@@ -35,7 +35,7 @@ export const DropTable = ({ id }: DropTableProps): JSX.Element => {
           {state.rows.map((v, i) => (
             <Fragment key={i}>
               <DropTableRowVariable
-                key={`${i}:${v.OID}`}
+                key={`${i}:${v.itemOid}`}
                 id={`${id}-row-variable-${i}`}
                 index={i}
               />
